@@ -3,6 +3,8 @@ apt update
 apt install vim
 # TODO check vim --version > 8
 
+cp .vimrc ~/.vimrc
+
 # tools for vim
 # nerd font
 mkdir ~/.fonts
