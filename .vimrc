@@ -235,9 +235,10 @@ au VimEnter * IndentLinesToggle
 "let g:indentLine_color_gui = '#A4E57E'
 "let g:indentLine_color_gui = '#7EA4E5'
 let g:indentLine_color_gui = '#2152A5'
-let g:indentLine_color_term = 202
+"let g:indentLine_color_term = 35
 "let g:indentLine_char = '|'
-let g:indentLine_char = '¦'
+"let g:indentLine_char = '¦'
+let g:indentLine_char = '┆'
 
 let g:load_doxygen_syntax=1
 
@@ -590,8 +591,14 @@ map <Leader>vs :VimuxInterruptRunner<CR>
 
 " to work in terminal
 au VimEnter * IndentLinesToggle
+"let g:indentLine_color_gui = '#A4E57E'
+"let g:indentLine_color_gui = '#7EA4E5'
 let g:indentLine_color_gui = '#2152A5'
-let g:indentLine_char = '¦'
+"let g:indentLine_color_term = 35
+"let g:indentLine_char = '|'
+"let g:indentLine_char = '¦'
+let g:indentLine_char = '┆'
+
 
 "set splitbelow
 "set splitright
@@ -600,7 +607,7 @@ set foldlevel=99
 set foldlevelstart=3
 set foldmethod=indent
 "set foldmethod=syntax
-hi Folded ctermfg=117
+"hi Folded ctermfg=117
 "hi Comment ctermfg=117
 
 " Add the virtualenv's site-packages to vim path
