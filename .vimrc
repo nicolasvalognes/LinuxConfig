@@ -608,7 +608,7 @@ set foldlevelstart=3
 set foldmethod=indent
 "set foldmethod=syntax
 "hi Folded ctermfg=117
-"hi Comment ctermfg=117
+hi Comment ctermfg=94
 
 " Add the virtualenv's site-packages to vim path
 if has('python')
