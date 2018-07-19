@@ -235,6 +235,7 @@ au VimEnter * IndentLinesToggle
 "let g:indentLine_color_gui = '#A4E57E'
 "let g:indentLine_color_gui = '#7EA4E5'
 let g:indentLine_color_gui = '#2152A5'
+let g:indentLine_color_term = 202
 "let g:indentLine_char = '|'
 let g:indentLine_char = '¦'
 
@@ -556,8 +557,8 @@ nnoremap <F5> :%s/\s\+$//e<CR>:w<CR>
 """"""""" if Python """"""""""
 nnoremap <F6> :call <SID>headerPythonPEP8()<CR>
 nnoremap <F7> :SyntasticCheck<CR>
-"autocmd FileType python nnoremap <LocalLeader>= :0,$!yapf<CR>
-autocmd FileType python nnoremap :yapf :0,$!yapf<CR>
+autocmd FileType python nnoremap <LocalLeader>yapf :0,$!yapf<CR>
+":command Yapf :0,$!yapf<CR>
 """"""""""""""""""""""""""""""
 nnoremap <F8> :sp<CR><C-w>w:terminal<CR><C-w>w:q!<CR>
 nnoremap <F9> :Calendar -view=year -split=horizontal -position=below -height=12<CR>
@@ -599,7 +600,7 @@ set foldlevel=99
 set foldlevelstart=3
 set foldmethod=indent
 "set foldmethod=syntax
-hi Folded ctermfg=202
+hi Folded ctermfg=117
 "hi Comment ctermfg=117
 
 " Add the virtualenv's site-packages to vim path
