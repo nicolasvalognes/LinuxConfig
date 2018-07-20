@@ -209,13 +209,10 @@ Plugin 'vim-python/python-syntax'
 " see https://github.com/nodejs/node/wiki/Vim-Plugins
 
 " Color scheme
-"Plugin 'Nyio/Nova'
-"Plugin 'trevordmiller/nova-vim'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'kien/rainbow_parentheses.vim'
-"Plugin 'arcticicestudio/nord-vim'
-"Plugin 'nightsense/snow'
+Plugin 'fenetikm/falcon'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -347,10 +344,10 @@ let g:ycm_min_num_of_chars_for_completion = 1
       "\ }
 
 " ALE
-let g:ale_completion_enabled = 1
-let g:ale_sign_column_always = 1
-let g:airline#extensions#ale#enabled = 1
-let g:ale_set_highlights = 0
+"let g:ale_completion_enabled = 1
+"let g:ale_sign_column_always = 1
+"let g:airline#extensions#ale#enabled = 1
+"let g:ale_set_highlights = 0
 
 
 
@@ -512,9 +509,9 @@ if has("gui_running")
     "set lines=45 columns=130
 
     " visuel longueur ligne 120
-    set colorcolumn=100
-    highlight ColorColumn guibg=#00153E
-    highlight NonText guifg=#888000
+    "set colorcolumn=100
+    "highlight ColorColumn guibg=#00153E
+    "highlight NonText guifg=#888000
 
     "hide toolsbar
     set guioptions-=T
@@ -530,7 +527,7 @@ endif
 " colors and functions
 """"""""""""""""""""""
 set t_Co=256
-"set termguicolors
+set termguicolors
 set background=dark
 
 colorscheme Tomorrow-Night-Bright
@@ -542,7 +539,8 @@ set cursorline
 hi Cursor guibg=#528bff ctermbg=69 gui=NONE cterm=NONE
 
 set colorcolumn=100
-highlight ColorColumn guibg=#00153E
+"highlight ColorColumn guibg=#00153E
+highlight ColorColumn guibg=#272727
 highlight NonText guifg=#888000
 
 nnoremap <F2> :NERDTreeToggle /home/developer/01_Middleware/mw-dev-tools/work/sources<CR>
@@ -629,3 +627,16 @@ if filereadable($VIRTUAL_ENV . '/.vimrc')
   source $VIRTUAL_ENV/.vimrc
 endif
 
+if has("autocmd")
+  " Highlight TODO, FIXME, NOTE, etc.
+  if v:version > 701
+    autocmd Syntax * call matchadd('Todo',  '\W\zs\(TODO\|FIXME\|CHANGED\|XXX\|BUG\|HACK\)')
+    autocmd Syntax * call matchadd('Debug', '\W\zs\(NOTE\|INFO\|IDEA\)')
+  endif
+endif
+
+let g:falcon_airline = 1
+let g:airline_theme = 'falcon'
+" set Vim-specific sequences for RGB colors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
