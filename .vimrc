@@ -180,17 +180,17 @@ Plugin 'editorconfig/editorconfig-vim'
 "Plugin 'thiagoalessio/rainbow_levels.vim'
 "Plugin 'Townk/vim-autoclose'
 Plugin 'itchyny/calendar.vim'
-Plugin 'dkprice/vim-easygrep'
+Plugin 'mileszs/ack.vim'
 
 " Plugins for C/C++
-"Plugin 'vim-scripts/a.vim'
-"Plugin 'vim-scripts/c.vim'
-"Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'vim-scripts/a.vim'
+Plugin 'vim-scripts/c.vim'
+Plugin 'octol/vim-cpp-enhanced-highlight'
 "Plugin 'vim-scripts/OmniCppComplete'
-"Plugin 'justinmk/vim-syntax-extra'
+Plugin 'justinmk/vim-syntax-extra'
 
 " Plugins for Qt
-"Plugin 'kosl90/qt-highlight-vim'
+Plugin 'kosl90/qt-highlight-vim'
 
 "Plugin for Python
 "Plugin 'python-mode/python-mode'
@@ -209,12 +209,10 @@ Plugin 'vim-python/python-syntax'
 " see https://github.com/nodejs/node/wiki/Vim-Plugins
 
 " Color scheme
-"Plugin 'Nyio/Nova'
-"Plugin 'trevordmiller/nova-vim'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'kien/rainbow_parentheses.vim'
-"Plugin 'arcticicestudio/nord-vim'
+Plugin 'fenetikm/falcon'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -234,8 +232,10 @@ au VimEnter * IndentLinesToggle
 "let g:indentLine_color_gui = '#A4E57E'
 "let g:indentLine_color_gui = '#7EA4E5'
 let g:indentLine_color_gui = '#2152A5'
+"let g:indentLine_color_term = 35
 "let g:indentLine_char = '|'
-let g:indentLine_char = '¦'
+"let g:indentLine_char = '¦'
+let g:indentLine_char = '┆'
 
 let g:load_doxygen_syntax=1
 
@@ -254,6 +254,13 @@ let python_highlight_all=1
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#default#layout = [
+      \ [ 'a', 'b', 'c' ],
+      \ ['error', 'warning' ]
+      \ ]
+"let g:airline_left_sep=''
+"let g:airline_right_sep=''
+let g:airline_skip_empty_sections = 1
 
 " tagbar
 let g:tagbar_left = 1
@@ -274,6 +281,7 @@ let g:syntastic_auto_loc_list = 2
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 "let g:syntastic_python_checkers = ['pylint']
+"let g:syntastic_python_checkers = ['flake8', 'mypy'] "make vim slow...
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_enable_highlighting = 0
 
@@ -336,10 +344,10 @@ let g:ycm_min_num_of_chars_for_completion = 1
       "\ }
 
 " ALE
-let g:ale_completion_enabled = 1
-let g:ale_sign_column_always = 1
-let g:airline#extensions#ale#enabled = 1
-let g:ale_set_highlights = 0
+"let g:ale_completion_enabled = 1
+"let g:ale_sign_column_always = 1
+"let g:airline#extensions#ale#enabled = 1
+"let g:ale_set_highlights = 0
 
 
 
@@ -433,7 +441,7 @@ function! s:headerPythonPEP8()
 endfunction
 
 function! s:pythonTodoComment()
-    execute "normal! O# TODO - N.V - "
+    execute "normal! O# TODO - NVS - "
     let currentdate=strftime("%Y-%m-%d")
     execute "normal! A" . currentdate
     execute "normal! A -  "
@@ -450,7 +458,7 @@ function! s:pythonPep8()
 endfunction
 
 function! s:pythonFixComment()
-    execute "normal! O# FIXME - N.V - "
+    execute "normal! O# FIXME - NVS - "
     let currentdate=strftime("%Y-%m-%d")
     execute "normal! A" . currentdate
     execute "normal! A -  "
@@ -501,9 +509,9 @@ if has("gui_running")
     "set lines=45 columns=130
 
     " visuel longueur ligne 120
-    set colorcolumn=100
-    highlight ColorColumn guibg=#00153E
-    highlight NonText guifg=#888000
+    "set colorcolumn=100
+    "highlight ColorColumn guibg=#00153E
+    "highlight NonText guifg=#888000
 
     "hide toolsbar
     set guioptions-=T
@@ -519,10 +527,10 @@ endif
 " colors and functions
 """"""""""""""""""""""
 set t_Co=256
-"set termguicolors
+set termguicolors
 set background=dark
 
-colorscheme Tomorrow-Night
+colorscheme Tomorrow-Night-Bright
 "colorscheme jellybeans
 "let g:airline_theme='tomorrow'
 let g:airline_theme='jellybeans'
@@ -531,10 +539,11 @@ set cursorline
 hi Cursor guibg=#528bff ctermbg=69 gui=NONE cterm=NONE
 
 set colorcolumn=100
-highlight ColorColumn guibg=#00153E
+"highlight ColorColumn guibg=#00153E
+highlight ColorColumn guibg=#272727
 highlight NonText guifg=#888000
 
-nnoremap <F2> :NERDTreeToggle<CR>
+nnoremap <F2> :NERDTreeToggle /home/developer/01_Middleware/mw-dev-tools/work/sources<CR>
 nnoremap <F3> :TagbarToggle<CR>
 nnoremap <F4> :nohl<CR>
 nnoremap <F5> :%s/\s\+$//e<CR>:w<CR>
@@ -547,6 +556,8 @@ nnoremap <F5> :%s/\s\+$//e<CR>:w<CR>
 """"""""" if Python """"""""""
 nnoremap <F6> :call <SID>headerPythonPEP8()<CR>
 nnoremap <F7> :SyntasticCheck<CR>
+autocmd FileType python nnoremap <LocalLeader>yapf :0,$!yapf<CR>
+":command Yapf :0,$!yapf<CR>
 """"""""""""""""""""""""""""""
 nnoremap <F8> :sp<CR><C-w>w:terminal<CR><C-w>w:q!<CR>
 nnoremap <F9> :Calendar -view=year -split=horizontal -position=below -height=12<CR>
@@ -572,13 +583,20 @@ map <Leader>vp :VimuxPromptCommand<CR>
 map <Leader>vl :VimuxRunLastCommand<CR>
 map <Leader>vs :VimuxInterruptRunner<CR>
 
+
 "inoremap print print("[NVS] ")<Esc>hi
 "inoremap pprint print("[NVS]")<Esc>opprint()<Esc>i
 
 " to work in terminal
 au VimEnter * IndentLinesToggle
+"let g:indentLine_color_gui = '#A4E57E'
+"let g:indentLine_color_gui = '#7EA4E5'
 let g:indentLine_color_gui = '#2152A5'
-let g:indentLine_char = '¦'
+"let g:indentLine_color_term = 35
+"let g:indentLine_char = '|'
+"let g:indentLine_char = '¦'
+let g:indentLine_char = '┆'
+
 
 "set splitbelow
 "set splitright
@@ -587,7 +605,8 @@ set foldlevel=99
 set foldlevelstart=3
 set foldmethod=indent
 "set foldmethod=syntax
-hi Folded ctermfg=4
+"hi Folded ctermfg=117
+hi Comment ctermfg=94
 
 " Add the virtualenv's site-packages to vim path
 if has('python')
@@ -608,46 +627,16 @@ if filereadable($VIRTUAL_ENV . '/.vimrc')
   source $VIRTUAL_ENV/.vimrc
 endif
 
-
-function! ToggleNERDTreeAndTagbar()
-  let w:jumpbacktohere = 1
-  " Detect which plugins are open
-  if exists('t:NERDTreeBufName')
-    let nerdtree_open = bufwinnr(t:NERDTreeBufName) != -1
-  else
-    let nerdtree_open = 0
+if has("autocmd")
+  " Highlight TODO, FIXME, NOTE, etc.
+  if v:version > 701
+    autocmd Syntax * call matchadd('Todo',  '\W\zs\(TODO\|FIXME\|CHANGED\|XXX\|BUG\|HACK\)')
+    autocmd Syntax * call matchadd('Debug', '\W\zs\(NOTE\|INFO\|IDEA\)')
   endif
-  let tagbar_open = bufwinnr('__Tagbar__') != -1
+endif
 
-  " Perform the appropriate action
-  if nerdtree_open && tagbar_open
-    NERDTreeClose
-    TagbarClose
-  elseif nerdtree_open
-    TagbarOpen
-    wincmd J
-    wincmd k
-    wincmd L
-  elseif tagbar_open
-    NERDTree
-    wincmd J
-    wincmd k
-    wincmd L
-  else
-    NERDTree
-    TagbarOpen
-    wincmd J
-    wincmd k
-    wincmd L
-  endif
-
-  " Jump back to the original window
-  for window in range(1, winnr('$'))
-    execute window . 'wincmd w'
-    if exists('w:jumpbacktohere')
-      unlet w:jumpbacktohere
-      break
-    endif
-  endfor
-endfunction
-nnoremap <leader>\ :call ToggleNERDTreeAndTagbar()<CR>
+let g:falcon_airline = 1
+let g:airline_theme = 'falcon'
+" set Vim-specific sequences for RGB colors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
