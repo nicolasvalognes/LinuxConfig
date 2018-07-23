@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/developer/.oh-my-zsh
+  export ZSH=~/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -135,4 +135,4 @@ alias run_influx='sudo docker run --rm --net blsi --ip 172.18.0.11 -p 8086:8086 
 #echo 'Running tmux server : '
 #tmux ls
 
-so_mw_env
+#so_mw_env

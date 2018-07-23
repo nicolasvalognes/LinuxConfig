@@ -3,13 +3,17 @@ apt update
 apt install vim
 # TODO check vim --version > 8
 
+mkdir ~/.vim/.undo
+mkdir ~/.vim/.backups
+mkdir ~/.vim/.swaps
+
 cp .vimrc ~/.vimrc
 
 # tools for vim
-# nerd font
-mkdir ~/.fonts
-git clone https://github.com/ryanoasis/nerd-fonts.git ~/.fonts
-~/.fonts/install.sh RobotoMono
+ #nerd font
+ mkdir ~/.fonts
+ git clone https://github.com/ryanoasis/nerd-fonts.git ~/.fonts
+ ~/.fonts/install.sh RobotoMono
 
 # Vundle
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
