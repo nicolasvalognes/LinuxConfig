@@ -2,11 +2,19 @@ To complete for installation...
 
 # VIM
 
-Run install_vim.sh in sudo mode
+1. Install Vundle (https://github.com/VundleVim/Vundle.vim)
+2. Copy .vimrc in ~
+3. Launch vim (errors could appear, it's not a problem)
+4. In vim, type :PluginInstall (Vundle will install all plugin), once it's done, you can close vim
+5. cd .vim/bundle/YouCompleteMe then launch the installation with langages support you need (see https://github.com/Valloric/YouCompleteMe)
+6. Install a NERDFont compatible and use it in your terminal (see : https://github.com/ryanoasis/nerd-fonts)
 
-# Tmux, oh.my.zsh, yapf and other
+# Oh my zsh
 
-(work in progress)
+https://github.com/robbyrussell/oh-my-zsh
 
-Run install.sh in sudo mode
+# Tmux
+
+sudo apt-get install tmux
+
 
