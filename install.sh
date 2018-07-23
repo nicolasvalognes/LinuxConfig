@@ -8,6 +8,7 @@ sudo apt install curl
 # Tmux
 apt-get install tmux
 cp .tmux.conf ~/.tmux.conf
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 # Oh-my-zsh
 apt-get install zsh
