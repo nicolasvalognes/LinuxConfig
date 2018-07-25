@@ -3,9 +3,14 @@ apt update
 apt install vim
 # TODO check vim --version > 8
 
+mkdir ~/.vim
 mkdir ~/.vim/.undo
 mkdir ~/.vim/.backups
 mkdir ~/.vim/.swaps
+
+chmod 777 ~/.vim/.undo
+chmod 777 ~/.vim/.backups
+chmod 777 ~/.vim/.swaps
 
 cp .vimrc ~/.vimrc
 
