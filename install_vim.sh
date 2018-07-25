@@ -11,9 +11,9 @@ cp .vimrc ~/.vimrc
 
 # tools for vim
  #nerd font
- mkdir ~/.fonts
- git clone https://github.com/ryanoasis/nerd-fonts.git ~/.fonts
- ~/.fonts/install.sh RobotoMono
+ #mkdir ~/.fonts
+ #git clone https://github.com/ryanoasis/nerd-fonts.git ~/.fonts
+ #~/.fonts/install.sh RobotoMono
 
 # Vundle
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
