@@ -171,12 +171,12 @@ Plugin 'mhinz/vim-startify'
 Plugin 'tpope/vim-surround'
 "Plugin 'SirVer/ultisnips'
 "Plugin 'honza/vim-snippets'
-Plugin 'vim-syntastic/syntastic'
 "Plugin 'vim-scripts/SearchComplete'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'benmills/vimux'
 Plugin 'editorconfig/editorconfig-vim'
-"Plugin 'w0rp/ale'
+"Plugin 'vim-syntastic/syntastic'
+Plugin 'w0rp/ale'
 "Plugin 'thiagoalessio/rainbow_levels.vim'
 "Plugin 'Townk/vim-autoclose'
 Plugin 'itchyny/calendar.vim'
@@ -280,35 +280,23 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 2
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
-"let g:syntastic_python_checkers = ['pylint']
 "let g:syntastic_python_checkers = ['flake8', 'mypy'] "make vim slow...
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_enable_highlighting = 0
+
+" Ale
+let g:ale_linters = {
+    \'python':['flake8', 'mypy'],
+    \}
+let g:ale_completion_enabled=1
+let g:ale_set_balloons=1
+let g:ale_hover=1
 
 " Rainbow Parentheses
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
-
-"python-mode
-"let g:pymode_rope_goto_definition_bind = "<C-]>" " Override go-to.definition key shortcut to Ctrl-]
-"let g:pymode_breakpoint = 1
-"let g:pymode_python = 'python3'
-""let g:pymode_folding = 0
-"let g:pymode_doc = 0
-"let g:pymode_lint = 0
-
-" vimpy
-"let g:vimpy_prompt_resolve=1
-"let g:vimpy_remove_unused=1
-
-"ropevim
-"let ropevim_vim_completion = 1
-"let ropevim_extended_complete = 1
-""let g:ropevim_autoimport_modules = ["os.*","traceback"]
-"let g:ropevim_autoimport_modules = ["*"]
-"imap <c-space> <C-R>=RopeCodeAssistInsertMode()<CR>
 
 " vim-tmux-navigator
 let g:tmux_navigator_save_on_switch = 2
@@ -323,32 +311,10 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 let g:ycm_python_binary_path='/usr/bin/python3'
 let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_min_num_of_chars_for_completion = 1
-"let g:EclimCompletionMethod = 'omnifunc'
-
-" jedi (autocompletion python)
-"let g:loaded_youcompleteme = 1
-"let g:jedi#force_by_version=3
-
-" Eclim
-"let g:acp_behaviorJavaEclimLength = 3
-"function MeetsForJavaEclim(context)
-  "return g:acp_behaviorJavaEclimLength >= 0 &&
-        "\ a:context =~ '\k\.\k\{' . g:acp_behaviorJavaEclimLength . ',}$'
-"endfunction
-"let g:acp_behavior = {
-      "\ 'java': [{
-      "\ 'command': "\<c-x>\<c-u>",
-      "\ 'completefunc' : 'eclim#java#complete#CodeComplete',
-      "\ 'meets'        : 'MeetsForJavaEclim',
-      "\ }]
-      "\ }
-
-" ALE
-"let g:ale_completion_enabled = 1
-"let g:ale_sign_column_always = 1
-"let g:airline#extensions#ale#enabled = 1
-"let g:ale_set_highlights = 0
-
+let g:ycp_add_preview_to_completeopt=1
+let g:ycp_complete_in_comments=1
+let g:ycp_complete_in_strings=1
+set completeopt-=preview
 
 
 """"""""""""""""""""
@@ -527,7 +493,7 @@ endif
 " colors and functions
 """"""""""""""""""""""
 set t_Co=256
-set termguicolors
+"set termguicolors
 set background=dark
 
 colorscheme Tomorrow-Night-Bright
@@ -607,6 +573,7 @@ set foldmethod=indent
 "set foldmethod=syntax
 "hi Folded ctermfg=117
 hi Comment ctermfg=94
+"hi Comment guifg='#875F00'
 
 " Add the virtualenv's site-packages to vim path
 if has('python')
