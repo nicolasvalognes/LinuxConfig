@@ -53,8 +53,8 @@ set autowriteall
 "set encoding=utf8
 set encoding=UTF-8
 
-set history=1000 "remember last 100 command
-set undolevels=1000 "undo 150 time max
+set history=1000 "remember last 1000 command
+set undolevels=1000 "undo 1000 time max
 set autoread "read files changed outside vim
 
 "show open bracket when user type the close bracket
@@ -109,7 +109,7 @@ set directory=~/.vim/.swaps//
 set signcolumn=yes
 
 " limit popup menu height
-set pumheight=30
+set pumheight=20
 
 noremap <Right> :bn<CR>
 noremap <Left> :bp<CR>
@@ -154,7 +154,7 @@ Plugin 'ctrlpvim/ctrlp.vim'
 "Plugin 'vim-scripts/DoxygenToolkit.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
-"Plugin 'ryanoasis/vim-devicons'
+Plugin 'ryanoasis/vim-devicons'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-airline/vim-airline'
 "Plugin 'vim-scripts/AutoComplPop'
@@ -198,6 +198,7 @@ Plugin 'vim-python/python-syntax'
 "Plugin 'davidhalter/jedi-vim'
 "Plugin 'dbsr/vimpy'
 "Plugin 'python-rope/ropevim'
+"Plugin 'ambv/black'
 
 " Plugins for Javascript
 "Plugin 'jelera/vim-javascript-syntax'
@@ -272,25 +273,34 @@ let g:cpp_experimental_template_highlight = 1
 let g:cpp_concepts_highlight = 1
 
 " syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 2
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
-"let g:syntastic_python_checkers = ['flake8', 'mypy'] "make vim slow...
-let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_enable_highlighting = 0
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 2
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 1
+""let g:syntastic_python_checkers = ['flake8', 'mypy'] "make vim slow...
+"let g:syntastic_python_checkers = ['flake8']
+"let g:syntastic_enable_highlighting = 0
 
 " Ale
 let g:ale_linters = {
     \'python':['flake8', 'mypy'],
     \}
+let g:ale_fixers = {
+    \'python':['black', 'isort'],
+    \}
 let g:ale_completion_enabled=1
 let g:ale_set_balloons=1
 let g:ale_hover=1
+let g:airline#extensions#ale#enabled = 1
+let g:ale_echo_msg_error_str = 'Err'
+let g:ale_echo_msg_warning_str = 'War'
+let g:ale_echo_msg_format = '[%severity%][%linter%|%code%] %s'
+let g:ale_set_highlights=0
+"let g:ale-python-root='~/01_Middleware/mw-dev-tools/work/sources'
 
 " Rainbow Parentheses
 au VimEnter * RainbowParenthesesToggle
@@ -315,6 +325,9 @@ let g:ycp_add_preview_to_completeopt=1
 let g:ycp_complete_in_comments=1
 let g:ycp_complete_in_strings=1
 set completeopt-=preview
+
+" Black
+"let g:black_virtualenv='/home/developer/00_Tools/python36_venv/venv'
 
 
 """"""""""""""""""""
@@ -416,7 +429,7 @@ function! s:pythonTodoComment()
 endfunction
 
 function! s:pythonBreakpoint()
-  execute "normal! Oimport pdb; pdb.set_trace() ## [DEBUG] Breakpoint"
+  execute "normal! Oimport pdb; pdb.set_trace()  # [DEBUG] Breakpoint"
 endfunction
 
 function! s:pythonPep8()
@@ -539,7 +552,7 @@ nnoremap <leader>p :call <SID>pythonPep8()<CR>
 
 nnoremap <leader>deb :call <SID>pyDebug()<CR>
 nnoremap <Leader>do :Dox<CR>
-nnoremap <leader>js :call <SID>jsonFormat()<CR><CR>
+nnoremap <leader>json :call <SID>jsonFormat()<CR><CR>
 "nnoremap <leader>js :%!python -m json.tool<CR>
 "nnoremap <leader>json  :%!python -m json.tool<CR>
 nnoremap <Leader>dov :call <SID>includeVarDoxygenComment()<CR>
@@ -548,6 +561,7 @@ nnoremap <leader>lev :RainbowLevelsToggle<CR>
 map <Leader>vp :VimuxPromptCommand<CR>
 map <Leader>vl :VimuxRunLastCommand<CR>
 map <Leader>vs :VimuxInterruptRunner<CR>
+map <leader>bl :silent !black %<CR>
 
 
 "inoremap print print("[NVS] ")<Esc>hi
