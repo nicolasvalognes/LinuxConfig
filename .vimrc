@@ -75,7 +75,7 @@ let g:maplocalleader = ","
 "nnoremap <Esc> :w<CR><Esc>
 "supprimer surlignage recherche et trailing white space sur echap
 "nnoremap <Esc> :nohl<CR>:w<CR><Esc>
-"nnoremap <Tab> :nohl<CR><Esc>
+nnoremap <Esc> <Esc>:nohl<CR>
 
 nnoremap Q <nop>
 
@@ -298,9 +298,10 @@ let g:ale_hover=1
 let g:airline#extensions#ale#enabled = 1
 let g:ale_echo_msg_error_str = 'Err'
 let g:ale_echo_msg_warning_str = 'War'
-let g:ale_echo_msg_format = '[%severity%][%linter%|%code%] %s'
+let g:ale_echo_msg_format = '[%severity%][%linter% %code%] %s'
 let g:ale_set_highlights=0
 "let g:ale-python-root='~/01_Middleware/mw-dev-tools/work/sources'
+let g:ale_fix_on_save = 1
 
 " Rainbow Parentheses
 au VimEnter * RainbowParenthesesToggle
@@ -326,8 +327,9 @@ let g:ycp_complete_in_comments=1
 let g:ycp_complete_in_strings=1
 set completeopt-=preview
 
-" Black
-"let g:black_virtualenv='/home/developer/00_Tools/python36_venv/venv'
+" Ack
+"nnoremap :Ack :Ack! " don't jump to first result automaticaly
+cnoreabbrev Ack Ack!
 
 
 """"""""""""""""""""
@@ -429,7 +431,7 @@ function! s:pythonTodoComment()
 endfunction
 
 function! s:pythonBreakpoint()
-  execute "normal! Oimport pdb; pdb.set_trace()  # [DEBUG] Breakpoint"
+  "execute "normal! Oimport pdb; pdb.set_trace()  # [DEBUG | TO REMOVE] Breakpoint"
 endfunction
 
 function! s:pythonPep8()
@@ -551,18 +553,11 @@ nnoremap <leader>b :call <SID>pythonBreakpoint()<CR>
 nnoremap <leader>p :call <SID>pythonPep8()<CR>
 
 nnoremap <leader>deb :call <SID>pyDebug()<CR>
-nnoremap <Leader>do :Dox<CR>
 nnoremap <leader>json :call <SID>jsonFormat()<CR><CR>
-"nnoremap <leader>js :%!python -m json.tool<CR>
-"nnoremap <leader>json  :%!python -m json.tool<CR>
 nnoremap <Leader>dov :call <SID>includeVarDoxygenComment()<CR>
-nnoremap <Leader>del :call <SID>deleteVarUnderCursor()<CR>
-nnoremap <leader>lev :RainbowLevelsToggle<CR>
 map <Leader>vp :VimuxPromptCommand<CR>
 map <Leader>vl :VimuxRunLastCommand<CR>
 map <Leader>vs :VimuxInterruptRunner<CR>
-map <leader>bl :silent !black %<CR>
-
 
 "inoremap print print("[NVS] ")<Esc>hi
 "inoremap pprint print("[NVS]")<Esc>opprint()<Esc>i
@@ -582,11 +577,12 @@ let g:indentLine_char = '┆'
 "set splitright
 
 set foldlevel=99
-set foldlevelstart=3
+"set foldlevelstart=3
 set foldmethod=indent
 "set foldmethod=syntax
 "hi Folded ctermfg=117
-hi Comment ctermfg=94
+hi Comment ctermfg=8
+"hi Comment ctermbg=8
 "hi Comment guifg='#875F00'
 
 " Add the virtualenv's site-packages to vim path
@@ -611,7 +607,7 @@ endif
 if has("autocmd")
   " Highlight TODO, FIXME, NOTE, etc.
   if v:version > 701
-    autocmd Syntax * call matchadd('Todo',  '\W\zs\(TODO\|FIXME\|CHANGED\|XXX\|BUG\|HACK\)')
+    autocmd Syntax * call matchadd('Todo',  '\W\zs\(TODO\|FIXME\|CHANGED\|XXX\|BUG\|HACK\|DEBUG\)')
     autocmd Syntax * call matchadd('Debug', '\W\zs\(NOTE\|INFO\|IDEA\)')
   endif
 endif
