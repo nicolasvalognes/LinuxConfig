@@ -75,7 +75,7 @@ let g:maplocalleader = ","
 "nnoremap <Esc> :w<CR><Esc>
 "supprimer surlignage recherche et trailing white space sur echap
 "nnoremap <Esc> :nohl<CR>:w<CR><Esc>
-nnoremap <Esc> <Esc>:nohl<CR>
+"nnoremap <Esc> <Esc>:nohl<CR>
 
 nnoremap Q <nop>
 
@@ -431,7 +431,10 @@ function! s:pythonTodoComment()
 endfunction
 
 function! s:pythonBreakpoint()
-  "execute "normal! Oimport pdb; pdb.set_trace()  # [DEBUG | TO REMOVE] Breakpoint"
+  execute "normal! Oimport pdb; pdb.set_trace()  # [DEBUG | TO REMOVE] Breakpoint"
+  "execute "normal! O# fmt: off   # [DEBUG | TO REMOVE] Breakpoint"
+  "execute "normal! oimport pdb; pdb.set_trace()"
+  "execute "normal! o# fmt: on"
 endfunction
 
 function! s:pythonPep8()
@@ -511,8 +514,8 @@ set t_Co=256
 "set termguicolors
 set background=dark
 
-colorscheme Tomorrow-Night-Bright
-"colorscheme jellybeans
+"colorscheme Tomorrow-Night-Bright
+colorscheme jellybeans
 "let g:airline_theme='tomorrow'
 let g:airline_theme='jellybeans'
 set cursorline
