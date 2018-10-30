@@ -28,6 +28,7 @@ set noerrorbells " Empeche Vim de beeper
 set backspace=indent,eol,start
 " Cache les fichiers lors de l’ouverture d’autres fichiers
 set hidden
+set background=dark
 " Active la coloration synaxique
 syntax enable
 " Active les comportements specifiques aux types de fichiers comme
@@ -92,10 +93,13 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 "autocmd BufWritePre * :%s/\s\+$//e
 
 " mapping navigation entre fenetre
+let g:C_Ctrl_h='off'
 nnoremap <C-h> <C-w>h
 let g:C_Ctrl_j='off'
 nnoremap <C-j> <C-w>j
+let g:C_Ctrl_k='off'
 nnoremap <C-k> <C-w>k
+let g:C_Ctrl_l='off'
 nnoremap <C-l> <C-w>l
 
 "set listchars=tab:¿\ ,eol:¬
@@ -121,7 +125,8 @@ nnoremap :bc :Bclose
 
  " ctags -R --python-kinds=-i --fields=+iaS --language-force=python -f mw_tags ~/01_Workspace/mw_dev_tools/work/sources
 set tags=./tags
-set tags+=~/00_Tools/working_tags/mw_tags
+set tags+=~/00_Tools/toruk_tags/mw_tags
+set tags+=~/00_Tools/toruk_tags/venv_tags
 
 "au BufRead,BufNewFile *.qss setfiletype css "syntax color for qt .css file
 "au BufRead,BufNewFile *.qrc setfiletype xml "syntax color for qt .qrc file
@@ -154,7 +159,7 @@ Plugin 'ctrlpvim/ctrlp.vim'
 "Plugin 'vim-scripts/DoxygenToolkit.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
-Plugin 'ryanoasis/vim-devicons'
+"Plugin 'ryanoasis/vim-devicons'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-airline/vim-airline'
 "Plugin 'vim-scripts/AutoComplPop'
@@ -199,6 +204,9 @@ Plugin 'vim-python/python-syntax'
 "Plugin 'dbsr/vimpy'
 "Plugin 'python-rope/ropevim'
 "Plugin 'ambv/black'
+Plugin 'alfredodeza/coveragepy.vim'
+Plugin 'mgedmin/coverage-highlight.vim'
+"Plugin 'heavenshell/vim-pydocstring'
 
 " Plugins for Javascript
 "Plugin 'jelera/vim-javascript-syntax'
@@ -272,19 +280,6 @@ let g:cpp_member_variable_highlight = 1
 let g:cpp_experimental_template_highlight = 1
 let g:cpp_concepts_highlight = 1
 
-" syntastic
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 2
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 1
-""let g:syntastic_python_checkers = ['flake8', 'mypy'] "make vim slow...
-"let g:syntastic_python_checkers = ['flake8']
-"let g:syntastic_enable_highlighting = 0
-
 " Ale
 let g:ale_linters = {
     \'python':['flake8', 'mypy'],
@@ -298,7 +293,7 @@ let g:ale_hover=1
 let g:airline#extensions#ale#enabled = 1
 let g:ale_echo_msg_error_str = 'Err'
 let g:ale_echo_msg_warning_str = 'War'
-let g:ale_echo_msg_format = '[%severity%][%linter% %code%] %s'
+let g:ale_echo_msg_format = '[%severity%][%linter%(%code%)] %s'
 let g:ale_set_highlights=0
 "let g:ale-python-root='~/01_Middleware/mw-dev-tools/work/sources'
 let g:ale_fix_on_save = 1
@@ -330,6 +325,9 @@ set completeopt-=preview
 " Ack
 "nnoremap :Ack :Ack! " don't jump to first result automaticaly
 cnoreabbrev Ack Ack!
+
+" Coveragepy
+let g:coveragepy_uncovered_sign = '>'
 
 
 """"""""""""""""""""
@@ -431,10 +429,10 @@ function! s:pythonTodoComment()
 endfunction
 
 function! s:pythonBreakpoint()
-  execute "normal! Oimport pdb; pdb.set_trace()  # [DEBUG | TO REMOVE] Breakpoint"
-  "execute "normal! O# fmt: off   # [DEBUG | TO REMOVE] Breakpoint"
-  "execute "normal! oimport pdb; pdb.set_trace()"
-  "execute "normal! o# fmt: on"
+  "execute "normal! Oimport pdb; pdb.set_trace()  # [DEBUG | TO REMOVE] Breakpoint"
+  execute "normal! O# fmt: off"
+  execute "normal! oimport pdb; pdb.set_trace()"
+  execute "normal! o# fmt: on"
 endfunction
 
 function! s:pythonPep8()
@@ -517,17 +515,18 @@ set background=dark
 "colorscheme Tomorrow-Night-Bright
 colorscheme jellybeans
 "let g:airline_theme='tomorrow'
-let g:airline_theme='jellybeans'
+"let g:airline_theme='jellybeans'
 set cursorline
 "set cursorcolumn
 hi Cursor guibg=#528bff ctermbg=69 gui=NONE cterm=NONE
 
 set colorcolumn=100
 "highlight ColorColumn guibg=#00153E
-highlight ColorColumn guibg=#272727
+"highlight ColorColumn guibg=#272727
+"highlight ColorColumn guibg=#888000
 highlight NonText guifg=#888000
 
-nnoremap <F2> :NERDTreeToggle /home/developer/01_Middleware/mw-dev-tools/work/sources<CR>
+nnoremap <F2> :NERDTreeToggle /home/developer/01_Middleware/01-toruk<CR>
 nnoremap <F3> :TagbarToggle<CR>
 nnoremap <F4> :nohl<CR>
 nnoremap <F5> :%s/\s\+$//e<CR>:w<CR>
@@ -558,35 +557,24 @@ nnoremap <leader>p :call <SID>pythonPep8()<CR>
 nnoremap <leader>deb :call <SID>pyDebug()<CR>
 nnoremap <leader>json :call <SID>jsonFormat()<CR><CR>
 nnoremap <Leader>dov :call <SID>includeVarDoxygenComment()<CR>
+nnoremap <Leader>doc :Pydocstring<CR>
 map <Leader>vp :VimuxPromptCommand<CR>
 map <Leader>vl :VimuxRunLastCommand<CR>
 map <Leader>vs :VimuxInterruptRunner<CR>
-
-"inoremap print print("[NVS] ")<Esc>hi
-"inoremap pprint print("[NVS]")<Esc>opprint()<Esc>i
+map <Leader>cov :Coveragepy session<CR>
 
 " to work in terminal
 au VimEnter * IndentLinesToggle
-"let g:indentLine_color_gui = '#A4E57E'
-"let g:indentLine_color_gui = '#7EA4E5'
-let g:indentLine_color_gui = '#2152A5'
-"let g:indentLine_color_term = 35
-"let g:indentLine_char = '|'
-"let g:indentLine_char = '¦'
+"let g:indentLine_color_gui = '#2152A5'
 let g:indentLine_char = '┆'
 
-
-"set splitbelow
-"set splitright
 
 set foldlevel=99
 "set foldlevelstart=3
 set foldmethod=indent
-"set foldmethod=syntax
-"hi Folded ctermfg=117
-hi Comment ctermfg=8
-"hi Comment ctermbg=8
-"hi Comment guifg='#875F00'
+"hi Folded ctermfg=239
+"hi Comment ctermfg=238
+hi Comment ctermfg=238
 
 " Add the virtualenv's site-packages to vim path
 if has('python')
@@ -620,3 +608,28 @@ let g:airline_theme = 'falcon'
 " set Vim-specific sequences for RGB colors
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+if exists('$TMUX')
+  function! TmuxOrSplitSwitch(wincmd, tmuxdir)
+    let previous_winnr = winnr()
+    silent! execute "wincmd " . a:wincmd
+    if previous_winnr == winnr()
+      call system("tmux select-pane -" . a:tmuxdir)
+      redraw!
+    endif
+  endfunction
+
+  let previous_title = substitute(system("tmux display-message -p '#{pane_title}'"), '\n', '', '')
+  let &t_ti = "\<Esc>]2;vim\<Esc>\\" . &t_ti
+  let &t_te = "\<Esc>]2;". previous_title . "\<Esc>\\" . &t_te
+
+  nnoremap <silent> <C-h> :call TmuxOrSplitSwitch('h', 'L')<cr>
+  nnoremap <silent> <C-j> :call TmuxOrSplitSwitch('j', 'D')<cr>
+  nnoremap <silent> <C-k> :call TmuxOrSplitSwitch('k', 'U')<cr>
+  nnoremap <silent> <C-l> :call TmuxOrSplitSwitch('l', 'R')<cr>
+else
+  map <C-h> <C-w>h
+  map <C-j> <C-w>j
+  map <C-k> <C-w>k
+  map <C-l> <C-w>l
+endif
