@@ -10,9 +10,6 @@ apt-get install tmux
 cp .tmux.conf ~/.tmux.conf
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
-# yapf (python formatter)
-pip install yapf
-
 # installing vim8
 #./install_vim.sh
 
