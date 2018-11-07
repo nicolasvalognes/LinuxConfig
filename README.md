@@ -2,7 +2,7 @@ To complete for installation...
 
 # VIM
 
-Run install_vim.sh
+Run install_vim.sh  
 Set your terminal font to RobotoMono Nerd Font
 
 # Tmux, yapf and others
