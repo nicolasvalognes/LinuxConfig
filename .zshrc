@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/developer/.oh-my-zsh
+  export ZSH=/home/nicolas/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -103,7 +103,7 @@ alias git_del_branch='git branch | grep -v -E "master|develop|release" | xargs -
 
 alias robo3t='~/00_Tools/robo3t/bin/robo3t &'
 alias chrome='/usr/bin/google-chrome-stable %U &'
-alias firefox='~/00_Tools/firefox/firefox'
+#alias firefox='~/00_Tools/firefox/firefox'
 
 alias pylint='pylint --output-format=colorized'
 
@@ -141,7 +141,7 @@ alias :vsp='tmux splitw -h -p '
 #alias cd_ec='cd ~/01_Middleware/mw-dev-tools/work/sources/mw-event-collector'
 #alias cd_ed='cd ~/01_Middleware/mw-dev-tools/work/sources/mw-event-dispatcher'
 
-#alias swagger_preview='cd ~/01_Middleware/mw-dev-tools/work/sources/documentation; ./generate_readable_doc.py; cd ./swagger-ui/dist; python -m http.server 8123 &; firefox --new-tab http://127.0.0.1:8123'
+alias swagger_preview='cd ~/01_Workspace/02_pandora_doc; ./generate_readable_doc.py; cd ./swagger-ui/dist; python -m http.server 8123 &; firefox --new-tab http://127.0.0.1:8123'
 
 #alias cloc='~/00_Tools/cloc/cloc'
 
@@ -152,8 +152,8 @@ alias :vsp='tmux splitw -h -p '
 
 #so_python_test_env
 
-alias source_toruk35='source ~/00_Tools/venv_toruk_py35/bin/activate'
-alias source_toruk36='source ~/00_Tools/venv_toruk_py36/bin/activate'
+alias py35='source ~/00_Tools/01_python_venv/py35/bin/activate'
+alias py36='source ~/00_Tools/01_python_venv/py36/bin/activate'
 
 alias run_mongo='sudo docker run --rm  --net blsi --ip 172.18.0.10 -p 27017:27017 -v /tmp/mongodb:/data/db  mongo:3.6.5 '
 alias run_influx='sudo docker run --rm --net blsi --ip 172.18.0.11 -p 8086:8086 -v /var/lib/influxdb:/var/lib/influxdb influxdb:latest /usr/bin/influxd'
@@ -162,6 +162,15 @@ alias run_influx='sudo docker run --rm --net blsi --ip 172.18.0.11 -p 8086:8086 
 #alias run_pytest='pytest tests --ignore tests/func'
 #alias run_pep8='pep8 ./blsi'
 
-alias cd_mw='cd ~/01_Middleware/01-toruk'
+alias cd_mw='cd ~/01_Workspace/01-toruk'
 
-source_toruk36
+alias vi='vim'
+
+if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+    source /etc/profile.d/vte-2.91.sh
+fi
+
+alias pytestcov='coverage run -m pytest'
+
+py36
+
