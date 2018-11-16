@@ -1,6 +1,6 @@
-add-apt-repository ppa:jonathonf/vim
-apt update
-apt install vim
+#add-apt-repository ppa:jonathonf/vim
+#apt update
+#apt install vim
 # TODO check vim --version > 8
 
 mkdir ~/.vim

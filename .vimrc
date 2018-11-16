@@ -133,9 +133,9 @@ set tags+=~/00_Tools/toruk_tags/venv_tags
 "au BufRead,BufNewFile *.md setfiletype markdown.pandoc
 "au BufRead,BufNewFile *.md setfiletype text
 autocmd BufNewFile,BufRead *.json set ft=javascript
+au BufNewFile,BufRead *.md set ft=markdown
 
 au BufRead *.txt set ft=
-au BufRead *.md set ft=
 
 """"""""""""""""""""
 """"" PLUGINS """"""
@@ -184,8 +184,9 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'w0rp/ale'
 "Plugin 'thiagoalessio/rainbow_levels.vim'
 "Plugin 'Townk/vim-autoclose'
-Plugin 'itchyny/calendar.vim'
+"Plugin 'itchyny/calendar.vim'
 Plugin 'mileszs/ack.vim'
+Plugin 'rbgrouleff/bclose.vim'
 
 " Plugins for C/C++
 Plugin 'vim-scripts/a.vim'
@@ -204,7 +205,6 @@ Plugin 'vim-python/python-syntax'
 "Plugin 'dbsr/vimpy'
 "Plugin 'python-rope/ropevim'
 "Plugin 'ambv/black'
-Plugin 'alfredodeza/coveragepy.vim'
 Plugin 'mgedmin/coverage-highlight.vim'
 "Plugin 'heavenshell/vim-pydocstring'
 
@@ -238,13 +238,9 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 "set ts=4 sw=4 et
 
 au VimEnter * IndentLinesToggle
-"let g:indentLine_color_gui = '#A4E57E'
-"let g:indentLine_color_gui = '#7EA4E5'
-let g:indentLine_color_gui = '#2152A5'
-"let g:indentLine_color_term = 35
-"let g:indentLine_char = '|'
-"let g:indentLine_char = '¦'
 let g:indentLine_char = '┆'
+let g:indentLine_setColor = 0
+let g:indentLine_color_term = 24
 
 let g:load_doxygen_syntax=1
 
@@ -252,7 +248,6 @@ let g:NERDTreeWinPos = "left"
 
 " bufexplorer
 map <S-Tab> :BufExplorerHorizontalSplit<CR>
-"map <leader>be :BufExplorerHorizontalSplit<CR>
 
 map <c-t> :CtrlPTag<CR>
 
@@ -450,7 +445,7 @@ endfunction
 
 function! s:pyDebug()
   execute "normal! O# [DEBUG]"
-  execute "normal! omy_file = open('/home/developer/98_Tmp/pydebug.txt', 'w')"
+  execute "normal! omy_file = open('/tmp/pydebug.txt', 'w')"
   execute "normal! omy_file.write(str(response))"
   execute "normal! omy_file.close()"
 endfunction
@@ -520,13 +515,11 @@ set cursorline
 "set cursorcolumn
 hi Cursor guibg=#528bff ctermbg=69 gui=NONE cterm=NONE
 
-set colorcolumn=100
-"highlight ColorColumn guibg=#00153E
-"highlight ColorColumn guibg=#272727
-"highlight ColorColumn guibg=#888000
-highlight NonText guifg=#888000
+"set colorcolumn=100
+execute "set colorcolumn=".join(range(101,999), ',')
+highlight ColorColumn ctermbg=234
 
-nnoremap <F2> :NERDTreeToggle /home/developer/01_Middleware/01-toruk<CR>
+nnoremap <F2> :NERDTreeToggle /home/nicolas/01_Middleware/01-toruk<CR>
 nnoremap <F3> :TagbarToggle<CR>
 nnoremap <F4> :nohl<CR>
 nnoremap <F5> :%s/\s\+$//e<CR>:w<CR>
@@ -538,12 +531,13 @@ nnoremap <F5> :%s/\s\+$//e<CR>:w<CR>
 
 """"""""" if Python """"""""""
 nnoremap <F6> :call <SID>headerPythonPEP8()<CR>
-nnoremap <F7> :SyntasticCheck<CR>
-autocmd FileType python nnoremap <LocalLeader>yapf :0,$!yapf<CR>
+"nnoremap <F7> :SyntasticCheck<CR>
+"autocmd FileType python nnoremap <LocalLeader>yapf :0,$!yapf<CR>
 ":command Yapf :0,$!yapf<CR>
 """"""""""""""""""""""""""""""
-nnoremap <F8> :sp<CR><C-w>w:terminal<CR><C-w>w:q!<CR>
-nnoremap <F9> :Calendar -view=year -split=horizontal -position=below -height=12<CR>
+"nnoremap <F8> :sp<CR><C-w>w:terminal<CR><C-w>w:q!<CR>
+"nnoremap <F9> :Calendar -view=year -split=horizontal -position=below -height=12<CR>
+"nnoremap <F7> :HighlightCoverage!<CR>
 
 
 "nnoremap <leader>t :tag <c-r><c-w><cr>
@@ -565,8 +559,9 @@ map <Leader>cov :Coveragepy session<CR>
 
 " to work in terminal
 au VimEnter * IndentLinesToggle
-"let g:indentLine_color_gui = '#2152A5'
 let g:indentLine_char = '┆'
+let g:indentLine_setColor = 0
+let g:indentLine_color_term = 24
 
 
 set foldlevel=99
@@ -574,7 +569,7 @@ set foldlevel=99
 set foldmethod=indent
 "hi Folded ctermfg=239
 "hi Comment ctermfg=238
-hi Comment ctermfg=238
+hi Comment ctermfg=240
 
 " Add the virtualenv's site-packages to vim path
 if has('python')
@@ -633,3 +628,8 @@ else
   map <C-k> <C-w>k
   map <C-l> <C-w>l
 endif
+
+" coverage highlight
+highlight NoCoverage ctermbg=2
+highlight NoCoverage ctermbg=0
+
