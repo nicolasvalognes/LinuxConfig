@@ -20,6 +20,8 @@ cp .vimrc ~/.vimrc
  #git clone https://github.com/ryanoasis/nerd-fonts.git ~/.fonts
  #~/.fonts/install.sh RobotoMono
 
+sudo apt-get install build-essential cmake python-dev python3-dev fonts-powerline
+
 # Vundle
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
@@ -27,6 +29,4 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 vim +PluginInstall +qall
 
 # compile YouCompleteme vim plugin for basic
-sudo apt-get install build-essential cmake
-sudo apt-get install python-dev python3-dev
 ~/.vim/bundle/YouCompleteMe/install.py

@@ -206,7 +206,7 @@ Plugin 'vim-python/python-syntax'
 "Plugin 'python-rope/ropevim'
 "Plugin 'ambv/black'
 Plugin 'mgedmin/coverage-highlight.vim'
-"Plugin 'heavenshell/vim-pydocstring'
+Plugin 'heavenshell/vim-pydocstring'
 
 " Plugins for Javascript
 "Plugin 'jelera/vim-javascript-syntax'
@@ -278,6 +278,7 @@ let g:cpp_concepts_highlight = 1
 " Ale
 let g:ale_linters = {
     \'python':['flake8', 'mypy'],
+    \'markdown':['markdownlint',],
     \}
 let g:ale_fixers = {
     \'python':['black', 'isort'],
@@ -519,7 +520,7 @@ hi Cursor guibg=#528bff ctermbg=69 gui=NONE cterm=NONE
 execute "set colorcolumn=".join(range(101,999), ',')
 highlight ColorColumn ctermbg=234
 
-nnoremap <F2> :NERDTreeToggle /home/nicolas/01_Middleware/01-toruk<CR>
+nnoremap <F2> :NERDTreeToggle /home/nicolas/01_Workspace/01-toruk<CR>
 nnoremap <F3> :TagbarToggle<CR>
 nnoremap <F4> :nohl<CR>
 nnoremap <F5> :%s/\s\+$//e<CR>:w<CR>
