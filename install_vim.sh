@@ -2,7 +2,7 @@
 #apt update
 #apt install vim
 # TODO check vim --version > 8
-apt install vim-nox
+sudo apt install vim-nox
 
 mkdir ~/.vim
 mkdir ~/.vim/.undo
