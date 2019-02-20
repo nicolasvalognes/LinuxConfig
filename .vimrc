@@ -52,7 +52,7 @@ set autowriteall
 
 " set utf8 as standard encoding
 "set encoding=utf8
-set encoding=UTF-8
+set encoding=utf-8
 
 set history=1000 "remember last 1000 command
 set undolevels=1000 "undo 1000 time max
@@ -124,7 +124,7 @@ nnoremap :bc :Bclose
 "noremap <Up> :resize +1<CR>
 
  " ctags -R --python-kinds=-i --fields=+iaS --language-force=python -f mw_tags ~/01_Workspace/mw_dev_tools/work/sources
-set tags=./tags
+"set tags=./tags
 "set tags+=~/00_Tools/toruk_tags/mw_tags
 "set tags+=~/00_Tools/toruk_tags/venv_tags
 
@@ -162,7 +162,6 @@ Plugin 'scrooloose/nerdtree'
 "Plugin 'ryanoasis/vim-devicons'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-airline/vim-airline'
-"Plugin 'vim-scripts/AutoComplPop'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-git'
 Plugin 'tpope/vim-fugitive'
@@ -187,6 +186,9 @@ Plugin 'w0rp/ale'
 "Plugin 'itchyny/calendar.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'rbgrouleff/bclose.vim'
+Plugin 'prabirshrestha/async.vim'
+Plugin 'prabirshrestha/asyncomplete.vim'
+Plugin 'prabirshrestha/vim-lsp'
 
 " Plugins for C/C++
 Plugin 'vim-scripts/a.vim'
@@ -206,7 +208,7 @@ Plugin 'vim-python/python-syntax'
 "Plugin 'python-rope/ropevim'
 "Plugin 'ambv/black'
 Plugin 'mgedmin/coverage-highlight.vim'
-Plugin 'heavenshell/vim-pydocstring'
+"Plugin 'heavenshell/vim-pydocstring'
 
 " Plugins for Javascript
 "Plugin 'jelera/vim-javascript-syntax'
@@ -222,6 +224,7 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'fenetikm/falcon'
+Plugin 'haishanh/night-owl.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -277,7 +280,7 @@ let g:cpp_concepts_highlight = 1
 
 " Ale
 let g:ale_linters = {
-    \'python':['flake8', 'mypy'],
+    \'python':['flake8', 'mypy', 'vulture'],
     \'markdown':['markdownlint',],
     \}
 let g:ale_fixers = {
@@ -293,6 +296,7 @@ let g:ale_echo_msg_format = '[%severity%][%linter%(%code%)] %s'
 let g:ale_set_highlights=0
 "let g:ale-python-root='~/01_Middleware/mw-dev-tools/work/sources'
 let g:ale_fix_on_save = 1
+let g:ale_sign_warning='>>'
 
 " Rainbow Parentheses
 au VimEnter * RainbowParenthesesToggle
@@ -316,14 +320,27 @@ let g:ycm_min_num_of_chars_for_completion = 1
 let g:ycp_add_preview_to_completeopt=1
 let g:ycp_complete_in_comments=1
 let g:ycp_complete_in_strings=1
+let g:ycm_max_num_candidates = 50
+let g:ycm_max_num_identifier_candidates = 50
+let g:ycm_collect_identifiers_from_tags_files = 1
 set completeopt-=preview
 
 " Ack
 "nnoremap :Ack :Ack! " don't jump to first result automaticaly
-cnoreabbrev Ack Ack!
+"cnoreabbrev Ack Ack! --type=python
 
 " Coveragepy
 let g:coveragepy_uncovered_sign = '>'
+
+" vim-lsp
+if executable('pyls')
+    " pip install python-language-server
+    au User lsp_setup call lsp#register_server({
+                \ 'name': 'pyls',
+                \ 'cmd': {server_info->['pyls']},
+                \ 'whitelist': ['python'],
+                \ })
+endif
 
 """"""""""""""""""""
 """"""" GUI """"""""
