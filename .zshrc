@@ -108,69 +108,31 @@ alias chrome='/usr/bin/google-chrome-stable %U &'
 alias pylint='pylint --output-format=colorized'
 
 ## tmux
-alias tmux='tmux -2'
-# Tmux split vim like
-alias :vs='tmux split -h'
-alias :sp='tmux split -v'
-alias :bd='tmux kill-pane'
-alias :new='tmux new-window'
-alias :vsp='tmux splitw -h -p '
-
-##alias Middleware
-#alias so_python_dev_env='source ~/01_Middleware/mw-dev-tools/work/venv/bin/activate'
-#alias so_python_test_env='source ~/00_Tools/pyvenv_353/bin/activate'
-#alias cd_mw='cd ~/01_Middleware/mw-dev-tools/'
-#alias cd_source='cd ~/01_Middleware/mw-dev-tools/work/sources'
-#alias cd_doc='cd ~/01_Middleware/mw-dev-tools/work/sources/documentation'
-#alias cd_am='cd ~/01_Middleware/mw-dev-tools/work/sources/mw-acquisition-manager'
-#alias cd_common='cd ~/01_Middleware/mw-dev-tools/work/sources/mw-common'
-#alias cd_cc='cd ~/01_Middleware/mw-dev-tools/work/sources/mw-control-center'
-#alias cd_edm='cd ~/01_Middleware/mw-dev-tools/work/sources/mw-experiment-data-manager'
-#alias cd_fica='cd ~/01_Middleware/mw-dev-tools/work/sources/mw-fi-control-api'
-#alias cd_gb='cd ~/01_Middleware/mw-dev-tools/work/sources/mw-global-bus'
-#alias cd_ifm='cd ~/01_Middleware/mw-dev-tools/work/sources/mw-infrastructure-manager'
-#alias cd_interop='cd ~/01_Middleware/mw-dev-tools/work/sources/mw-interoperability'
-#alias cd_ldc='cd ~/01_Middleware/mw-dev-tools/work/sources/mw-live-data-collector'
-#alias cd_pr='cd ~/01_Middleware/mw-dev-tools/work/sources/mw-program-runner'
-#alias cd_rc='cd ~/01_Middleware/mw-dev-tools/work/sources/mw-resource-collector'
-#alias cd_salt='cd ~/01_Middleware/mw-dev-tools/work/sources/mw-salt-config'
-#alias cd_trm='cd ~/01_Middleware/mw-dev-tools/work/sources/mw-test-run-manager'
-#alias cd_tu='cd ~/01_Middleware/mw-dev-tools/work/sources/mw-test-utils'
-#alias cd_lf='cd ~/01_Middleware/mw-dev-tools/work/sources/mw-log-forwarder'
-#alias cd_nc='cd ~/01_Middleware/mw-dev-tools/work/sources/mw-new-component'
-#alias cd_ec='cd ~/01_Middleware/mw-dev-tools/work/sources/mw-event-collector'
-#alias cd_ed='cd ~/01_Middleware/mw-dev-tools/work/sources/mw-event-dispatcher'
-
-alias swagger_preview='cd ~/01_Workspace/02_pandora_doc; ./generate_readable_doc.py; cd ./swagger-ui/dist; python -m http.server 8123 &; firefox --new-tab http://127.0.0.1:8123'
-
-#alias cloc='~/00_Tools/cloc/cloc'
-
-#alias vim='deactivate; so_python_dev_env; vim'
-#alias git commit='deactivate; so_python_dev_env; git commit'
-
-##alias pytest='pytest --cov=. --cov-append'
-
-#so_python_test_env
-
+alias tmux='tmux -2' 
+alias swagger_preview='cd ~/01_Workspace/02_pandora_doc; ./generate_readable_doc.py; cd ./swagger-ui/dist; python -m http.server 8123 &; firefox --new-tab http://127.0.0.1:8123' 
 alias py35='source ~/00_Tools/01_python_venv/py35/bin/activate'
-alias py36='source ~/00_Tools/01_python_venv/py36/bin/activate'
-
+alias py36='source ~/00_Tools/01_python_venv/py36/bin/activate' 
 alias run_mongo='sudo docker run --rm  --net blsi --ip 172.18.0.10 -p 27017:27017 -v /tmp/mongodb:/data/db  mongo:3.6.5 '
-alias run_influx='sudo docker run --rm --net blsi --ip 172.18.0.11 -p 8086:8086 -v /var/lib/influxdb:/var/lib/influxdb influxdb:latest /usr/bin/influxd'
+alias run_influx='sudo docker run --rm --net blsi --ip 172.18.0.11 -p 8086:8086 -v /var/lib/influxdb:/var/lib/influxdb influxdb:latest /usr/bin/influxd' 
+#alias pytestcov='coverage run -m pytest' 
+alias vi='vim'
+alias robo3t='~/00_Tools/robo3t/bin/robo3t'
 
 #alias run_mypy='mypy --ignore-missing-imports --disallow-untyped-defs blsi'
 #alias run_pytest='pytest tests --ignore tests/func'
 #alias run_pep8='pep8 ./blsi'
 
-alias cd_mw='cd ~/01_Workspace/01-toruk'
+alias python37='python3.7'
+alias py37='source ~/.pythonvenv/python371/bin/activate' 
 
-alias vi='vim'
+alias pytest='pytest -vv --setup-show --boxed --capture=no'
+
+#alias flake8='flake8 -strict'
+
 
 if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
     source /etc/profile.d/vte-2.91.sh
 fi
 
-alias pytestcov='coverage run -m pytest'
-
-py36
+py37
 
