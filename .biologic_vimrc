@@ -176,3 +176,4 @@ map <Leader>vl :VimuxRunLastCommand<CR>
 map <Leader>vs :VimuxInterruptRunner<CR>
 map <Leader>cov :Coveragepy session<CR>
 
+cnoreabbrev Ack Ack! --type=python
