@@ -133,6 +133,7 @@ nnoremap :bc :Bclose
 "au BufRead,BufNewFile *.md setfiletype markdown.pandoc
 "au BufRead,BufNewFile *.md setfiletype text
 autocmd BufNewFile,BufRead *.json set ft=javascript
+autocmd BufNewFile,BufRead *.ts setlocal ft=javascript
 au BufNewFile,BufRead *.md set ft=markdown
 
 au BufRead *.txt set ft=
@@ -173,13 +174,13 @@ Plugin 'mhinz/vim-startify'
 "Plugin 'thaerkh/vim-workspace'
 "Plugin 'mbbill/undotree'
 Plugin 'tpope/vim-surround'
+"ultisnips does not work with YouCompeteMe
 "Plugin 'SirVer/ultisnips'
 "Plugin 'honza/vim-snippets'
 "Plugin 'vim-scripts/SearchComplete'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'benmills/vimux'
 Plugin 'editorconfig/editorconfig-vim'
-"Plugin 'vim-syntastic/syntastic'
 Plugin 'w0rp/ale'
 "Plugin 'thiagoalessio/rainbow_levels.vim'
 "Plugin 'Townk/vim-autoclose'
@@ -212,9 +213,13 @@ Plugin 'mgedmin/coverage-highlight.vim'
 
 " Plugins for Javascript
 "Plugin 'jelera/vim-javascript-syntax'
+"Plugin 'pangloss/vim-javascript'
+Plugin 'leafgarland/typescript-vim'
+
 
 "Plugin for HTML
 "Plugin 'alvan/vim-closetag'
+Plugin 'rstacruz/sparkup'
 
 " Plugins for Node.js
 " see https://github.com/nodejs/node/wiki/Vim-Plugins
@@ -252,7 +257,7 @@ let g:NERDTreeWinPos = "left"
 " bufexplorer
 map <S-Tab> :BufExplorerHorizontalSplit<CR>
 
-map <c-t> :CtrlPTag<CR>
+map <leader>tags :CtrlPTag<CR>
 
 " python-syntax
 let python_highlight_all=1
@@ -279,9 +284,12 @@ let g:cpp_experimental_template_highlight = 1
 let g:cpp_concepts_highlight = 1
 
 " Ale
+    "\'python':['flake8', 'mypy', 'vulture'],
+    "\'python':['flake8', 'pyre'],
 let g:ale_linters = {
-    \'python':['flake8', 'mypy', 'vulture'],
+    \'python':['flake8', 'mypy'],
     \'markdown':['markdownlint',],
+    \'javascript':['eslint',],
     \}
 let g:ale_fixers = {
     \'python':['black', 'isort'],
@@ -316,7 +324,7 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 " YouCompleteMe
 let g:ycm_python_binary_path='/usr/bin/python3'
 let g:ycm_autoclose_preview_window_after_completion=1
-let g:ycm_min_num_of_chars_for_completion = 1
+let g:ycm_min_num_of_chars_for_completion = 2
 let g:ycp_add_preview_to_completeopt=1
 let g:ycp_complete_in_comments=1
 let g:ycp_complete_in_strings=1
@@ -324,6 +332,16 @@ let g:ycm_max_num_candidates = 50
 let g:ycm_max_num_identifier_candidates = 50
 let g:ycm_collect_identifiers_from_tags_files = 1
 set completeopt-=preview
+
+" UltiSnips
+" Trigger configuration. Do not use <tab> if you use
+" https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
 
 " Ack
 "nnoremap :Ack :Ack! " don't jump to first result automaticaly
