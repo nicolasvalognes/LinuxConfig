@@ -123,20 +123,17 @@ nnoremap :bc :Bclose
 "noremap <Down> :resize -1<CR>
 "noremap <Up> :resize +1<CR>
 
- " ctags -R --python-kinds=-i --fields=+iaS --language-force=python -f mw_tags ~/01_Workspace/mw_dev_tools/work/sources
-"set tags=./tags
-"set tags+=~/00_Tools/toruk_tags/mw_tags
-"set tags+=~/00_Tools/toruk_tags/venv_tags
 
 "au BufRead,BufNewFile *.qss setfiletype css "syntax color for qt .css file
 "au BufRead,BufNewFile *.qrc setfiletype xml "syntax color for qt .qrc file
 "au BufRead,BufNewFile *.md setfiletype markdown.pandoc
 "au BufRead,BufNewFile *.md setfiletype text
 autocmd BufNewFile,BufRead *.json set ft=javascript
-autocmd BufNewFile,BufRead *.ts setlocal ft=javascript
+autocmd BufNewFile,BufRead *.ts setlocal ft=typescript
 au BufNewFile,BufRead *.md set ft=markdown
 
-au BufRead *.txt set ft=
+au BufNewFile,BufRead CMakeLists.txt set filetype=cmake
+"au BufRead *.txt set ft=
 
 """"""""""""""""""""
 """"" PLUGINS """"""
@@ -155,66 +152,52 @@ Plugin 'VundleVim/Vundle.vim'
 " General plugins
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'lilydjwg/colorizer'
-"Plugin 'kien/ctrlp.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
-"Plugin 'vim-scripts/DoxygenToolkit.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
-"Plugin 'ryanoasis/vim-devicons'
+Plugin 'ryanoasis/vim-devicons'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-airline/vim-airline'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-git'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
-"Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'Yggdroot/indentLine'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'mhinz/vim-startify'
-"Plugin 'thaerkh/vim-workspace'
-"Plugin 'mbbill/undotree'
 Plugin 'tpope/vim-surround'
-"ultisnips does not work with YouCompeteMe
-"Plugin 'SirVer/ultisnips'
-"Plugin 'honza/vim-snippets'
-"Plugin 'vim-scripts/SearchComplete'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'benmills/vimux'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'w0rp/ale'
-"Plugin 'thiagoalessio/rainbow_levels.vim'
-"Plugin 'Townk/vim-autoclose'
-"Plugin 'itchyny/calendar.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'rbgrouleff/bclose.vim'
-Plugin 'prabirshrestha/async.vim'
-Plugin 'prabirshrestha/asyncomplete.vim'
-Plugin 'prabirshrestha/vim-lsp'
+Plugin 'kshenoy/vim-signature'
+"Plugin 'jiangmiao/auto-pairs'
+Plugin 'vim-utils/vim-man'
+Plugin 'vim-scripts/DoxygenToolkit.vim'
+Plugin'vhdirk/vim-cmake'
+
+Plugin 'nicolasvalognes/WisebimVim'
+Plugin 'nicolasvalognes/jellyscheme'
+Plugin 'nicolasvalognes/vim-comment-improved'
 
 " Plugins for C/C++
-Plugin 'vim-scripts/a.vim'
-Plugin 'vim-scripts/c.vim'
+"Plugin 'vim-scripts/a.vim'
+"Plugin 'vim-scripts/c.vim'
 Plugin 'octol/vim-cpp-enhanced-highlight'
-"Plugin 'vim-scripts/OmniCppComplete'
 Plugin 'justinmk/vim-syntax-extra'
 
 " Plugins for Qt
 Plugin 'kosl90/qt-highlight-vim'
 
 "Plugin for Python
-"Plugin 'python-mode/python-mode'
 Plugin 'vim-python/python-syntax'
-"Plugin 'davidhalter/jedi-vim'
-"Plugin 'dbsr/vimpy'
-"Plugin 'python-rope/ropevim'
-"Plugin 'ambv/black'
-Plugin 'mgedmin/coverage-highlight.vim'
-"Plugin 'heavenshell/vim-pydocstring'
 
 " Plugins for Javascript
-"Plugin 'jelera/vim-javascript-syntax'
-"Plugin 'pangloss/vim-javascript'
 Plugin 'leafgarland/typescript-vim'
+"test for js
+Plugin 'Shougo/vimproc.vim'
 
 
 "Plugin for HTML
@@ -229,7 +212,8 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'fenetikm/falcon'
-Plugin 'haishanh/night-owl.vim'
+
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -245,14 +229,22 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 "let g:indent_guides_guide_size=1
 "set ts=4 sw=4 et
 
+map <leader>k <Plug>(Man)
+map <leader>v <Plug>(Vman)
+
 au VimEnter * IndentLinesToggle
 let g:indentLine_char = '┆'
 let g:indentLine_setColor = 0
 let g:indentLine_color_term = 24
 
 let g:load_doxygen_syntax=1
+let g:DoxygenToolkit_authorName="Nicolas Valognes"
 
 let g:NERDTreeWinPos = "left"
+"let g:NERDTreeMinimalUI = 1
+"let g:NERDTreeMarkBookmarks = 0
+let g:NERDTreeAutoDeleteBuffer = 1
+let g:NERDTreeStatusLine = -1
 
 " bufexplorer
 map <S-Tab> :BufExplorerHorizontalSplit<CR>
@@ -284,15 +276,21 @@ let g:cpp_experimental_template_highlight = 1
 let g:cpp_concepts_highlight = 1
 
 " Ale
-    "\'python':['flake8', 'mypy', 'vulture'],
-    "\'python':['flake8', 'pyre'],
 let g:ale_linters = {
     \'python':['flake8', 'mypy'],
     \'markdown':['markdownlint',],
-    \'javascript':['eslint',],
+    \'typescript':['tslint', 'prettier',],
+    \'cpp':['clang++', 'clang',],
+    \'html':['prettier',],
+    \'css':['prettier',],
     \}
+
 let g:ale_fixers = {
     \'python':['black', 'isort'],
+    \'cpp':['clang-format',],
+    \'typescript':['tslint'],
+    \'html':['prettier',],
+    \'css':['prettier',],
     \}
 let g:ale_completion_enabled=1
 let g:ale_set_balloons=1
@@ -304,7 +302,11 @@ let g:ale_echo_msg_format = '[%severity%][%linter%(%code%)] %s'
 let g:ale_set_highlights=0
 "let g:ale-python-root='~/01_Middleware/mw-dev-tools/work/sources'
 let g:ale_fix_on_save = 1
-let g:ale_sign_warning='>>'
+"let g:ale_sign_warning='>>'
+let g:ale_sign_warning = '▲'
+let g:ale_sign_error = '✗'
+"let g:ale_cpp_clang_options = '-std=c++17 -isystem /usr/include/c++/v1 -I/usr/include/c++/v1 -I/opt/ros/kinetic/include -I/usr/local/include -I/usr/include -I/usr/include/x86_64-linux-gnu -I../**'
+let g:ale_cpp_clang_options = '-std=c++17 -isystem -I../**'
 
 " Rainbow Parentheses
 au VimEnter * RainbowParenthesesToggle
@@ -332,6 +334,10 @@ let g:ycm_max_num_candidates = 50
 let g:ycm_max_num_identifier_candidates = 50
 let g:ycm_collect_identifiers_from_tags_files = 1
 set completeopt-=preview
+" disable ycm checker
+let g:ycm_show_diagnostics_ui=0
+let g:ycm_enable_diagnostic_signs = 0
+let g:ycm_enable_diagnostic_highlighting = 0
 
 " UltiSnips
 " Trigger configuration. Do not use <tab> if you use
@@ -348,7 +354,7 @@ let g:UltiSnipsEditSplit="vertical"
 "cnoreabbrev Ack Ack! --type=python
 
 " Coveragepy
-let g:coveragepy_uncovered_sign = '>'
+"let g:coveragepy_uncovered_sign = '>'
 
 " vim-lsp
 if executable('pyls')
@@ -359,6 +365,11 @@ if executable('pyls')
                 \ 'whitelist': ['python'],
                 \ })
 endif
+
+"let g:gitgutter_sign_added = '∙'
+"let g:gitgutter_sign_modified = '∙'
+"let g:gitgutter_sign_removed = '∙'
+"let g:gitgutter_sign_modified_removed = '∙'
 
 """"""""""""""""""""
 """"""" GUI """"""""
@@ -407,16 +418,19 @@ set t_Co=256
 "set termguicolors
 set background=dark
 
-"colorscheme Tomorrow-Night-Bright
-colorscheme jellybeans
+"colorscheme Tomorrow-Night
+colorscheme jellyscheme
 "let g:airline_theme='tomorrow'
 "let g:airline_theme='jellybeans'
+let g:falcon_airline = 1
+let g:airline_theme = 'falcon'
 set cursorline
 "set cursorcolumn
-hi Cursor guibg=#528bff ctermbg=69 gui=NONE cterm=NONE
+"hi Cursor guibg=#528bff ctermbg=69 gui=NONE cterm=NONE
 
-"set colorcolumn=100
-execute "set colorcolumn=".join(range(101,999), ',')
+set colorcolumn=80
+au BufRead,BufNewFile *.py set colorcolumn=100
+"execute "set colorcolumn=".join(range(101,999), ',')
 highlight ColorColumn ctermbg=234
 
 " to work in terminal
@@ -433,19 +447,19 @@ set foldmethod=indent
 "hi Comment ctermfg=238
 hi Comment ctermfg=240
 
-" Add the virtualenv's site-packages to vim path
-if has('python')
-  py << EOF
-  import os.path
-  import sys
-  import vim
-  if 'VIRTUAL_ENV' in os.environ:
-        project_base_dir = os.environ['VIRTUAL_ENV']
-          sys.path.insert(0, project_base_dir)
-          activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-          execfile(activate_this, dict(__file__=activate_this))
-EOF
-endif
+"   " Add the virtualenv's site-packages to vim path
+"   if has('python')
+"     py << EOF
+"     import os.path
+"     import sys
+"     import vim
+"     if 'VIRTUAL_ENV' in os.environ:
+"           project_base_dir = os.environ['VIRTUAL_ENV']
+"             sys.path.insert(0, project_base_dir)
+"             activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+"             execfile(activate_this, dict(__file__=activate_this))
+"   EOF
+"   endif
 
 " Load up virtualenv's vimrc if it exists
 if filereadable($VIRTUAL_ENV . '/.vimrc')
@@ -455,13 +469,11 @@ endif
 if has("autocmd")
   " Highlight TODO, FIXME, NOTE, etc.
   if v:version > 701
-    autocmd Syntax * call matchadd('Todo',  '\W\zs\(TODO\|FIXME\|CHANGED\|XXX\|BUG\|HACK\|DEBUG\)')
-    autocmd Syntax * call matchadd('Debug', '\W\zs\(NOTE\|INFO\|IDEA\)')
+    autocmd Syntax * call matchadd('Todo',  '\W\zs\(TODO\|FIXME\|CHANGED\|XXX\|BUG\|HACK\|DEBUG\|OPTIMIZE\)')
+    autocmd Syntax * call matchadd('ImprovedTodo', '\W\zs\(NOTE\|INFO\|IDEA\)')
   endif
 endif
 
-let g:falcon_airline = 1
-let g:airline_theme = 'falcon'
 " set Vim-specific sequences for RGB colors
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
@@ -495,4 +507,6 @@ endif
 highlight NoCoverage ctermbg=2
 highlight NoCoverage ctermbg=0
 
-source ~/.biologic_vimrc
+set path+=../../**
+
+source ~/.wisebim_vimrc
