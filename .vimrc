@@ -118,19 +118,15 @@ set pumheight=20
 noremap <Right> :bn<CR>
 noremap <Left> :bp<CR>
 nnoremap :bc :Bclose
-"noremap <Left> :vertical resize -1<CR>
-"noremap <Right> :vertical resize +1<CR>
-"noremap <Down> :resize -1<CR>
-"noremap <Up> :resize +1<CR>
 
 
-"au BufRead,BufNewFile *.qss setfiletype css "syntax color for qt .css file
-"au BufRead,BufNewFile *.qrc setfiletype xml "syntax color for qt .qrc file
+au BufRead,BufNewFile *.qss setfiletype css "syntax color for qt .css file
+au BufRead,BufNewFile *.qrc setfiletype xml "syntax color for qt .qrc file
 "au BufRead,BufNewFile *.md setfiletype markdown.pandoc
-"au BufRead,BufNewFile *.md setfiletype text
+au BufRead,BufNewFile *.md setfiletype text
 autocmd BufNewFile,BufRead *.json set ft=javascript
 autocmd BufNewFile,BufRead *.ts setlocal ft=typescript
-au BufNewFile,BufRead *.md set ft=markdown
+"au BufNewFile,BufRead *.md set ft=markdown
 
 au BufNewFile,BufRead CMakeLists.txt set filetype=cmake
 "au BufRead *.txt set ft=
@@ -178,13 +174,14 @@ Plugin 'vim-utils/vim-man'
 Plugin 'vim-scripts/DoxygenToolkit.vim'
 Plugin'vhdirk/vim-cmake'
 
-Plugin 'nicolasvalognes/WisebimVim'
-Plugin 'nicolasvalognes/jellyscheme'
-Plugin 'nicolasvalognes/vim-comment-improved'
+Plugin 'nicolasvalognes/nv-vim-wisebim'
+Plugin 'nicolasvalognes/nv-vim-jellyscheme'
+Plugin 'nicolasvalognes/nv-vim-comment-improved'
+Plugin 'nicolasvalognes/nv-vim-json-format'
 
 " Plugins for C/C++
 "Plugin 'vim-scripts/a.vim'
-"Plugin 'vim-scripts/c.vim'
+Plugin 'vim-scripts/c.vim'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'justinmk/vim-syntax-extra'
 
@@ -195,7 +192,7 @@ Plugin 'kosl90/qt-highlight-vim'
 Plugin 'vim-python/python-syntax'
 
 " Plugins for Javascript
-Plugin 'leafgarland/typescript-vim'
+"Plugin 'leafgarland/typescript-vim'
 "test for js
 Plugin 'Shougo/vimproc.vim'
 
@@ -211,7 +208,7 @@ Plugin 'rstacruz/sparkup'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'kien/rainbow_parentheses.vim'
-Plugin 'fenetikm/falcon'
+Plugin 'KabbAmine/yowish.vim'
 
 
 
@@ -323,13 +320,15 @@ let g:VimuxHeight = "50"
 " editor-config
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
+set completeopt=menuone,noselect,noinsert
+"set omnifunc=syntaxcomplete#Complete
 " YouCompleteMe
 let g:ycm_python_binary_path='/usr/bin/python3'
 let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_min_num_of_chars_for_completion = 2
 let g:ycp_add_preview_to_completeopt=1
-let g:ycp_complete_in_comments=1
-let g:ycp_complete_in_strings=1
+let g:ycp_complete_in_comments=0
+let g:ycp_complete_in_strings=0
 let g:ycm_max_num_candidates = 50
 let g:ycm_max_num_identifier_candidates = 50
 let g:ycm_collect_identifiers_from_tags_files = 1
@@ -348,6 +347,12 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
+
+map <Leader>vp :VimuxPromptCommand<CR>
+map <Leader>vl :VimuxRunLastCommand<CR>
+map <Leader>vs :VimuxInterruptRunner<CR>
+
+let g:developer_name="Nicolas Valognes"
 
 " Ack
 "nnoremap :Ack :Ack! " don't jump to first result automaticaly
@@ -421,9 +426,7 @@ set background=dark
 "colorscheme Tomorrow-Night
 colorscheme jellyscheme
 "let g:airline_theme='tomorrow'
-"let g:airline_theme='jellybeans'
-let g:falcon_airline = 1
-let g:airline_theme = 'falcon'
+let g:airline_theme='jellybeans'
 set cursorline
 "set cursorcolumn
 "hi Cursor guibg=#528bff ctermbg=69 gui=NONE cterm=NONE
@@ -441,30 +444,36 @@ let g:indentLine_color_term = 24
 
 
 set foldlevel=99
-"set foldlevelstart=3
-set foldmethod=indent
+set foldlevelstart=5
+"set foldmethod=indent
+if (&ft=="python")
+  set foldmethod=indent
+else
+  set foldmethod=syntax
+endif
+
 "hi Folded ctermfg=239
 "hi Comment ctermfg=238
 hi Comment ctermfg=240
 
-"   " Add the virtualenv's site-packages to vim path
-"   if has('python')
-"     py << EOF
-"     import os.path
-"     import sys
-"     import vim
-"     if 'VIRTUAL_ENV' in os.environ:
-"           project_base_dir = os.environ['VIRTUAL_ENV']
-"             sys.path.insert(0, project_base_dir)
-"             activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-"             execfile(activate_this, dict(__file__=activate_this))
-"   EOF
-"   endif
+" Add the virtualenv's site-packages to vim path
+"if has('python')
+  "py << EOF
+  "import os.path
+  "import sys
+  "import vim
+  "if 'VIRTUAL_ENV' in os.environ:
+    "project_base_dir = os.environ['VIRTUAL_ENV']
+    "sys.path.insert(0, project_base_dir)
+    "activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+    "execfile(activate_this, dict(__file__=activate_this))
+    "EOF
+  "endif
 
-" Load up virtualenv's vimrc if it exists
-if filereadable($VIRTUAL_ENV . '/.vimrc')
-  source $VIRTUAL_ENV/.vimrc
-endif
+"" Load up virtualenv's vimrc if it exists
+"if filereadable($VIRTUAL_ENV . '/.vimrc')
+  "source $VIRTUAL_ENV/.vimrc
+"endif
 
 if has("autocmd")
   " Highlight TODO, FIXME, NOTE, etc.
@@ -503,10 +512,43 @@ else
   map <C-l> <C-w>l
 endif
 
+
+function! s:pythonBreakpoint()
+  "execute "normal! Oimport pdb; pdb.set_trace()  # [DEBUG | TO REMOVE] Breakpoint"
+  execute "normal! O# fmt: off"
+  execute "normal! oimport pdb; pdb.set_trace()"
+  execute "normal! o# fmt: on"
+endfunction
+nnoremap <leader>b :call <SID>pythonBreakpoint()<CR>
+
+function! s:pyDebug()
+  execute "normal! O# [DEBUG]"
+  execute "normal! omy_file = open('/tmp/pydebug.txt', 'w')"
+  execute "normal! omy_file.write(str(response))"
+  execute "normal! omy_file.close()"
+endfunction
+nnoremap <leader>deb :call <SID>pyDebug()<CR>
+
 " coverage highlight
 highlight NoCoverage ctermbg=2
 highlight NoCoverage ctermbg=0
 
 set path+=../../**
 
-source ~/.wisebim_vimrc
+cnoreabbrev Ack Ack!
+
+nnoremap <F2> :NERDTreeToggle<CR>
+nnoremap <F3> :TagbarToggle<CR>
+nnoremap <F4> :nohl<CR>
+set pastetoggle=<F5>
+
+"source ~/.wisebim_vimrc
+
+"""  Current work specific config
+
+set tags+=/home/nicolas/00_Tools/wisebim_tags/py37_PlansToBim_core_tags
+set tags+=/home/nicolas/00_Tools/wisebim_tags/plans2bim_front_tags
+set tags+=/home/nicolas/00_Tools/wisebim_tags/plans2bim_middleware_tags
+set tags+=/home/nicolas/00_Tools/wisebim_tags/plans2bim_core_tags
+set tags+=/home/nicolas/00_Tools/wisebim_tags/cpp_headers_tags
+
