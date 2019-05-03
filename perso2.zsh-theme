@@ -15,36 +15,12 @@
 
 VIRTUAL_ENV_DISABLE_PROMPT=true
 
-# Define order and content of prompt
-#if [ ! -n "${BULLETTRAIN_PROMPT_ORDER+1}" ]; then
-  #BULLETTRAIN_PROMPT_ORDER=(
-    #perl
-    #ruby
-    #virtualenv
-    ##nvm
-    #aws
-    #go
-    #rust
-    #elixir
-
-    ##time
-    #status
-    ##custom
-    #context
-    #screen
-    #dir
-    #git
-    #hg
-    #cmd_exec_time
-  #)
-#fi
-
 if [ ! -n "${BULLETTRAIN_PROMPT_ORDER+1}" ]; then
   BULLETTRAIN_PROMPT_ENV=(
+    time
     perl
     ruby
     virtualenv
-    #nvm
     aws
     go
     rust
@@ -53,21 +29,16 @@ if [ ! -n "${BULLETTRAIN_PROMPT_ORDER+1}" ]; then
     )
 
   BULLETTRAIN_PROMPT_ORDER=(
-    #time
     status
-    #custom
     context
     screen
     dir
-    #hg
-    #cmd_exec_time
   )
 fi
 
 # PROMPT
 if [ ! -n "${BULLETTRAIN_PROMPT_CHAR+1}" ]; then
-  #BULLETTRAIN_PROMPT_CHAR="\$"
-  BULLETTRAIN_PROMPT_CHAR=" ╰─ "
+  BULLETTRAIN_PROMPT_CHAR=" ╰─"
 fi
 if [ ! -n "${BULLETTRAIN_PROMPT_ROOT+1}" ]; then
   BULLETTRAIN_PROMPT_ROOT=true
@@ -95,7 +66,7 @@ fi
 
 # TIME
 if [ ! -n "${BULLETTRAIN_TIME_BG+1}" ]; then
-  BULLETTRAIN_TIME_BG=white
+  BULLETTRAIN_TIME_BG=green
 fi
 if [ ! -n "${BULLETTRAIN_TIME_FG+1}" ]; then
   BULLETTRAIN_TIME_FG=black
