@@ -114,23 +114,6 @@ set signcolumn=yes
 
 " limit popup menu height
 set pumheight=20
-
-noremap <Right> :bn<CR>
-noremap <Left> :bp<CR>
-nnoremap :bc :Bclose
-
-
-au BufRead,BufNewFile *.qss setfiletype css "syntax color for qt .css file
-au BufRead,BufNewFile *.qrc setfiletype xml "syntax color for qt .qrc file
-"au BufRead,BufNewFile *.md setfiletype markdown.pandoc
-au BufRead,BufNewFile *.md setfiletype text
-autocmd BufNewFile,BufRead *.json set ft=javascript
-autocmd BufNewFile,BufRead *.ts setlocal ft=typescript
-"au BufNewFile,BufRead *.md set ft=markdown
-
-au BufNewFile,BufRead CMakeLists.txt set filetype=cmake
-"au BufRead *.txt set ft=
-
 """"""""""""""""""""
 """"" PLUGINS """"""
 """"""""""""""""""""
@@ -192,10 +175,13 @@ Plugin 'kosl90/qt-highlight-vim'
 Plugin 'vim-python/python-syntax'
 
 " Plugins for Javascript
-"Plugin 'leafgarland/typescript-vim'
+Plugin 'leafgarland/typescript-vim'
 "test for js
 Plugin 'Shougo/vimproc.vim'
 
+" Plugin for markdown
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
 
 "Plugin for HTML
 "Plugin 'alvan/vim-closetag'
@@ -285,10 +271,11 @@ let g:ale_linters = {
 let g:ale_fixers = {
     \'python':['black', 'isort'],
     \'cpp':['clang-format',],
-    \'typescript':['tslint'],
-    \'html':['prettier',],
+    \'typescript':['prettier'],
     \'css':['prettier',],
+    \'html':['prettier',],
     \}
+
 let g:ale_completion_enabled=1
 let g:ale_set_balloons=1
 let g:ale_hover=1
@@ -376,6 +363,26 @@ endif
 "let g:gitgutter_sign_removed = '∙'
 "let g:gitgutter_sign_modified_removed = '∙'
 
+
+
+noremap <Right> :bn<CR>
+noremap <Left> :bp<CR>
+nnoremap :bc :Bclose
+
+
+au BufRead,BufNewFile *.qss setfiletype css "syntax color for qt .css file
+au BufRead,BufNewFile *.qrc setfiletype xml "syntax color for qt .qrc file
+au BufRead,BufNewFile *.md setfiletype text
+autocmd BufNewFile,BufRead *.json set ft=javascript
+autocmd BufNewFile,BufRead *.ts setlocal ft=typescript
+"au BufNewFile,BufRead *.md set ft=markdown
+au! BufRead,BufNewFile *.markdown set filetype=mkd
+au! BufRead,BufNewFile *.md       set filetype=mkd
+
+au BufNewFile,BufRead CMakeLists.txt set filetype=cmake
+"au BufRead *.txt set ft=
+
+
 """"""""""""""""""""
 """"""" GUI """"""""
 """"""""""""""""""""
@@ -427,11 +434,13 @@ set background=dark
 colorscheme jellyscheme
 "let g:airline_theme='tomorrow'
 let g:airline_theme='jellybeans'
+"let g:airline_theme='papercolor'
 set cursorline
 "set cursorcolumn
 "hi Cursor guibg=#528bff ctermbg=69 gui=NONE cterm=NONE
 
-set colorcolumn=80
+set colorcolumn=120
+au BufRead,BufNewFile *.c,*.cpp,*h,*.hpp set colorcolumn=80
 au BufRead,BufNewFile *.py set colorcolumn=100
 "execute "set colorcolumn=".join(range(101,999), ',')
 highlight ColorColumn ctermbg=234
@@ -444,13 +453,13 @@ let g:indentLine_color_term = 24
 
 
 set foldlevel=99
-set foldlevelstart=5
+"set foldlevelstart=4
+set foldmethod=indent
+"if (&ft=="python")
 "set foldmethod=indent
-if (&ft=="python")
-  set foldmethod=indent
-else
-  set foldmethod=syntax
-endif
+"else
+  "set foldmethod=syntax
+"endif
 
 "hi Folded ctermfg=239
 "hi Comment ctermfg=238

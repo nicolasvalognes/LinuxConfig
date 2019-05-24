@@ -7,10 +7,8 @@
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-#ZSH_THEME="robbyrussell"
-#ZSH_THEME="agnoster"
-#ZSH_THEME="gnzh"
-ZSH_THEME="perso"
+#ZSH_THEME="perso"
+ZSH_THEME="perso2"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -103,36 +101,38 @@ alias git_del_branch='git branch | grep -v -E "master|develop|release" | xargs -
 
 alias robo3t='~/00_Tools/robo3t/bin/robo3t &'
 alias chrome='/usr/bin/google-chrome-stable %U &'
-#alias firefox='~/00_Tools/firefox/firefox'
+
+alias docker='sudo docker'
 
 alias pylint='pylint --output-format=colorized'
 
 ## tmux
-alias tmux='tmux -2' 
-alias swagger_preview='cd ~/01_Workspace/02_pandora_doc; ./generate_readable_doc.py; cd ./swagger-ui/dist; python -m http.server 8123 &; firefox --new-tab http://127.0.0.1:8123' 
-alias py35='source ~/00_Tools/01_python_venv/py35/bin/activate'
-alias py36='source ~/00_Tools/01_python_venv/py36/bin/activate' 
+alias tmux='tmux -2'
+alias swagger_preview='cd ~/01_Workspace/02_pandora_doc; ./generate_readable_doc.py; cd ./swagger-ui/dist; python -m http.server 8123 &; firefox --new-tab http://127.0.0.1:8123'
 alias run_mongo='sudo docker run --rm  --net blsi --ip 172.18.0.10 -p 27017:27017 -v /tmp/mongodb:/data/db  mongo:3.6.5 '
-alias run_influx='sudo docker run --rm --net blsi --ip 172.18.0.11 -p 8086:8086 -v /var/lib/influxdb:/var/lib/influxdb influxdb:latest /usr/bin/influxd' 
-#alias pytestcov='coverage run -m pytest' 
+alias run_influx='sudo docker run --rm --net blsi --ip 172.18.0.11 -p 8086:8086 -v /var/lib/influxdb:/var/lib/influxdb influxdb:latest /usr/bin/influxd'
+#alias pytestcov='coverage run -m pytest'
 alias vi='vim'
 alias robo3t='~/00_Tools/robo3t/bin/robo3t'
 
+#alias python='python3'
+#alias py37_plans2bim='source ~/.pythonvenv/py37_plans2bim/bin/activate'
+alias py37_PlansToBim_middleware='source ~/.pythonvenv/py37_PlansToBim_middleware/bin/activate'
+alias py37_PlansToBim_core='source ~/.pythonvenv/py37_PlansToBim_core/bin/activate'
+#alias pytest='pytest -vv --setup-show --boxed --capture=no'
+#alias flake8='flake8 -strict'
 #alias run_mypy='mypy --ignore-missing-imports --disallow-untyped-defs blsi'
 #alias run_pytest='pytest tests --ignore tests/func'
 #alias run_pep8='pep8 ./blsi'
 
-alias python37='python3.7'
-alias py37='source ~/.pythonvenv/python371/bin/activate' 
-
-alias pytest='pytest -vv --setup-show --boxed --capture=no'
-
-#alias flake8='flake8 -strict'
+alias plantuml='java -jar ~/00_Tools/plantuml.jar'
 
 
-if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
-    source /etc/profile.d/vte-2.91.sh
-fi
+#if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+#    source /etc/profile.d/vte-2.91.sh
+#fi
 
-py37
+alias curl_get='curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET'
+
+source ~/.profile
 
