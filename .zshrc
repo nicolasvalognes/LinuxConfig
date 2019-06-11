@@ -52,7 +52,15 @@ ZSH_THEME="perso2"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(
+  git
+  git-flow
+  colored-man-pages
+  zsh-syntax-highlighting
+  zsh-autosuggestions
+  django
+  colorize
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -86,7 +94,8 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 
-alias ls='ls -l --color=auto'
+#alias ls='lsd'
+alias ls='lsd -l --color=auto'
 alias lr='ls -r'
 alias la='ls -a'
 #alias lt='ls -alt'
@@ -136,3 +145,5 @@ alias curl_get='curl -i -H "Accept: application/json" -H "Content-Type: applicat
 
 source ~/.profile
 
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
