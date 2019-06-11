@@ -131,9 +131,10 @@ Plugin 'VundleVim/Vundle.vim'
 " General plugins
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'lilydjwg/colorizer'
-Plugin 'ctrlpvim/ctrlp.vim'
+"Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-airline/vim-airline'
@@ -143,7 +144,6 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'Yggdroot/indentLine'
 Plugin 'terryma/vim-multiple-cursors'
-Plugin 'mhinz/vim-startify'
 Plugin 'tpope/vim-surround'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'benmills/vimux'
@@ -155,7 +155,8 @@ Plugin 'kshenoy/vim-signature'
 "Plugin 'jiangmiao/auto-pairs'
 Plugin 'vim-utils/vim-man'
 Plugin 'vim-scripts/DoxygenToolkit.vim'
-Plugin'vhdirk/vim-cmake'
+Plugin 'vhdirk/vim-cmake'
+Plugin 'junegunn/fzf.vim'
 
 Plugin 'nicolasvalognes/nv-vim-wisebim'
 Plugin 'nicolasvalognes/nv-vim-jellyscheme'
@@ -177,7 +178,7 @@ Plugin 'vim-python/python-syntax'
 " Plugins for Javascript
 Plugin 'leafgarland/typescript-vim'
 "test for js
-Plugin 'Shougo/vimproc.vim'
+"Plugin 'Shougo/vimproc.vim'
 
 " Plugin for markdown
 Plugin 'godlygeek/tabular'
@@ -232,7 +233,9 @@ let g:NERDTreeStatusLine = -1
 " bufexplorer
 map <S-Tab> :BufExplorerHorizontalSplit<CR>
 
-map <leader>tags :CtrlPTag<CR>
+"map <leader>tags :CtrlPTag<CR>
+map <leader>tags :Tags<CR>
+map <C-p> :Files<CR>
 
 " python-syntax
 let python_highlight_all=1
@@ -432,9 +435,7 @@ set background=dark
 
 "colorscheme Tomorrow-Night
 colorscheme jellyscheme
-"let g:airline_theme='tomorrow'
-let g:airline_theme='jellybeans'
-"let g:airline_theme='papercolor'
+let g:airline_theme='lucius'
 set cursorline
 "set cursorcolumn
 "hi Cursor guibg=#528bff ctermbg=69 gui=NONE cterm=NONE
@@ -561,3 +562,28 @@ set tags+=/home/nicolas/00_Tools/wisebim_tags/plans2bim_middleware_tags
 set tags+=/home/nicolas/00_Tools/wisebim_tags/plans2bim_core_tags
 set tags+=/home/nicolas/00_Tools/wisebim_tags/cpp_headers_tags
 
+
+" need : npm install --global git+https://github.com/Perlence/tstags.git
+let g:tagbar_type_typescript = {
+  \ 'ctagsbin' : 'tstags',
+  \ 'ctagsargs' : '-f-',
+  \ 'kinds': [
+    \ 'e:enums:0:1',
+    \ 'f:function:0:1',
+    \ 't:typealias:0:1',
+    \ 'M:Module:0:1',
+    \ 'I:import:0:1',
+    \ 'i:interface:0:1',
+    \ 'C:class:0:1',
+    \ 'm:method:0:1',
+    \ 'p:property:0:1',
+    \ 'v:variable:0:1',
+    \ 'c:const:0:1',
+  \ ],
+  \ 'sort' : 0
+  \ }
+
+" disable modeline for safety
+" see https://github.com/numirias/security/blob/master/doc/2019-06-04_ace-vim-neovim.md
+set modelines=0
+set nomodeline
