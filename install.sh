@@ -19,3 +19,8 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 cp .zshrc ~/.zshrc
 cp perso.zsh-theme ~/.oh-my-zsh/themes/perso.zsh-theme
 chsh -s /bin/zsh
+
+rm .vimrc
+ln -s ~/.vimrc .vimrc
+rm .zshrc
+ln -s ~/.zshrc .zshrc
