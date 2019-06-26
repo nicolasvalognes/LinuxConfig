@@ -94,6 +94,15 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 
+#if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+#    source /etc/profile.d/vte-2.91.sh
+#fi
+
+source ~/.profile
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+
 #alias ls='lsd'
 alias ls='lsd -l --color=auto'
 alias lr='ls -r'
@@ -111,8 +120,6 @@ alias git_del_branch='git branch | grep -v -E "master|develop|release" | xargs -
 alias robo3t='~/00_Tools/robo3t/bin/robo3t &'
 alias chrome='/usr/bin/google-chrome-stable %U &'
 
-alias docker='sudo docker'
-
 alias pylint='pylint --output-format=colorized'
 
 ## tmux
@@ -124,10 +131,11 @@ alias run_influx='sudo docker run --rm --net blsi --ip 172.18.0.11 -p 8086:8086 
 alias vi='vim'
 alias robo3t='~/00_Tools/robo3t/bin/robo3t'
 
-#alias python='python3'
-#alias py37_plans2bim='source ~/.pythonvenv/py37_plans2bim/bin/activate'
+alias run_postgres='sudo docker run --name postgres-db --rm -p 127.0.0.1:5432:5432 -v $HOME/docker/volumes/postgres:/var/lib/postgresql/data postgres'
+
 alias py37_PlansToBim_middleware='source ~/.pythonvenv/py37_PlansToBim_middleware/bin/activate'
 alias py37_PlansToBim_core='source ~/.pythonvenv/py37_PlansToBim_core/bin/activate'
+alias py37_celery='source ~/.pythonvenv/py37_celery_rabbitMQ/bin/activate'
 #alias pytest='pytest -vv --setup-show --boxed --capture=no'
 #alias flake8='flake8 -strict'
 #alias run_mypy='mypy --ignore-missing-imports --disallow-untyped-defs blsi'
@@ -136,14 +144,6 @@ alias py37_PlansToBim_core='source ~/.pythonvenv/py37_PlansToBim_core/bin/activa
 
 alias plantuml='java -jar ~/00_Tools/plantuml.jar'
 
-
-#if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
-#    source /etc/profile.d/vte-2.91.sh
-#fi
-
 alias curl_get='curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET'
 
-source ~/.profile
-
-
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+alias mysql-workbench="/usr/bin/mysql-workbench"

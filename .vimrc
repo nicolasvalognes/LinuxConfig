@@ -157,6 +157,7 @@ Plugin 'vim-utils/vim-man'
 Plugin 'vim-scripts/DoxygenToolkit.vim'
 Plugin 'vhdirk/vim-cmake'
 Plugin 'junegunn/fzf.vim'
+Plugin 'RRethy/vim-illuminate'
 
 Plugin 'nicolasvalognes/nv-vim-wisebim'
 Plugin 'nicolasvalognes/nv-vim-jellyscheme'
@@ -177,6 +178,7 @@ Plugin 'vim-python/python-syntax'
 
 " Plugins for Javascript
 Plugin 'leafgarland/typescript-vim'
+Plugin 'Galooshi/vim-import-js'
 "test for js
 "Plugin 'Shougo/vimproc.vim'
 
@@ -236,6 +238,9 @@ map <S-Tab> :BufExplorerHorizontalSplit<CR>
 "map <leader>tags :CtrlPTag<CR>
 map <leader>tags :Tags<CR>
 map <C-p> :Files<CR>
+
+" illumninate
+let g:Illuminate_highlightUnderCursor=0
 
 " python-syntax
 let python_highlight_all=1
