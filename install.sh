@@ -24,3 +24,7 @@ rm .vimrc
 ln -s ~/.vimrc .vimrc
 rm .zshrc
 ln -s ~/.zshrc .zshrc
+rm ~/.config/git/ignore
+ln -s ~/.config/git/ignore ignore
+rm ~/.config/nvim/init.vim
+ln -s ~/.config/nvim/init.vim init.vim

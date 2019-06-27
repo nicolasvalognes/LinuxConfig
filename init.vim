@@ -1,13 +1,5 @@
-""""""""""""""""""""
-"""""" BASE """"""""
-""""""""""""""""""""
-
-" VIM Configuration
-" Annule la compatibilite avec l’ancetre Vi : totalement indispensable
-set nocompatible
 " -- Affichage
 set title " Met a jour le titre de votre fenetre ou de
-" votre terminal
 set number " Affiche le numero des lignes
 set ruler " Affiche la position actuelle du curseur
 set nowrap " Affiche les lignes trop longues sur plusieurs
@@ -67,48 +59,29 @@ set lazyredraw "don't redraw when executing macro
 
 set ttyfast " terminal acceleration
 
-" --- MAPPPING sur la virgule
+" mapping navigation entre fenetre
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
 let mapleader = ","
 let g:mapleader = ","
 let maplocalleader = ","
 let g:maplocalleader = ","
 
-"nnoremap <Esc> :w<CR><Esc>
-"supprimer surlignage recherche et trailing white space sur echap
-"nnoremap <Esc> :nohl<CR>:w<CR><Esc>
-"nnoremap <Esc> <Esc>:nohl<CR>
-
 nnoremap Q <nop>
 
 " --- mapping recherche sur la barre espace
 map <space> /
-"map <leader>f /
 
 " --- map 0 on ^ to go to first non-blank character of the line
 map 0 ^
 
-" disable auto-comment on insert new line after a commented line
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-
-"autocmd BufWritePre * :%s/\s\+$//e
-
-" mapping navigation entre fenetre
-let g:C_Ctrl_h='off'
-nnoremap <C-h> <C-w>h
-let g:C_Ctrl_j='off'
-nnoremap <C-j> <C-w>j
-let g:C_Ctrl_k='off'
-nnoremap <C-k> <C-w>k
-let g:C_Ctrl_l='off'
-nnoremap <C-l> <C-w>l
-
-"set listchars=tab:¿\ ,eol:¬
-"set list
-
 " undo backup swap directory
-set undodir=~/.vim/.undo//
-set backupdir=~/.vim/.backups//
-set directory=~/.vim/.swaps//
+set undodir=~/.nvim/.undo//
+set backupdir=~/.nvim/.backups//
+set directory=~/.nvim/.swaps//
 
 set signcolumn=yes
 
@@ -117,93 +90,77 @@ set pumheight=20
 """"""""""""""""""""
 """"" PLUGINS """"""
 """"""""""""""""""""
-
-"" ------ VUNDLE -----------
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
+call plug#begin('~/.nvim/plugged')
 " General plugins
-Plugin 'jlanzarotta/bufexplorer'
-Plugin 'lilydjwg/colorizer'
-"Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'ryanoasis/vim-devicons'
-Plugin 'majutsushi/tagbar'
-Plugin 'vim-airline/vim-airline'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'tpope/vim-git'
-Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'Yggdroot/indentLine'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'tpope/vim-surround'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'benmills/vimux'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'w0rp/ale'
-Plugin 'mileszs/ack.vim'
-Plugin 'rbgrouleff/bclose.vim'
-Plugin 'kshenoy/vim-signature'
-"Plugin 'jiangmiao/auto-pairs'
-Plugin 'vim-utils/vim-man'
-Plugin 'vim-scripts/DoxygenToolkit.vim'
-Plugin 'vhdirk/vim-cmake'
-Plugin 'junegunn/fzf.vim'
-Plugin 'RRethy/vim-illuminate'
-"Plugin 'vim-scripts/vim-auto-save'
+Plug 'jlanzarotta/bufexplorer'
+Plug 'lilydjwg/colorizer'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'ryanoasis/vim-devicons'
+Plug 'majutsushi/tagbar'
+Plug 'vim-airline/vim-airline'
+Plug 'Valloric/YouCompleteMe'
+Plug 'tpope/vim-git'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'Yggdroot/indentLine'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-surround'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'benmills/vimux'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'w0rp/ale'
+Plug 'mileszs/ack.vim'
+Plug 'rbgrouleff/bclose.vim'
+Plug 'kshenoy/vim-signature'
+Plug 'vim-utils/vim-man'
+Plug 'vim-scripts/DoxygenToolkit.vim'
+Plug 'vhdirk/vim-cmake'
+Plug 'junegunn/fzf.vim'
+Plug 'RRethy/vim-illuminate'
+Plug 'nicolasvalognes/nv-vim-wisebim'
+Plug 'nicolasvalognes/nv-vim-jellyscheme'
+Plug 'nicolasvalognes/nv-vim-comment-improved'
+Plug 'nicolasvalognes/nv-vim-json-format'
 
-Plugin 'nicolasvalognes/nv-vim-wisebim'
-Plugin 'nicolasvalognes/nv-vim-jellyscheme'
-Plugin 'nicolasvalognes/nv-vim-comment-improved'
-Plugin 'nicolasvalognes/nv-vim-json-format'
+" Plugs for C/C++
+"Plug 'vim-scripts/a.vim'
+Plug 'vim-scripts/c.vim'
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'justinmk/vim-syntax-extra'
 
-" Plugins for C/C++
-"Plugin 'vim-scripts/a.vim'
-Plugin 'vim-scripts/c.vim'
-Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'justinmk/vim-syntax-extra'
+" Plugs for Qt
+Plug 'kosl90/qt-highlight-vim'
 
-" Plugins for Qt
-Plugin 'kosl90/qt-highlight-vim'
+"Plug for Python
+Plug 'vim-python/python-syntax'
 
-"Plugin for Python
-Plugin 'vim-python/python-syntax'
-
-" Plugins for Javascript
-Plugin 'leafgarland/typescript-vim'
-Plugin 'Galooshi/vim-import-js'
+" Plugs for Javascript
+Plug 'leafgarland/typescript-vim'
+Plug 'Galooshi/vim-import-js'
 "test for js
-"Plugin 'Shougo/vimproc.vim'
+"Plug 'Shougo/vimproc.vim'
 
-" Plugin for markdown
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
+" Plug for markdown
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 
-"Plugin for HTML
-"Plugin 'alvan/vim-closetag'
-Plugin 'rstacruz/sparkup'
+"Plug for HTML
+"Plug 'alvan/vim-closetag'
+Plug 'rstacruz/sparkup'
 
-" Plugins for Node.js
-" see https://github.com/nodejs/node/wiki/Vim-Plugins
+" Plugs for Node.js
+" see https://github.com/nodejs/node/wiki/Vim-Plugs
 
 " Color scheme
-Plugin 'flazz/vim-colorschemes'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'kien/rainbow_parentheses.vim'
-Plugin 'KabbAmine/yowish.vim'
+Plug 'flazz/vim-colorschemes'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'KabbAmine/yowish.vim'
 
+call plug#end()
 
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
 filetype plugin indent on    " required
 
 "autocmd vimenter * NERDTree
