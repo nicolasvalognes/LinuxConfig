@@ -128,7 +128,7 @@ alias swagger_preview='cd ~/01_Workspace/02_pandora_doc; ./generate_readable_doc
 alias run_mongo='sudo docker run --rm  --net blsi --ip 172.18.0.10 -p 27017:27017 -v /tmp/mongodb:/data/db  mongo:3.6.5 '
 alias run_influx='sudo docker run --rm --net blsi --ip 172.18.0.11 -p 8086:8086 -v /var/lib/influxdb:/var/lib/influxdb influxdb:latest /usr/bin/influxd'
 #alias pytestcov='coverage run -m pytest'
-alias vi='vim'
+alias vi='nvim'
 alias robo3t='~/00_Tools/robo3t/bin/robo3t'
 
 alias run_postgres='sudo docker run --name postgres-db --rm -p 127.0.0.1:5432:5432 -v $HOME/docker/volumes/postgres:/var/lib/postgresql/data postgres'
