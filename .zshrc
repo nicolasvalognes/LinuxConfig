@@ -130,6 +130,8 @@ alias tmux='tmux -2'
 #alias run_influx='sudo docker run --rm --net blsi --ip 172.18.0.11 -p 8086:8086 -v /var/lib/influxdb:/var/lib/influxdb influxdb:latest /usr/bin/influxd'
 #alias pytestcov='coverage run -m pytest'
 alias vi='nvim'
+alias vimdiff='nvim -d'
+
 #alias robo3t='~/00_Tools/robo3t/bin/robo3t'
 alias postman='~/00_Tools/03_Postman/Postman'
 
