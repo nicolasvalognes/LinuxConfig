@@ -1,3 +1,4 @@
+"
 " -- Affichage
 set title " Met a jour le titre de votre fenetre ou de
 set number " Affiche le numero des lignes
@@ -65,6 +66,10 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" Move between rows in wrapped lines
+noremap j gj
+noremap k gk
+
 let mapleader = ","
 let g:mapleader = ","
 let maplocalleader = ","
@@ -72,8 +77,9 @@ let g:maplocalleader = ","
 
 nnoremap Q <nop>
 
-" --- mapping recherche sur la barre espace
-map <space> /
+" --- mapping recherche sur la barre espace (BUG with :Ex if active)
+"map <space> /
+map ; /
 
 " --- map 0 on ^ to go to first non-blank character of the line
 map 0 ^
@@ -87,40 +93,41 @@ set signcolumn=yes
 
 " limit popup menu height
 set pumheight=20
+
+set wildmenu
+set wildmode=longest:full,list:full
+
+set completeopt=longest,menuone
+
+" Yank from cursor to end of line, to be consistent with C and D
+nnoremap Y y$
+
+
+" Write as root, when you forgot to sudoedit
+cnoreabbrev w!! w !sudo tee % >/dev/null
+
 """"""""""""""""""""
 """"" PLUGINS """"""
 """"""""""""""""""""
 call plug#begin('~/.nvim/plugged')
 " General plugins
 Plug 'jlanzarotta/bufexplorer'
-Plug 'lilydjwg/colorizer'
+Plug 'ap/vim-css-color'
 Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'ryanoasis/vim-devicons'
-Plug 'majutsushi/tagbar'
 Plug 'vim-airline/vim-airline'
-Plug 'Valloric/YouCompleteMe'
-Plug 'tpope/vim-git'
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'Yggdroot/indentLine'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'tpope/vim-surround'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'benmills/vimux'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'w0rp/ale'
-Plug 'mileszs/ack.vim'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'kshenoy/vim-signature'
-Plug 'vim-utils/vim-man'
-Plug 'vim-scripts/DoxygenToolkit.vim'
-Plug 'vhdirk/vim-cmake'
 Plug 'junegunn/fzf.vim'
-Plug 'RRethy/vim-illuminate'
+Plug 'Numkil/ag.nvim'
+
+" perso
 Plug 'nicolasvalognes/nv-vim-wisebim'
-Plug 'nicolasvalognes/nv-vim-jellyscheme'
 Plug 'nicolasvalognes/nv-vim-comment-improved'
 Plug 'nicolasvalognes/nv-vim-json-format'
 
@@ -139,55 +146,24 @@ Plug 'vim-python/python-syntax'
 " Plugs for Javascript
 Plug 'leafgarland/typescript-vim'
 Plug 'Galooshi/vim-import-js'
-"test for js
-"Plug 'Shougo/vimproc.vim'
 
 " Plug for markdown
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 
 "Plug for HTML
-"Plug 'alvan/vim-closetag'
 Plug 'rstacruz/sparkup'
 
 " Plugs for Node.js
 " see https://github.com/nodejs/node/wiki/Vim-Plugs
 
 " Color scheme
-Plug 'flazz/vim-colorschemes'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'kien/rainbow_parentheses.vim'
-Plug 'KabbAmine/yowish.vim'
+Plug 'nicolasvalognes/nv-vim-jellyscheme'
 
 call plug#end()
 
 filetype plugin indent on    " required
-
-"autocmd vimenter * NERDTree
-"autocmd vimenter * wincmd p
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType=="primary") | q | endif
-"autocmd vimenter * Tagbar
-
-"au VimEnter * IndentGuidesToggle
-"let g:indent_guides_guide_size=1
-"set ts=4 sw=4 et
-
-map <leader>k <Plug>(Man)
-map <leader>v <Plug>(Vman)
-
-au VimEnter * IndentLinesToggle
-let g:indentLine_char = '┆'
-let g:indentLine_setColor = 0
-let g:indentLine_color_term = 24
-
-let g:load_doxygen_syntax=1
-let g:DoxygenToolkit_authorName="Nicolas Valognes"
-
-let g:NERDTreeWinPos = "left"
-"let g:NERDTreeMinimalUI = 1
-"let g:NERDTreeMarkBookmarks = 0
-let g:NERDTreeAutoDeleteBuffer = 1
-let g:NERDTreeStatusLine = -1
 
 " bufexplorer
 map <S-Tab> :BufExplorerHorizontalSplit<CR>
@@ -202,9 +178,6 @@ let g:auto_save_silent = 1  " do not display the auto-save notification
 map <leader>tags :Tags<CR>
 map <C-p> :Files<CR>
 
-" illumninate
-let g:Illuminate_highlightUnderCursor=0
-
 " python-syntax
 let python_highlight_all=1
 
@@ -216,8 +189,6 @@ let g:airline#extensions#default#layout = [
       \ [ 'a', 'b', 'c' ],
       \ ['error', 'warning' ]
       \ ]
-"let g:airline_left_sep=''
-"let g:airline_right_sep=''
 let g:airline_skip_empty_sections = 1
 
 " tagbar
@@ -233,7 +204,7 @@ let g:cpp_concepts_highlight = 1
 let g:ale_linters = {
     \'python':['flake8', 'mypy'],
     \'markdown':['markdownlint',],
-    \'typescript':['tslint', 'prettier',],
+    \'typescript':['prettier',],
     \'cpp':['clang++', 'clang',],
     \'html':['prettier',],
     \'css':['prettier',],
@@ -244,6 +215,7 @@ let g:ale_fixers = {
     \'cpp':['clang-format',],
     \'typescript':['prettier'],
     \'css':['prettier',],
+    \'php':['php_cs_fixer',],
     \'html':['prettier',],
     \}
 
@@ -255,19 +227,13 @@ let g:ale_echo_msg_error_str = 'Err'
 let g:ale_echo_msg_warning_str = 'War'
 let g:ale_echo_msg_format = '[%severity%][%linter%(%code%)] %s'
 let g:ale_set_highlights=0
-"let g:ale-python-root='~/01_Middleware/mw-dev-tools/work/sources'
 let g:ale_fix_on_save = 1
-"let g:ale_sign_warning='>>'
 let g:ale_sign_warning = '▲'
 let g:ale_sign_error = '✗'
-"let g:ale_cpp_clang_options = '-std=c++17 -isystem /usr/include/c++/v1 -I/usr/include/c++/v1 -I/opt/ros/kinetic/include -I/usr/local/include -I/usr/include -I/usr/include/x86_64-linux-gnu -I../**'
 let g:ale_cpp_clang_options = '-std=c++17 -isystem -I../**'
+let g:ale_python_pylint_options = "--init-hook='import sys; sys.path.append(\".\")'"
+let g:ale_python_auto_pipenv = 1
 
-" Rainbow Parentheses
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
 
 " vim-tmux-navigator
 let g:tmux_navigator_save_on_switch = 2
@@ -278,62 +244,20 @@ let g:VimuxHeight = "50"
 " editor-config
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
-set completeopt=menuone,noselect,noinsert
-"set omnifunc=syntaxcomplete#Complete
-" YouCompleteMe
-let g:ycm_python_binary_path='/usr/bin/python3'
-let g:ycm_autoclose_preview_window_after_completion=1
-let g:ycm_min_num_of_chars_for_completion = 2
-let g:ycp_add_preview_to_completeopt=1
-let g:ycp_complete_in_comments=0
-let g:ycp_complete_in_strings=0
-let g:ycm_max_num_candidates = 50
-let g:ycm_max_num_identifier_candidates = 50
-let g:ycm_collect_identifiers_from_tags_files = 1
-set completeopt-=preview
-" disable ycm checker
-let g:ycm_show_diagnostics_ui=0
-let g:ycm_enable_diagnostic_signs = 0
-let g:ycm_enable_diagnostic_highlighting = 0
-
-" UltiSnips
-" Trigger configuration. Do not use <tab> if you use
-" https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-
 
 map <Leader>vp :VimuxPromptCommand<CR>
 map <Leader>vl :VimuxRunLastCommand<CR>
 map <Leader>vs :VimuxInterruptRunner<CR>
 
-let g:developer_name="Nicolas Valognes"
-
-" Ack
-"nnoremap :Ack :Ack! " don't jump to first result automaticaly
-"cnoreabbrev Ack Ack! --type=python
-
-" Coveragepy
-"let g:coveragepy_uncovered_sign = '>'
-
 " vim-lsp
-if executable('pyls')
-    " pip install python-language-server
-    au User lsp_setup call lsp#register_server({
-                \ 'name': 'pyls',
-                \ 'cmd': {server_info->['pyls']},
-                \ 'whitelist': ['python'],
-                \ })
-endif
-
-"let g:gitgutter_sign_added = '∙'
-"let g:gitgutter_sign_modified = '∙'
-"let g:gitgutter_sign_removed = '∙'
-"let g:gitgutter_sign_modified_removed = '∙'
-
+"if executable('pyls')
+    "" pip install python-language-server
+    "au User lsp_setup call lsp#register_server({
+                "\ 'name': 'pyls',
+                "\ 'cmd': {server_info->['pyls']},
+                "\ 'whitelist': ['python'],
+                "\ })
+"endif
 
 
 noremap <Right> :bn<CR>
@@ -379,11 +303,6 @@ if has("gui_running")
     " set gvim window size (for an alternative on Windows, see simalt below).
     "set lines=45 columns=130
 
-    " visuel longueur ligne 120
-    "set colorcolumn=100
-    "highlight ColorColumn guibg=#00153E
-    "highlight NonText guifg=#888000
-
     "hide toolsbar
     set guioptions-=T
     " hide menubar
@@ -398,60 +317,25 @@ endif
 " colors and functions
 """"""""""""""""""""""
 set t_Co=256
-"set termguicolors
 set background=dark
 
-"colorscheme Tomorrow-Night
 colorscheme jellyscheme
 let g:airline_theme='lucius'
 set cursorline
-"set cursorcolumn
-"hi Cursor guibg=#528bff ctermbg=69 gui=NONE cterm=NONE
 
 set colorcolumn=120
 au BufRead,BufNewFile *.c,*.cpp,*h,*.hpp set colorcolumn=80
 au BufRead,BufNewFile *.py set colorcolumn=100
-"execute "set colorcolumn=".join(range(101,999), ',')
 highlight ColorColumn ctermbg=234
 
 " to work in terminal
 au VimEnter * IndentLinesToggle
 let g:indentLine_char = '┆'
-let g:indentLine_setColor = 0
-let g:indentLine_color_term = 24
 
 
 set foldlevel=99
-"set foldlevelstart=4
 set foldmethod=indent
-"if (&ft=="python")
-"set foldmethod=indent
-"else
-  "set foldmethod=syntax
-"endif
-
-"hi Folded ctermfg=239
-"hi Comment ctermfg=238
-hi Comment ctermfg=240
-
-" Add the virtualenv's site-packages to vim path
-"if has('python')
-  "py << EOF
-  "import os.path
-  "import sys
-  "import vim
-  "if 'VIRTUAL_ENV' in os.environ:
-    "project_base_dir = os.environ['VIRTUAL_ENV']
-    "sys.path.insert(0, project_base_dir)
-    "activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-    "execfile(activate_this, dict(__file__=activate_this))
-"EOF
-"endif
-
-""" Load up virtualenv s vimrc if it exists
-"if filereadable($VIRTUAL_ENV . '/.vimrc')
-  "source $VIRTUAL_ENV/.vimrc
-"endif
+set foldlevelstart=3
 
 if has("autocmd")
   " Highlight TODO, FIXME, NOTE, etc.
@@ -511,24 +395,23 @@ nnoremap <leader>deb :call <SID>pyDebug()<CR>
 highlight NoCoverage ctermbg=2
 highlight NoCoverage ctermbg=0
 
-set path+=../../**
 
-cnoreabbrev Ack Ack!
-
-nnoremap <F2> :NERDTreeToggle<CR>
-nnoremap <F3> :TagbarToggle<CR>
-nnoremap <F4> :nohl<CR>
-set pastetoggle=<F5>
-
-"source ~/.wisebim_vimrc
+"nnoremap <F2> :NERDTreeToggle<CR>
+"nnoremap <F2> :TagbarToggle<CR>
+nnoremap <F3> :nohl<CR>
+set pastetoggle=<F4>
 
 """  Current work specific config
+set tags+=/home/nicolas/00_Tools/wisebim_tags/*
+"set tags+=/home/nicolas/00_Tools/wisebim_tags/cpp_headers_tags
+"set tags+=/home/nicolas/00_Tools/wisebim_tags/py37_PlansToBim_tags
 
-set tags+=/home/nicolas/00_Tools/wisebim_tags/py37_PlansToBim_core_tags
-set tags+=/home/nicolas/00_Tools/wisebim_tags/plans2bim_front_tags
-set tags+=/home/nicolas/00_Tools/wisebim_tags/plans2bim_middleware_tags
-set tags+=/home/nicolas/00_Tools/wisebim_tags/plans2bim_core_tags
-set tags+=/home/nicolas/00_Tools/wisebim_tags/cpp_headers_tags
+"set tags+=/home/nicolas/00_Tools/wisebim_tags/plans2bim_front_tags
+"set tags+=/home/nicolas/00_Tools/wisebim_tags/grid2bim_front_tags
+"set tags+=/home/nicolas/00_Tools/wisebim_tags/middleware_lib_tags
+"set tags+=/home/nicolas/00_Tools/wisebim_tags/wisebim_component_tags
+"set tags+=/home/nicolas/00_Tools/wisebim_tags/plans2bim_controlcenter_tags
+"set tags+=/home/nicolas/00_Tools/wisebim_tags/plans2bim_core_tags
 
 
 " need : npm install --global git+https://github.com/Perlence/tstags.git
@@ -555,3 +438,28 @@ let g:tagbar_type_typescript = {
 " see https://github.com/numirias/security/blob/master/doc/2019-06-04_ace-vim-neovim.md
 set modelines=0
 set nomodeline
+
+
+"### COC plugin ###
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" to work in terminal
+au VimEnter * IndentLinesToggle

@@ -598,3 +598,4 @@ let g:tagbar_type_typescript = {
 " see https://github.com/numirias/security/blob/master/doc/2019-06-04_ace-vim-neovim.md
 set modelines=0
 set nomodeline
+
