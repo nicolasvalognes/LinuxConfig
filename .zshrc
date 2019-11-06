@@ -178,6 +178,12 @@ py37_Plans2Bim
 
 xrandr --auto
 
+alias cat="less"
+alias more="less"
+
+# fix error on Fedora31 with XWayland
+alias virtualbox="QT_QPA_PLATFORM=xcb $(which virtualbox)"
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
