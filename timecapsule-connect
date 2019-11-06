@@ -1,0 +1,1 @@
+mount -t cifs //192.168.1.2/Data /media/timecapsule -o username=Nicolas\ Valognes,sec=ntlm,vers=1.0
