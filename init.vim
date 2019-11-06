@@ -93,6 +93,7 @@ set signcolumn=yes
 
 " limit popup menu height
 set pumheight=20
+set cmdheight=2
 
 set wildmenu
 set wildmode=longest:full,list:full
@@ -165,6 +166,9 @@ call plug#end()
 
 filetype plugin indent on    " required
 
+" nv-vim-comment-improved
+let g:developer_name="Nicolas Valognes"
+
 " bufexplorer
 map <S-Tab> :BufExplorerHorizontalSplit<CR>
 
@@ -191,8 +195,6 @@ let g:airline#extensions#default#layout = [
       \ ]
 let g:airline_skip_empty_sections = 1
 
-" tagbar
-let g:tagbar_left = 1
 
 " vim-cpp-enhanced-highlight
 let g:cpp_class_scope_highlight = 1
@@ -335,7 +337,7 @@ let g:indentLine_char = '┆'
 
 set foldlevel=99
 set foldmethod=indent
-set foldlevelstart=3
+set foldlevelstart=6
 
 if has("autocmd")
   " Highlight TODO, FIXME, NOTE, etc.
@@ -396,13 +398,11 @@ highlight NoCoverage ctermbg=2
 highlight NoCoverage ctermbg=0
 
 
-"nnoremap <F2> :NERDTreeToggle<CR>
-"nnoremap <F2> :TagbarToggle<CR>
 nnoremap <F3> :nohl<CR>
 set pastetoggle=<F4>
 
 """  Current work specific config
-set tags+=/home/nicolas/00_Tools/wisebim_tags/*
+"set tags+=/home/nicolas/00_Tools/wisebim_tags/*
 "set tags+=/home/nicolas/00_Tools/wisebim_tags/cpp_headers_tags
 "set tags+=/home/nicolas/00_Tools/wisebim_tags/py37_PlansToBim_tags
 
@@ -413,26 +413,6 @@ set tags+=/home/nicolas/00_Tools/wisebim_tags/*
 "set tags+=/home/nicolas/00_Tools/wisebim_tags/plans2bim_controlcenter_tags
 "set tags+=/home/nicolas/00_Tools/wisebim_tags/plans2bim_core_tags
 
-
-" need : npm install --global git+https://github.com/Perlence/tstags.git
-let g:tagbar_type_typescript = {
-  \ 'ctagsbin' : 'tstags',
-  \ 'ctagsargs' : '-f-',
-  \ 'kinds': [
-    \ 'e:enums:0:1',
-    \ 'f:function:0:1',
-    \ 't:typealias:0:1',
-    \ 'M:Module:0:1',
-    \ 'I:import:0:1',
-    \ 'i:interface:0:1',
-    \ 'C:class:0:1',
-    \ 'm:method:0:1',
-    \ 'p:property:0:1',
-    \ 'v:variable:0:1',
-    \ 'c:const:0:1',
-  \ ],
-  \ 'sort' : 0
-  \ }
 
 " disable modeline for safety
 " see https://github.com/numirias/security/blob/master/doc/2019-06-04_ace-vim-neovim.md
