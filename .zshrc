@@ -7,8 +7,6 @@
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-#ZSH_THEME="perso"
-#ZSH_THEME="perso2"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Uncomment the following line to use case-sensitive completion.
@@ -125,54 +123,19 @@ alias pylint='pylint --output-format=colorized'
 
 ## tmux
 alias tmux='tmux -2'
-#alias swagger_preview='cd ~/01_Workspace/02_pandora_doc; ./generate_readable_doc.py; cd ./swagger-ui/dist; python -m http.server 8123 &; firefox --new-tab http://127.0.0.1:8123'
-#alias run_mongo='sudo docker run --rm  --net blsi --ip 172.18.0.10 -p 27017:27017 -v /tmp/mongodb:/data/db  mongo:3.6.5 '
-#alias run_influx='sudo docker run --rm --net blsi --ip 172.18.0.11 -p 8086:8086 -v /var/lib/influxdb:/var/lib/influxdb influxdb:latest /usr/bin/influxd'
-#alias pytestcov='coverage run -m pytest'
 alias vi='nvim'
 alias vimdiff='nvim -d'
 
-#alias robo3t='~/00_Tools/robo3t/bin/robo3t'
 alias postman='~/00_Tools/03_Postman/Postman'
 
 
-#alias py37_PlansToBim_middleware='source ~/.pythonvenv/py37_PlansToBim_middleware/bin/activate'
-#alias py37_PlansToBim_core='source ~/.pythonvenv/py37_PlansToBim_core/bin/activate'
 alias py37_Plans2Bim='source ~/.pythonvenv/py372_Plans2Bim/bin/activate'
-#alias pytest='pytest -vv --setup-show --boxed --capture=no'
-#alias flake8='flake8 -strict'
-#alias run_mypy='mypy --ignore-missing-imports --disallow-untyped-defs blsi'
-#alias run_pytest='pytest tests --ignore tests/func'
-#alias run_pep8='pep8 ./blsi'
 
 alias plantuml='java -jar ~/00_Tools/plantuml.jar'
 
 alias curl_get='curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET'
 
 alias mysql-workbench="/usr/bin/mysql-workbench"
-
-alias run_postgres='sudo docker run --name postgres-db --rm -p 127.0.0.1:5432:5432 -v $HOME/docker/volumes/postgres:/var/lib/postgresql/data postgres'
-alias run_postgres_exec='sudo docker exec -it postgres-db bash'
-alias run_core='cd ~/01_Workspace/01_PlansToBim/core/build/release; ./run_api.sh'
-alias run_celery='sudo systemctl start redis; cd ~/01_Workspace/01_PlansToBim/core/api/; export DJANGO_SETTINGS_MODULE="api.settings.settings_local"; celery --app=api worker -l info'
-
-alias run_middleware='cd ~/01_Workspace/01_PlansToBim/middleware; ./start_middleware_local.sh'
-alias run_cc='cd ~/01_Workspace/01_PlansToBim/controlcenter; ./run_api.sh'
-alias run_ci='cd ~/01_Workspace/01_PlansToBim/core_interface; ./run_api.sh'
-alias run_ged='cd ~/01_Workspace/01_PlansToBim/ged; ./run_api.sh'
-alias run_gp='cd ~/01_Workspace/01_PlansToBim/ged_proxy; ./run_api.sh'
-
-alias run_front='cd ~/01_Workspace/01_PlansToBim/front; ng serve'
-alias run_admin='cd ~/01_Workspace/01_PlansToBim/admin; ng serve --port 4201'
-
-
-#alias run_core='cd ~/01_Workspace/01_PlansToBim/core/build/release; py37_PlansToBim_core; ./run_api.sh'
-#alias run_middleware='cd ~/01_Workspace/01_PlansToBim/middleware; py37_PlansToBim_middleware; ./start_middleware_local.sh'
-#alias run_celery='sudo systemctl start redis; cd ~/01_Workspace/01_PlansToBim/core/api/;  py37_PlansToBim_core; export DJANGO_SETTINGS_MODULE="api.settings.settings_local"; celery --app=api worker -l info'
-
-export CORE_ENV_PATH='/home/nicolas/.env/core.env'
-export MIDDLEWARE_ENV_PATH='/home/nicolas/.env/middleware.env'
-export MIDDLEWARE_ENV_PATH='/home/nicolas/.env/middleware.env'
 
 py37_Plans2Bim
 
