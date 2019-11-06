@@ -9,6 +9,7 @@
 	# Use patched font symbols.
 	export TMUX_POWERLINE_PATCHED_FONT_IN_USE="true"
 	# The theme to use.
+  #export TMUX_POWERLINE_THEME="default"
   export TMUX_POWERLINE_THEME="mytheme"
 	# Overlay directory to look for themes. There you can put your own themes outside the repo. Fallback will still be the "themes" directory in the repo.
 	export TMUX_POWERLINE_DIR_USER_THEMES=""
@@ -88,11 +89,13 @@
 
 	## Maildir
 	# Path to the maildir to check.
-	export TMUX_POWERLINE_SEG_MAILCOUNT_MAILDIR_INBOX="/home/nicolas/.mail/inbox/new"
+	#export TMUX_POWERLINE_SEG_MAILCOUNT_MAILDIR_INBOX="/home/nicolas/.mail/inbox/new"
+	export TMUX_POWERLINE_SEG_MAILCOUNT_MAILDIR_INBOX="/home/nicolas/.thunderbird/58oxjz5y.default/ImapMail/imap.ionos.fr/INBOX"
 
 	## mbox
 	# Path to the mbox to check.
-	export TMUX_POWERLINE_SEG_MAILCOUNT_MBOX_INBOX="/var/spool/mail/nicolas"
+	#export TMUX_POWERLINE_SEG_MAILCOUNT_MBOX_INBOX="/var/spool/mail/nicolas"
+	export TMUX_POWERLINE_SEG_MAILCOUNT_MBOX_INBOX="/home/nicolas/.thunderbird/58oxjz5y.default/ImapMail/imap.ionos.fr/INBOX"
 
 	## mailcheck
 	# Optional path to mailcheckrc
@@ -151,5 +154,6 @@
 	# 1. Go to Yahoo weather http://weather.yahoo.com/
 	# 2. Find the weather for you location
 	# 3. Copy the last numbers in that URL. e.g. "http://weather.yahoo.com/united-states/california/newport-beach-12796587/" has the numbers "12796587"
-	TMUX_POWERLINE_SEG_WEATHER_LOCATION=""
+	#TMUX_POWERLINE_SEG_WEATHER_LOCATION="584008"
+	TMUX_POWERLINE_SEG_WEATHER_LOCATION="12796587"
 # }
