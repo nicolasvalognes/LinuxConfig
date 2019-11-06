@@ -16,8 +16,6 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 # Oh-my-zsh
 apt-get install zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-cp .zshrc ~/.zshrc
-cp perso.zsh-theme ~/.oh-my-zsh/themes/perso.zsh-theme
 chsh -s /bin/zsh
 
 rm .vimrc
