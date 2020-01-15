@@ -30,10 +30,10 @@ filetype on
 filetype plugin on
 filetype indent on
 
-" indent 4 spaces
-set softtabstop=4
-set shiftwidth=4
-set tabstop=4
+" indent 2 spaces
+set softtabstop=2
+set shiftwidth=2
+set tabstop=2
 set smarttab
 set expandtab
 set autoindent
@@ -76,6 +76,7 @@ let maplocalleader = ","
 let g:maplocalleader = ","
 
 nnoremap Q <nop>
+"nnoremap q: <nop>
 
 " --- mapping recherche sur la barre espace (BUG with :Ex if active)
 "map <space> /
@@ -93,7 +94,7 @@ set signcolumn=yes
 
 " limit popup menu height
 set pumheight=20
-set cmdheight=2
+"set cmdheight=2
 
 set wildmenu
 set wildmode=longest:full,list:full
@@ -103,9 +104,12 @@ set completeopt=longest,menuone
 " Yank from cursor to end of line, to be consistent with C and D
 nnoremap Y y$
 
-
 " Write as root, when you forgot to sudoedit
 cnoreabbrev w!! w !sudo tee % >/dev/null
+
+noremap <Right> :bn<CR>
+noremap <Left> :bp<CR>
+
 
 """"""""""""""""""""
 """"" PLUGINS """"""
@@ -126,6 +130,7 @@ Plug 'rbgrouleff/bclose.vim'
 Plug 'kshenoy/vim-signature'
 Plug 'junegunn/fzf.vim'
 Plug 'Numkil/ag.nvim'
+Plug 'majutsushi/tagbar'
 
 " perso
 Plug 'nicolasvalognes/nv-vim-wisebim'
@@ -161,6 +166,8 @@ Plug 'rstacruz/sparkup'
 " Color scheme
 Plug 'vim-airline/vim-airline-themes'
 Plug 'nicolasvalognes/nv-vim-jellyscheme'
+"Plug 'arcticicestudio/nord-vim'
+Plug 'nicolasvalognes/nv-vim-nord'
 
 call plug#end()
 
@@ -210,6 +217,7 @@ let g:ale_linters = {
     \'cpp':['clang++', 'clang',],
     \'html':['prettier',],
     \'css':['prettier',],
+    \'json':['prettier',],
     \}
 
 let g:ale_fixers = {
@@ -219,6 +227,7 @@ let g:ale_fixers = {
     \'css':['prettier',],
     \'php':['php_cs_fixer',],
     \'html':['prettier',],
+    \'json':['prettier',],
     \}
 
 let g:ale_completion_enabled=1
@@ -235,6 +244,7 @@ let g:ale_sign_error = '✗'
 let g:ale_cpp_clang_options = '-std=c++17 -isystem -I../**'
 let g:ale_python_pylint_options = "--init-hook='import sys; sys.path.append(\".\")'"
 let g:ale_python_auto_pipenv = 1
+let g:ale_linters_explicit=1
 
 
 " vim-tmux-navigator
@@ -261,23 +271,27 @@ map <Leader>vs :VimuxInterruptRunner<CR>
                 "\ })
 "endif
 
+" markdown
+let g:vim_markdown_conceal = 0
+let g:vim_markdown_conceal_code_blocks = 0
 
-noremap <Right> :bn<CR>
-noremap <Left> :bp<CR>
 nnoremap :bc :Bclose
 
 
 au BufRead,BufNewFile *.qss setfiletype css "syntax color for qt .css file
 au BufRead,BufNewFile *.qrc setfiletype xml "syntax color for qt .qrc file
 au BufRead,BufNewFile *.md setfiletype text
-autocmd BufNewFile,BufRead *.json set ft=javascript
+"autocmd BufNewFile,BufRead *.json set ft=javascript
 autocmd BufNewFile,BufRead *.ts setlocal ft=typescript
-"au BufNewFile,BufRead *.md set ft=markdown
-au! BufRead,BufNewFile *.markdown set filetype=mkd
-au! BufRead,BufNewFile *.md       set filetype=mkd
-
+au BufNewFile,BufRead *.md set ft=markdown
+"au! BufRead,BufNewFile *.markdown set filetype=mkd
+"au! BufRead,BufNewFile *.md       set filetype=mkd
 au BufNewFile,BufRead CMakeLists.txt set filetype=cmake
 "au BufRead *.txt set ft=
+"au BufRead *.txt set conceallevel=0
+"au BufRead *.json set conceallevel=0
+
+au VimEnter * IndentLinesToggle
 
 
 """"""""""""""""""""
@@ -319,31 +333,34 @@ endif
 " colors and functions
 """"""""""""""""""""""
 set t_Co=256
-set background=dark
 
-colorscheme jellyscheme
-let g:airline_theme='lucius'
-set cursorline
+"colorscheme jellyscheme
+"let g:airline_theme='lucius'
+"let g:airline_theme='jellybeans'
+colorscheme nv-vim-nord
+let g:airline_theme='nord'
+"set cursorline
 
-set colorcolumn=120
+"set colorcolumn=120
 au BufRead,BufNewFile *.c,*.cpp,*h,*.hpp set colorcolumn=80
 au BufRead,BufNewFile *.py set colorcolumn=100
-highlight ColorColumn ctermbg=234
+"highlight ColorColumn ctermbg=234
 
-" to work in terminal
-au VimEnter * IndentLinesToggle
-let g:indentLine_char = '┆'
+"let g:indentLine_char = '┆'
+let g:indentLine_char = '┊'
+"let g:indentLine_char_list = [ '┊','┆', '¦', '|']
 
 
 set foldlevel=99
 set foldmethod=indent
-set foldlevelstart=6
+"set foldlevelstart=1
 
 if has("autocmd")
   " Highlight TODO, FIXME, NOTE, etc.
   if v:version > 701
     autocmd Syntax * call matchadd('Todo',  '\W\zs\(TODO\|FIXME\|CHANGED\|XXX\|BUG\|HACK\|DEBUG\|OPTIMIZE\)')
-    autocmd Syntax * call matchadd('ImprovedTodo', '\W\zs\(NOTE\|INFO\|IDEA\)')
+    "autocmd Syntax * call matchadd('ImprovedTodo', '\W\zs\(NOTE\|INFO\|IDEA\)')
+    autocmd Syntax * call matchadd('Todo', '\W\zs\(NOTE\|INFO\|IDEA\)')
   endif
 endif
 
@@ -398,20 +415,15 @@ highlight NoCoverage ctermbg=2
 highlight NoCoverage ctermbg=0
 
 
-nnoremap <F3> :nohl<CR>
-set pastetoggle=<F4>
+nnoremap <F2> :nohl<CR>
+nnoremap <F3> :TagbarToggle<CR>
+nnoremap <F4> :set conceallevel=0<CR>
+set pastetoggle=<F6>
 
 """  Current work specific config
-"set tags+=/home/nicolas/00_Tools/wisebim_tags/*
-"set tags+=/home/nicolas/00_Tools/wisebim_tags/cpp_headers_tags
-"set tags+=/home/nicolas/00_Tools/wisebim_tags/py37_PlansToBim_tags
-
-"set tags+=/home/nicolas/00_Tools/wisebim_tags/plans2bim_front_tags
-"set tags+=/home/nicolas/00_Tools/wisebim_tags/grid2bim_front_tags
-"set tags+=/home/nicolas/00_Tools/wisebim_tags/middleware_lib_tags
-"set tags+=/home/nicolas/00_Tools/wisebim_tags/wisebim_component_tags
-"set tags+=/home/nicolas/00_Tools/wisebim_tags/plans2bim_controlcenter_tags
-"set tags+=/home/nicolas/00_Tools/wisebim_tags/plans2bim_core_tags
+set tags+=/home/nicolas/00_Tools/wisebim_tags/cpp_headers_tags
+set tags+=/home/nicolas/00_Tools/wisebim_tags/py37_SaasBim_tags
+set tags+=./tags
 
 
 " disable modeline for safety
@@ -440,6 +452,12 @@ inoremap <silent><expr> <c-space> coc#refresh()
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" TagBar
+let g:tagbar_left=1
+
+" terminal mode
+:tnoremap <Esc> <C-\><C-n>
 
 " to work in terminal
 au VimEnter * IndentLinesToggle

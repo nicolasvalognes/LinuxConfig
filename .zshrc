@@ -1,3 +1,5 @@
+ if [ "$TMUX" = "" ]; then tmux; fi
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -8,6 +10,7 @@
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="powerlevel10k/powerlevel10k"
+#ZSH_THEME="tywr"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -102,8 +105,7 @@ source ~/.profile
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 
-#alias ls='lsd'
-alias ls='lsd -l --color=auto'
+alias ls='ls -l --color=auto'
 alias lr='ls -r'
 alias la='ls -a'
 #alias lt='ls -alt'
@@ -111,25 +113,30 @@ alias la='ls -a'
 alias grep='grep --color=always'
 alias mygrep='grep -Hn --color=always'
 alias ack='ack --color'
-alias hl='ack --passthru '
+alias ag='ag --color'
+alias hl='ag --passthrough'
 
 alias gitlg='git log --graph --abbrev-commit --decorate --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n""          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)" --all'
 alias git_del_branch='git branch | grep -v -E "master|develop|release" | xargs -n 1 git branch -d'
 
 alias robo3t='~/00_Tools/robo3t/bin/robo3t &'
 alias chrome='/usr/bin/google-chrome-stable %U &'
+alias firedev='/home/nicolas/.local/firefox-70-developer-edition/firefox'
 
 alias pylint='pylint --output-format=colorized'
 
 ## tmux
 alias tmux='tmux -2'
-alias vi='nvim'
-alias vimdiff='nvim -d'
+#alias vi='nvim'
+#alias vimdiff='nvim -d'
+alias vi='~/00_Tools/neovim-image/nvim.appimage'
+alias vimdiff='~/00_Tools/neovim-image/nvim.appimage -d'
 
 alias postman='~/00_Tools/03_Postman/Postman'
 
 
 alias py37_Plans2Bim='source ~/.pythonvenv/py372_Plans2Bim/bin/activate'
+alias py37_2Bim='source ~/.pythonvenv/py372_2Bim/bin/activate'
 
 alias plantuml='java -jar ~/00_Tools/plantuml.jar'
 
@@ -137,7 +144,8 @@ alias curl_get='curl -i -H "Accept: application/json" -H "Content-Type: applicat
 
 alias mysql-workbench="/usr/bin/mysql-workbench"
 
-py37_Plans2Bim
+#py37_Plans2Bim
+source ~/.pythonvenv/py37_SaasBim/bin/activate
 
 xrandr --auto
 
@@ -155,3 +163,6 @@ export LESS="--RAW-CONTROL-CHARS"
 
 # Use colors for less, man, etc.
 [[ -f ~/.LESS_TERMCAP ]] && . ~/.LESS_TERMCAP
+
+
+test -r "~/.dir_colors" && eval $(dircolors ~/.dir_colors)
