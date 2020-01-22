@@ -1,4 +1,4 @@
- if [ "$TMUX" = "" ]; then tmux; fi
+ #if [ "$TMUX" = "" ]; then tmux; fi
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -166,3 +166,5 @@ export LESS="--RAW-CONTROL-CHARS"
 
 
 test -r "~/.dir_colors" && eval $(dircolors ~/.dir_colors)
+
+source /home/nicolas/.config/broot/launcher/bash/br
