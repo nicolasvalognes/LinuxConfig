@@ -105,16 +105,17 @@ source ~/.profile
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 
-alias ls='ls -l --color=auto'
-alias lr='ls -r'
+alias ls='lsd --color=auto'
+alias lr='ls -lr'
 alias la='ls -a'
 #alias lt='ls -alt'
 
 alias grep='grep --color=always'
-alias mygrep='grep -Hn --color=always'
+alias grep='grep -Hn --color=always'
 alias ack='ack --color'
 alias ag='ag --color'
-alias hl='ag --passthrough'
+#alias hl='ag --passthrough'
+alias hl="grep -e '^' -e"
 
 alias gitlg='git log --graph --abbrev-commit --decorate --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n""          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)" --all'
 alias git_del_branch='git branch | grep -v -E "master|develop|release" | xargs -n 1 git branch -d'
@@ -131,6 +132,7 @@ alias tmux='tmux -2'
 #alias vimdiff='nvim -d'
 alias vi='~/00_Tools/neovim-image/nvim.appimage'
 alias vimdiff='~/00_Tools/neovim-image/nvim.appimage -d'
+alias update_neovim='cd ~/00_Tools/neovim-image; ./get_lastest_neovim.sh; cd -'
 
 alias postman='~/00_Tools/03_Postman/Postman'
 
@@ -160,11 +162,21 @@ alias virtualbox="QT_QPA_PLATFORM=xcb $(which virtualbox)"
 
 # Set colors for less. Borrowed from https://wiki.archlinux.org/index.php/Color_output_in_console#less .
 export LESS="--RAW-CONTROL-CHARS"
-
 # Use colors for less, man, etc.
 [[ -f ~/.LESS_TERMCAP ]] && . ~/.LESS_TERMCAP
 
 
 test -r "~/.dir_colors" && eval $(dircolors ~/.dir_colors)
 
+# br tool
 source /home/nicolas/.config/broot/launcher/bash/br
+
+# dev command wisebi m specific
+alias p2b='npm install; export P2B_ENV_PATH=~/.env/plans2bim.env;ng serve --port 4200 --poll=2000 --ssl true '
+alias init_p2b_middleware_database='rm -rf p2b_middleware/*/migrations/00*; export P2B_ENV_PATH=~/.env/plans2bim.env; python manage.py makemigrations --settings=p2b_middleware.settings.settings_local; export P2B_ENV_PATH=~/.env/grid2bim.env; python manage.py migrate --settings=p2b_middleware.settings.settings_local; export P2B_ENV_PATH=~/.env/grid2bim.env; ./devTools/start_control_center '
+
+alias g2b='npm install; export P2B_ENV_PATH=~/.env/grid2bim.env;ng serve --port 4201 --poll=2000 --ssl true '
+alias init_g2b_core_api_database='rm -rf g2b_core_api/*/migrations/00*; export P2B_ENV_PATH=~/.env/grid2bim.env; python manage.py makemigrations --settings=g2b_core_api.settings.settings_local; export P2B_ENV_PATH=~/.env/grid2bim.env; python manage.py migrate --settings=g2b_core_api.settings.settings_local; export P2B_ENV_PATH=~/.env/grid2bim.env; export DJANGO_SETTINGS_MODULE="g2b_core_api.settings.settings_local"; ./start_core_local.sh'
+alias init_g2b_middleware_database='rm -rf p2b_middleware/*/migrations/00*; export P2B_ENV_PATH=~/.env/grid2bim.env; python manage.py makemigrations --settings=p2b_middleware.settings.settings_local; export P2B_ENV_PATH=~/.env/grid2bim.env; python manage.py migrate --settings=p2b_middleware.settings.settings_local; export P2B_ENV_PATH=~/.env/grid2bim.env; ./devTools/start_control_center '
+
+alias dev_split=' tmux split-window -h -p 70; tmux select-pane -t 1; tmux split-window -v; '

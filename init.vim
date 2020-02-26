@@ -131,6 +131,7 @@ Plug 'kshenoy/vim-signature'
 Plug 'junegunn/fzf.vim'
 Plug 'Numkil/ag.nvim'
 Plug 'majutsushi/tagbar'
+Plug 'tpope/vim-fugitive'
 
 " perso
 Plug 'nicolasvalognes/nv-vim-wisebim'
@@ -339,7 +340,7 @@ set t_Co=256
 "let g:airline_theme='jellybeans'
 colorscheme nv-vim-nord
 let g:airline_theme='nord'
-"set cursorline
+set cursorline
 
 "set colorcolumn=120
 au BufRead,BufNewFile *.c,*.cpp,*h,*.hpp set colorcolumn=80
@@ -353,7 +354,7 @@ let g:indentLine_char = '┊'
 
 set foldlevel=99
 set foldmethod=indent
-"set foldlevelstart=1
+"set foldlevelstart=3
 
 if has("autocmd")
   " Highlight TODO, FIXME, NOTE, etc.
@@ -416,9 +417,9 @@ highlight NoCoverage ctermbg=0
 
 
 nnoremap <F2> :nohl<CR>
-nnoremap <F3> :TagbarToggle<CR>
-nnoremap <F4> :set conceallevel=0<CR>
-set pastetoggle=<F6>
+nnoremap <F3> :set conceallevel=0<CR>
+nnoremap <F4> :TagbarToggle<CR>
+set pastetoggle=<F5>
 
 """  Current work specific config
 set tags+=/home/nicolas/00_Tools/wisebim_tags/cpp_headers_tags
