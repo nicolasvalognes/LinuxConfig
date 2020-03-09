@@ -158,6 +158,9 @@ Plug 'Galooshi/vim-import-js'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 
+"latex
+Plug 'lervag/vimtex'
+
 "Plug for HTML
 Plug 'rstacruz/sparkup'
 
@@ -275,6 +278,45 @@ map <Leader>vs :VimuxInterruptRunner<CR>
 " markdown
 let g:vim_markdown_conceal = 0
 let g:vim_markdown_conceal_code_blocks = 0
+
+" typescript-vim
+let g:typescript_indent_disable = 1
+let g:typescript_compiler_binary = 'tsc'
+let g:typescript_compiler_options = ''
+autocmd FileType typescript :set makeprg=tsc
+
+" tagbar
+let g:tagbar_type_typescript = {
+  \ 'ctagsbin' : 'tstags',
+  \ 'ctagsargs' : '-f-',
+  \ 'kinds': [
+    \ 'e:enums:0:1',
+    \ 'f:function:0:1',
+    \ 't:typealias:0:1',
+    \ 'M:Module:0:1',
+    \ 'I:import:0:1',
+    \ 'i:interface:0:1',
+    \ 'C:class:0:1',
+    \ 'm:method:0:1',
+    \ 'p:property:0:1',
+    \ 'v:variable:0:1',
+    \ 'c:const:0:1',
+  \ ],
+  \ 'sort' : 0
+\ }
+"let g:tagbar_type_typescript = {
+  "\ 'ctagstype': 'typescript',
+  "\ 'kinds': [
+    "\ 'c:classes',
+    "\ 'n:modules',
+    "\ 'f:functions',
+    "\ 'v:variables',
+    "\ 'v:varlambdas',
+    "\ 'm:members',
+    "\ 'i:interfaces',
+    "\ 'e:enums',
+  "\ ]
+"\ }
 
 nnoremap :bc :Bclose
 

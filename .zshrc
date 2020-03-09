@@ -107,11 +107,11 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 alias ls='lsd --color=auto'
 alias lr='ls -lr'
-alias la='ls -a'
+alias la='ls -la'
 #alias lt='ls -alt'
 
 alias grep='grep --color=always'
-alias grep='grep -Hn --color=always'
+alias ngrep='grep -Hn --color=always'
 alias ack='ack --color'
 alias ag='ag --color'
 #alias hl='ag --passthrough'
@@ -173,10 +173,11 @@ source /home/nicolas/.config/broot/launcher/bash/br
 
 # dev command wisebi m specific
 alias p2b='npm install; export P2B_ENV_PATH=~/.env/plans2bim.env;ng serve --port 4200 --poll=2000 --ssl true '
+alias init_p2b_core_api_database='rm -rf p2b_core_api/*/migrations/00*; export P2B_ENV_PATH=~/.env/plans2bim.env; python manage.py makemigrations --settings=p2b_core_api.settings.settings_local; export P2B_ENV_PATH=~/.env/plans2bim.env; python manage.py migrate --settings=p2b_core_api.settings.settings_local; export P2B_ENV_PATH=~/.env/plans2bim.env; export DJANGO_SETTINGS_MODULE="p2b_core_api.settings.settings_local"; ./start_core_local.sh'
 alias init_p2b_middleware_database='rm -rf p2b_middleware/*/migrations/00*; export P2B_ENV_PATH=~/.env/plans2bim.env; python manage.py makemigrations --settings=p2b_middleware.settings.settings_local; export P2B_ENV_PATH=~/.env/grid2bim.env; python manage.py migrate --settings=p2b_middleware.settings.settings_local; export P2B_ENV_PATH=~/.env/grid2bim.env; ./devTools/start_control_center '
 
 alias g2b='npm install; export P2B_ENV_PATH=~/.env/grid2bim.env;ng serve --port 4201 --poll=2000 --ssl true '
 alias init_g2b_core_api_database='rm -rf g2b_core_api/*/migrations/00*; export P2B_ENV_PATH=~/.env/grid2bim.env; python manage.py makemigrations --settings=g2b_core_api.settings.settings_local; export P2B_ENV_PATH=~/.env/grid2bim.env; python manage.py migrate --settings=g2b_core_api.settings.settings_local; export P2B_ENV_PATH=~/.env/grid2bim.env; export DJANGO_SETTINGS_MODULE="g2b_core_api.settings.settings_local"; ./start_core_local.sh'
 alias init_g2b_middleware_database='rm -rf p2b_middleware/*/migrations/00*; export P2B_ENV_PATH=~/.env/grid2bim.env; python manage.py makemigrations --settings=p2b_middleware.settings.settings_local; export P2B_ENV_PATH=~/.env/grid2bim.env; python manage.py migrate --settings=p2b_middleware.settings.settings_local; export P2B_ENV_PATH=~/.env/grid2bim.env; ./devTools/start_control_center '
 
-alias dev_split=' tmux split-window -h -p 70; tmux select-pane -t 1; tmux split-window -v; '
+alias sdev=' tmux split-window -h -p 70; tmux select-pane -t 1; tmux split-window -v; '
