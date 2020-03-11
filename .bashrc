@@ -116,6 +116,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
+source /opt/intel/openvino/bin/setupvars.sh
 
 ################################################################################
 #                              PERSO                                           #

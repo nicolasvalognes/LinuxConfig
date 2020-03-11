@@ -61,6 +61,8 @@ set lazyredraw "don't redraw when executing macro
 set ttyfast " terminal acceleration
 
 " mapping navigation entre fenetre
+let g:BASH_Ctrl_j = 'off'
+let g:C_Ctrl_j = 'off'
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -383,10 +385,11 @@ set t_Co=256
 colorscheme nv-vim-nord
 let g:airline_theme='nord'
 set cursorline
+highlight CursorLine ctermbg=234
 
 "set colorcolumn=120
-au BufRead,BufNewFile *.c,*.cpp,*h,*.hpp set colorcolumn=80
-au BufRead,BufNewFile *.py set colorcolumn=100
+"au BufRead,BufNewFile *.c,*.cpp,*h,*.hpp set colorcolumn=80
+"au BufRead,BufNewFile *.py set colorcolumn=100
 "highlight ColorColumn ctermbg=234
 
 "let g:indentLine_char = '┆'
@@ -464,8 +467,8 @@ nnoremap <F4> :TagbarToggle<CR>
 set pastetoggle=<F5>
 
 """  Current work specific config
-set tags+=/home/nicolas/00_Tools/wisebim_tags/cpp_headers_tags
-set tags+=/home/nicolas/00_Tools/wisebim_tags/py37_SaasBim_tags
+set tags+=/home/nicolas/.tags/cpp_headers_tags
+set tags+=/home/nicolas/.tags/py37saas_tags
 set tags+=./tags
 
 

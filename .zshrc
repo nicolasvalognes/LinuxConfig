@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
  #if [ "$TMUX" = "" ]; then tmux; fi
 
 # If you come from bash you might have to change your $PATH.
@@ -105,7 +112,7 @@ source ~/.profile
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 
-alias ls='lsd --color=auto'
+alias ls='ls --color=auto'
 alias lr='ls -lr'
 alias la='ls -la'
 #alias lt='ls -alt'
@@ -130,9 +137,9 @@ alias pylint='pylint --output-format=colorized'
 alias tmux='tmux -2'
 #alias vi='nvim'
 #alias vimdiff='nvim -d'
-alias vi='~/00_Tools/neovim-image/nvim.appimage'
-alias vimdiff='~/00_Tools/neovim-image/nvim.appimage -d'
-alias update_neovim='cd ~/00_Tools/neovim-image; ./get_lastest_neovim.sh; cd -'
+alias vi='~/tools/neovim/nvim.appimage'
+alias vimdiff='~/tools/neovim/nvim.appimage -d'
+alias update_neovim='cd ~/tools/neovim; ./get_lastest_neovim.sh; cd -'
 
 alias postman='~/00_Tools/03_Postman/Postman'
 
@@ -146,8 +153,9 @@ alias curl_get='curl -i -H "Accept: application/json" -H "Content-Type: applicat
 
 alias mysql-workbench="/usr/bin/mysql-workbench"
 
+alias pip='pip3'
 #py37_Plans2Bim
-source ~/.pythonvenv/py37_SaasBim/bin/activate
+source ~/.pythonvenv/py37saas/bin/activate
 
 xrandr --auto
 
@@ -155,7 +163,7 @@ alias cat="less"
 alias more="less"
 
 # fix error on Fedora31 with XWayland
-alias virtualbox="QT_QPA_PLATFORM=xcb $(which virtualbox)"
+#alias virtualbox="QT_QPA_PLATFORM=xcb $(which virtualbox)"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
@@ -168,9 +176,6 @@ export LESS="--RAW-CONTROL-CHARS"
 
 test -r "~/.dir_colors" && eval $(dircolors ~/.dir_colors)
 
-# br tool
-source /home/nicolas/.config/broot/launcher/bash/br
-
 # dev command wisebi m specific
 alias p2b='npm install; export P2B_ENV_PATH=~/.env/plans2bim.env;ng serve --port 4200 --poll=2000 --ssl true '
 alias init_p2b_core_api_database='rm -rf p2b_core_api/*/migrations/00*; export P2B_ENV_PATH=~/.env/plans2bim.env; python manage.py makemigrations --settings=p2b_core_api.settings.settings_local; export P2B_ENV_PATH=~/.env/plans2bim.env; python manage.py migrate --settings=p2b_core_api.settings.settings_local; export P2B_ENV_PATH=~/.env/plans2bim.env; export DJANGO_SETTINGS_MODULE="p2b_core_api.settings.settings_local"; ./start_core_local.sh'
@@ -181,3 +186,8 @@ alias init_g2b_core_api_database='rm -rf g2b_core_api/*/migrations/00*; export P
 alias init_g2b_middleware_database='rm -rf p2b_middleware/*/migrations/00*; export P2B_ENV_PATH=~/.env/grid2bim.env; python manage.py makemigrations --settings=p2b_middleware.settings.settings_local; export P2B_ENV_PATH=~/.env/grid2bim.env; python manage.py migrate --settings=p2b_middleware.settings.settings_local; export P2B_ENV_PATH=~/.env/grid2bim.env; ./devTools/start_control_center '
 
 alias sdev=' tmux split-window -h -p 70; tmux select-pane -t 1; tmux split-window -v; '
+
+source /opt/intel/openvino/bin/setupvars.sh
+export PATH=~/.npm-global/bin:$PATH
+
+export PYTHONPATH=/home/nicolas/.local/lib/python3.7/site-packages/:$PYTHONPATH
