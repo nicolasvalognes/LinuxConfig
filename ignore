@@ -3,3 +3,4 @@
 *.o
 *.coverage
 *.bak
+npm-debug.log

@@ -122,3 +122,5 @@ source /opt/intel/openvino/bin/setupvars.sh
 #                              PERSO                                           #
 ################################################################################
 export PS1='\n\e[0;31m\u@\h \e[0;32m\w \n \e[1;33m> \e[0;37m'
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

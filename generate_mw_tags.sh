@@ -10,21 +10,21 @@
 
 
 p2b_tags_file='/home/nicolas/development/planstobim/tags'
-rm ${p2b_tags_file}
-#touch ${p2b_tags_file}
-ctags -R --python-kinds=-i --fields=+iaS --language-force=python -f ${p2b_tags_file} /home/nicolas/development/planstobim/p2b_middleware
-ctags -R --c++-kinds=+p --fields=+iaS --extras=+q -f ${p2b_tags_file} /home/nicolas/development/planstobim/p2b_core
-ctags -R --fields=+iaS --language-force=typescript -f ${p2b_tags_file} /home/nicolas/development/planstobim/wisebim-middleware-lib
-ctags -R --fields=+iaS --language-force=typescript -f ${p2b_tags_file} /home/nicolas/development/planstobim/wisebim-ui
-ctags -R --fields=+iaS --language-force=typescript -f ${p2b_tags_file} /home/nicolas/development/planstobim/p2b_front
+rm '/home/nicolas/development/planstobim/tags'
+touch '/home/nicolas/development/planstobim/tags'
+ctags -R --python-kinds=-i --fields=+iaS --language-force=python -f '/home/nicolas/development/planstobim/tags' /home/nicolas/development/planstobim/p2b_middleware
+ctags -R --c++-kinds=+p --fields=+iaS --extras=+q -f '/home/nicolas/development/planstobim/tags' /home/nicolas/development/planstobim/p2b_core
+ctags -R --fields=+iaS --language-force=typescript -f '/home/nicolas/development/planstobim/tags' /home/nicolas/development/planstobim/wisebim-middleware-lib
+ctags -R --fields=+iaS --language-force=typescript -f '/home/nicolas/development/planstobim/tags' /home/nicolas/development/planstobim/wisebim-ui
+ctags -R --fields=+iaS --language-force=typescript -f '/home/nicolas/development/planstobim/tags' /home/nicolas/development/planstobim/p2b_front
 
 
 g2b_tags_file='/home/nicolas/development/grid2bim/tags'
-rm ${g2b_tags_file}
-#touch ${g2b_tags_file}
-ctags -R --python-kinds=-i --fields=+iaS --language-force=python -f ${g2b_tags_file} /home/nicolas/development/grid2bim/p2b_middleware
-ctags -R --c++-kinds=+p --fields=+iaS --extras=+q -f ${g2b_tags_file} /home/nicolas/development/grid2bim/g2b_core
-ctags -R --fields=+iaS --language-force=typescript -f ${g2b_tags_file} /home/nicolas/development/grid2bim/wisebim-middleware-lib
-ctags -R --fields=+iaS --language-force=typescript -f ${g2b_tags_file} /home/nicolas/development/grid2bim/wisebim-ui
-ctags -R --fields=+iaS --language-force=typescript -f ${g2b_tags_file} /home/nicolas/development/grid2bim/g2b_front
+rm '/home/nicolas/development/grid2bim/tags'
+touch '/home/nicolas/development/grid2bim/tags'
+ctags -R --python-kinds=-i --fields=+iaS --language-force=python -f '/home/nicolas/development/grid2bim/tags' /home/nicolas/development/grid2bim/p2b_middleware
+ctags -R --c++-kinds=+p --fields=+iaS --extras=+q -f '/home/nicolas/development/grid2bim/tags' /home/nicolas/development/grid2bim/g2b_core
+ctags -R --fields=+iaS --language-force=typescript -f '/home/nicolas/development/grid2bim/tags' /home/nicolas/development/grid2bim/wisebim-middleware-lib
+ctags -R --fields=+iaS --language-force=typescript -f '/home/nicolas/development/grid2bim/tags' /home/nicolas/development/grid2bim/wisebim-ui
+ctags -R --fields=+iaS --language-force=typescript -f '/home/nicolas/development/grid2bim/tags' /home/nicolas/development/grid2bim/g2b_front
 

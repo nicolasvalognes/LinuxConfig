@@ -181,7 +181,7 @@ alias p2b='npm install; export P2B_ENV_PATH=~/.env/plans2bim.env;ng serve --port
 alias init_p2b_core_api_database='rm -rf p2b_core_api/*/migrations/00*; export P2B_ENV_PATH=~/.env/plans2bim.env; python manage.py makemigrations --settings=p2b_core_api.settings.settings_local; export P2B_ENV_PATH=~/.env/plans2bim.env; python manage.py migrate --settings=p2b_core_api.settings.settings_local; export P2B_ENV_PATH=~/.env/plans2bim.env; export DJANGO_SETTINGS_MODULE="p2b_core_api.settings.settings_local"; ./start_core_local.sh'
 alias init_p2b_middleware_database='rm -rf p2b_middleware/*/migrations/00*; export P2B_ENV_PATH=~/.env/plans2bim.env; python manage.py makemigrations --settings=p2b_middleware.settings.settings_local; export P2B_ENV_PATH=~/.env/grid2bim.env; python manage.py migrate --settings=p2b_middleware.settings.settings_local; export P2B_ENV_PATH=~/.env/grid2bim.env; ./devTools/start_control_center '
 
-alias g2b='npm install; export P2B_ENV_PATH=~/.env/grid2bim.env;ng serve --port 4201 --poll=2000 --ssl true '
+alias g2b='npm install; export P2B_ENV_PATH=~/.env/grid2bim.env;ng serve --port 4210 --poll=2000 --ssl true '
 alias init_g2b_core_api_database='rm -rf g2b_core_api/*/migrations/00*; export P2B_ENV_PATH=~/.env/grid2bim.env; python manage.py makemigrations --settings=g2b_core_api.settings.settings_local; export P2B_ENV_PATH=~/.env/grid2bim.env; python manage.py migrate --settings=g2b_core_api.settings.settings_local; export P2B_ENV_PATH=~/.env/grid2bim.env; export DJANGO_SETTINGS_MODULE="g2b_core_api.settings.settings_local"; ./start_core_local.sh'
 alias init_g2b_middleware_database='rm -rf p2b_middleware/*/migrations/00*; export P2B_ENV_PATH=~/.env/grid2bim.env; python manage.py makemigrations --settings=p2b_middleware.settings.settings_local; export P2B_ENV_PATH=~/.env/grid2bim.env; python manage.py migrate --settings=p2b_middleware.settings.settings_local; export P2B_ENV_PATH=~/.env/grid2bim.env; ./devTools/start_control_center '
 
@@ -191,3 +191,5 @@ source /opt/intel/openvino/bin/setupvars.sh
 export PATH=~/.npm-global/bin:$PATH
 
 export PYTHONPATH=/home/nicolas/.local/lib/python3.7/site-packages/:$PYTHONPATH
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

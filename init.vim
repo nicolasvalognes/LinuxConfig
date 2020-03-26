@@ -130,6 +130,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'w0rp/ale'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'kshenoy/vim-signature'
+Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'Numkil/ag.nvim'
 Plug 'majutsushi/tagbar'
@@ -319,6 +320,18 @@ let g:tagbar_type_typescript = {
     "\ 'e:enums',
   "\ ]
 "\ }
+"
+let g:coc_global_extensions= [
+      \'coc-angular',
+      \'coc-clangd',
+      \'coc-cmake',
+      \'coc-css',
+      \'coc-html',
+      \'coc-json',
+      \'coc-python',
+      \'coc-texlab',
+      \'coc-tsserver'
+      \]
 
 nnoremap :bc :Bclose
 

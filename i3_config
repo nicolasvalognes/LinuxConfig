@@ -213,8 +213,7 @@ set $nord15  #B48EAD
 # -----------------------------------------------
 
 # wallpaper
-#exec feh --bg-scale ~/Pictures/Wallpapers/701802.jpg
-exec feh --bg-scale ~/Pictures/Wallpapers/nord3.png
+exec feh --bg-scale ~/Pictures/gqbatl6azdl41.png
 
 # gnome -terminal as default terminal
 bindsym $mod+Return exec gnome-terminal
