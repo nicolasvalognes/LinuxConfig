@@ -120,7 +120,7 @@ call plug#begin('~/.nvim/plugged')
 " General plugins
 Plug 'jlanzarotta/bufexplorer'
 Plug 'ap/vim-css-color'
-Plug 'scrooloose/nerdcommenter'
+"Plug 'scrooloose/nerdcommenter'
 Plug 'vim-airline/vim-airline'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'Yggdroot/indentLine'
@@ -135,11 +135,15 @@ Plug 'junegunn/fzf.vim'
 Plug 'Numkil/ag.nvim'
 Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'junegunn/goyo.vim'
 
 " perso
 Plug 'nicolasvalognes/nv-vim-wisebim'
 Plug 'nicolasvalognes/nv-vim-comment-improved'
 Plug 'nicolasvalognes/nv-vim-json-format'
+Plug 'nicolasvalognes/nv-vim-nord'
+Plug 'nicolasvalognes/nv-nerdcommenter'
 
 " Plugs for C/C++
 "Plug 'vim-scripts/a.vim'
@@ -217,10 +221,11 @@ let g:cpp_experimental_template_highlight = 1
 let g:cpp_concepts_highlight = 1
 
 " Ale
+    "\'typescript':['prettier', 'eslint', 'tsserver', 'tslint'],
 let g:ale_linters = {
     \'python':['flake8', 'mypy'],
     \'markdown':['markdownlint',],
-    \'typescript':['prettier',],
+    \'typescript':['prettier', 'tslint', 'tsserver'],
     \'cpp':['clang++', 'clang',],
     \'html':['prettier',],
     \'css':['prettier',],
@@ -252,6 +257,9 @@ let g:ale_cpp_clang_options = '-std=c++17 -isystem -I../**'
 let g:ale_python_pylint_options = "--init-hook='import sys; sys.path.append(\".\")'"
 let g:ale_python_auto_pipenv = 1
 let g:ale_linters_explicit=1
+
+map <Leader>ne :ALENext<CR>
+map <Leader>pe :ALEPrevious<CR>
 
 
 " vim-tmux-navigator
@@ -332,6 +340,7 @@ let g:coc_global_extensions= [
       \'coc-texlab',
       \'coc-tsserver'
       \]
+      "\'coc-eslint',
 
 nnoremap :bc :Bclose
 
@@ -347,7 +356,7 @@ au BufNewFile,BufRead *.md set ft=markdown
 au BufNewFile,BufRead CMakeLists.txt set filetype=cmake
 "au BufRead *.txt set ft=
 "au BufRead *.txt set conceallevel=0
-"au BufRead *.json set conceallevel=0
+au BufRead *.json set conceallevel=0
 
 au VimEnter * IndentLinesToggle
 
@@ -395,7 +404,7 @@ set t_Co=256
 "colorscheme jellyscheme
 "let g:airline_theme='lucius'
 "let g:airline_theme='jellybeans'
-colorscheme nv-vim-nord
+colorscheme nord
 let g:airline_theme='nord'
 set cursorline
 highlight CursorLine ctermbg=234

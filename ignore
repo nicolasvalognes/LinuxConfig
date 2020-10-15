@@ -4,3 +4,4 @@
 *.coverage
 *.bak
 npm-debug.log
+tags

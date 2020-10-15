@@ -124,6 +124,7 @@ alias ag='ag --color'
 #alias hl='ag --passthrough'
 alias hl="grep -e '^' -e"
 
+#alias git='git-lfs'
 alias gitlg='git log --graph --abbrev-commit --decorate --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n""          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)" --all'
 alias git_del_branch='git branch | grep -v -E "master|develop|release" | xargs -n 1 git branch -d'
 
@@ -136,16 +137,10 @@ alias pylint='pylint --output-format=colorized'
 ## tmux
 alias tmux='tmux -2'
 #alias vi='nvim'
-#alias vimdiff='nvim -d'
-alias vi='~/tools/neovim/nvim.appimage'
-alias vimdiff='~/tools/neovim/nvim.appimage -d'
-alias update_neovim='cd ~/tools/neovim; ./get_lastest_neovim.sh; cd -'
-
-alias postman='~/00_Tools/03_Postman/Postman'
-
-
-alias py37_Plans2Bim='source ~/.pythonvenv/py372_Plans2Bim/bin/activate'
-alias py37_2Bim='source ~/.pythonvenv/py372_2Bim/bin/activate'
+alias vimdiff='nvim -d'
+#alias vi='~/tools/neovim/nvim.appimage'
+#alias nvim='~/tools/neovim/nvim.appimage'
+#alias vimdiff='~/tools/neovim/nvim.appimage -d'
 
 alias plantuml='java -jar ~/00_Tools/plantuml.jar'
 
@@ -154,16 +149,14 @@ alias curl_get='curl -i -H "Accept: application/json" -H "Content-Type: applicat
 alias mysql-workbench="/usr/bin/mysql-workbench"
 
 alias pip='pip3'
-#py37_Plans2Bim
 source ~/.pythonvenv/py37saas/bin/activate
 
 xrandr --auto
+# disable integrated screen for homework
+alias disable_integrated_screen='xrandr --output eDP-1 --off'
 
 alias cat="less"
 alias more="less"
-
-# fix error on Fedora31 with XWayland
-#alias virtualbox="QT_QPA_PLATFORM=xcb $(which virtualbox)"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
@@ -172,7 +165,6 @@ alias more="less"
 export LESS="--RAW-CONTROL-CHARS"
 # Use colors for less, man, etc.
 [[ -f ~/.LESS_TERMCAP ]] && . ~/.LESS_TERMCAP
-
 
 test -r "~/.dir_colors" && eval $(dircolors ~/.dir_colors)
 
@@ -185,7 +177,10 @@ alias g2b='npm install; export P2B_ENV_PATH=~/.env/grid2bim.env;ng serve --port 
 alias init_g2b_core_api_database='rm -rf g2b_core_api/*/migrations/00*; export P2B_ENV_PATH=~/.env/grid2bim.env; python manage.py makemigrations --settings=g2b_core_api.settings.settings_local; export P2B_ENV_PATH=~/.env/grid2bim.env; python manage.py migrate --settings=g2b_core_api.settings.settings_local; export P2B_ENV_PATH=~/.env/grid2bim.env; export DJANGO_SETTINGS_MODULE="g2b_core_api.settings.settings_local"; ./start_core_local.sh'
 alias init_g2b_middleware_database='rm -rf p2b_middleware/*/migrations/00*; export P2B_ENV_PATH=~/.env/grid2bim.env; python manage.py makemigrations --settings=p2b_middleware.settings.settings_local; export P2B_ENV_PATH=~/.env/grid2bim.env; python manage.py migrate --settings=p2b_middleware.settings.settings_local; export P2B_ENV_PATH=~/.env/grid2bim.env; ./devTools/start_control_center '
 
-alias sdev=' tmux split-window -h -p 70; tmux select-pane -t 1; tmux split-window -v; '
+alias split_dev=' tmux split-window -h -p 70; tmux select-pane -t 0; tmux split-window -v; '
+
+alias blender='~/tools/blender-2.83.4-linux64/blender'
+alias bimize='~/workspace/bimize/build/gui/Bimize'
 
 source /opt/intel/openvino/bin/setupvars.sh
 export PATH=~/.npm-global/bin:$PATH
@@ -193,3 +188,4 @@ export PATH=~/.npm-global/bin:$PATH
 export PYTHONPATH=/home/nicolas/.local/lib/python3.7/site-packages/:$PYTHONPATH
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
