@@ -191,9 +191,9 @@ let g:developer_name="Nicolas Valognes"
 map <S-Tab> :BufExplorerHorizontalSplit<CR>
 
 " auto-save
-let g:auto_save = 1 " enable AutoSave on Vim startup
-let g:auto_save_in_insert_mode = 0  " do not save while in insert mode
-let g:auto_save_silent = 1  " do not display the auto-save notification
+"let g:auto_save = 1 " enable AutoSave on Vim startup
+"let g:auto_save_in_insert_mode = 0  " do not save while in insert mode
+"let g:auto_save_silent = 1  " do not display the auto-save notification
 
 
 "map <leader>tags :CtrlPTag<CR>
@@ -233,14 +233,16 @@ let g:ale_linters = {
     \}
 
 let g:ale_fixers = {
-    \'python':['black', 'isort'],
-    \'cpp':['clang-format',],
     \'typescript':['prettier'],
+    \'cpp':['clang-format',],
     \'css':['prettier',],
     \'php':['php_cs_fixer',],
     \'html':['prettier',],
     \'json':['prettier',],
     \}
+
+    "\'python':['black', 'isort'],
+
 
 let g:ale_completion_enabled=1
 let g:ale_set_balloons=1
@@ -476,7 +478,19 @@ function! s:pyDebug()
   execute "normal! omy_file.write(str(response))"
   execute "normal! omy_file.close()"
 endfunction
-nnoremap <leader>deb :call <SID>pyDebug()<CR>
+"nnoremap <leader>deb :call <SID>pyDebug()<CR>
+
+function! s:addDebug()
+  if (&ft=='python')
+    execute "normal! o# [DEBUG]"
+    execute "normal! omy_file = open('/tmp/pydebug.txt', 'w')"
+    execute "normal! omy_file.write(str(response))"
+    execute "normal! omy_file.close()"
+  elseif (&ft=='typescript')
+    execute "normal! oconsole.debug(``);"
+  endif
+endfunction
+nnoremap <leader>deb :call <SID>addDebug()<CR>
 
 " coverage highlight
 highlight NoCoverage ctermbg=2

@@ -127,6 +127,7 @@ alias hl="grep -e '^' -e"
 #alias git='git-lfs'
 alias gitlg='git log --graph --abbrev-commit --decorate --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n""          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)" --all'
 alias git_del_branch='git branch | grep -v -E "master|develop|release" | xargs -n 1 git branch -d'
+alias git_del_branch_force='git branch | grep -v -E "master|develop|release" | xargs -n 1 git branch -D'
 
 alias robo3t='~/00_Tools/robo3t/bin/robo3t &'
 alias chrome='/usr/bin/google-chrome-stable %U &'
@@ -137,10 +138,10 @@ alias pylint='pylint --output-format=colorized'
 ## tmux
 alias tmux='tmux -2'
 #alias vi='nvim'
-alias vimdiff='nvim -d'
-#alias vi='~/tools/neovim/nvim.appimage'
+#alias vimdiff='nvim -d'
+alias vi='~/tools/neovim/nvim.appimage'
 #alias nvim='~/tools/neovim/nvim.appimage'
-#alias vimdiff='~/tools/neovim/nvim.appimage -d'
+alias vimdiff='~/tools/neovim/nvim.appimage -d'
 
 alias plantuml='java -jar ~/00_Tools/plantuml.jar'
 
@@ -177,7 +178,7 @@ alias g2b='npm install; export P2B_ENV_PATH=~/.env/grid2bim.env;ng serve --port 
 alias init_g2b_core_api_database='rm -rf g2b_core_api/*/migrations/00*; export P2B_ENV_PATH=~/.env/grid2bim.env; python manage.py makemigrations --settings=g2b_core_api.settings.settings_local; export P2B_ENV_PATH=~/.env/grid2bim.env; python manage.py migrate --settings=g2b_core_api.settings.settings_local; export P2B_ENV_PATH=~/.env/grid2bim.env; export DJANGO_SETTINGS_MODULE="g2b_core_api.settings.settings_local"; ./start_core_local.sh'
 alias init_g2b_middleware_database='rm -rf p2b_middleware/*/migrations/00*; export P2B_ENV_PATH=~/.env/grid2bim.env; python manage.py makemigrations --settings=p2b_middleware.settings.settings_local; export P2B_ENV_PATH=~/.env/grid2bim.env; python manage.py migrate --settings=p2b_middleware.settings.settings_local; export P2B_ENV_PATH=~/.env/grid2bim.env; ./devTools/start_control_center '
 
-alias split_dev=' tmux split-window -h -p 70; tmux select-pane -t 0; tmux split-window -v; '
+alias sd=' tmux split-window -h -p 70; tmux select-pane -t 0; tmux split-window -v; '
 
 alias blender='~/tools/blender-2.83.4-linux64/blender'
 alias bimize='~/workspace/bimize/build/gui/Bimize'
