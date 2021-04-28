@@ -44,8 +44,7 @@ set autowrite
 set autowriteall
 
 " set utf8 as standard encoding
-"set encoding=utf8
-set encoding=utf-8
+"set encoding=utf-8
 
 set history=1000 "remember last 1000 command
 set undolevels=1000 "undo 1000 time max
@@ -225,7 +224,7 @@ let g:cpp_concepts_highlight = 1
 let g:ale_linters = {
     \'python':['flake8', 'mypy'],
     \'markdown':['markdownlint',],
-    \'typescript':['prettier', 'tslint', 'tsserver'],
+    \'typescript':['prettier', 'eslint', 'tsserver'],
     \'cpp':['clang++', 'clang',],
     \'html':['prettier',],
     \'css':['prettier',],

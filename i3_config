@@ -11,7 +11,7 @@
 
 #Needed for i3-gaps
 #hide_edge_borders both
-for_window [class="^.*"] border pixel 2
+for_window [class="^.*"] border pixel 3
 gaps inner 5
 gaps outer 5
 
@@ -213,7 +213,7 @@ set $nord15  #B48EAD
 # -----------------------------------------------
 
 # wallpaper
-exec feh --bg-scale ~/Pictures/wb_wp.png
+exec feh --bg-scale ~/Pictures/Wallpapers/mountainBW.jpg
 
 # gnome -terminal as default terminal
 bindsym $mod+Return exec gnome-terminal
@@ -227,7 +227,7 @@ bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 
 #client.focused          #BF616A #BF616A #282a36 #BF616A #BF616A
-client.focused          $nord3 $nord3 #282a36 $nord11 $nord11
+client.focused          $nord3 $nord3 #282a36 $nord8 $nord8
 client.focused_inactive #282a36 #282a36 #f8f8f2 #282a36 #282a36
 client.unfocused        #282a36 #282a36 #f8f8f2 #282a36 #282a36
 client.urgent           #ff5555 #ff5555 #282a36 #ff5555 #ff5555
@@ -236,7 +236,11 @@ client.placeholder      #282a36 #282a36 #f8f8f2 #282a36 #282a36
  # Polybar
 #exec_always --no-startup-id killall polybar; polybar -c ~/.config/polybar/config -r example
 #exec_always --no-startup-id killall polybar; polybar -c ~/.config/polybar/nord_config -r main
-exec_always --no-startup-id killall polybar; polybar -c ~/.config/polybar/nv-nord-polybar -r nv-nord-polybar
+#exec_always --no-startup-id killall polybar; polybar -c ~/.config/polybar/nv-nord-polybar -r nv-nord-polybar
+
+#exec_always --no-startup-id killall polybar; polybar -c ~/.config/polybar/config -r nv-nord-polybar
+exec_always --no-startup-id killall polybar; polybar -c ~/.config/polybar/config -r nord
+
 
 # Restore GNOME's settings
 #exec --no-startup-id /usr/libexec/gnome-settings-daemon-localeexec

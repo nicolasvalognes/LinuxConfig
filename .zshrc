@@ -11,7 +11,7 @@ fi
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/nicolas/.oh-my-zsh
+  export ZSH=/home/nvalognes/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -129,9 +129,10 @@ alias gitlg='git log --graph --abbrev-commit --decorate --format=format:"%C(bold
 alias git_del_branch='git branch | grep -v -E "master|develop|release" | xargs -n 1 git branch -d'
 alias git_del_branch_force='git branch | grep -v -E "master|develop|release" | xargs -n 1 git branch -D'
 
-alias robo3t='~/00_Tools/robo3t/bin/robo3t &'
-alias chrome='/usr/bin/google-chrome-stable %U &'
-alias firedev='/home/nicolas/.local/firefox-70-developer-edition/firefox'
+#alias robo3t='~/00_Tools/robo3t/bin/robo3t &'
+#alias chrome='/usr/bin/google-chrome-stable %U &'
+#alias firedev='/home/nvalognes/.local/firefox-70-developer-edition/firefox'
+alias firedev='/usr/local/firefox_dev/firefox'
 
 alias pylint='pylint --output-format=colorized'
 
@@ -150,7 +151,7 @@ alias curl_get='curl -i -H "Accept: application/json" -H "Content-Type: applicat
 alias mysql-workbench="/usr/bin/mysql-workbench"
 
 alias pip='pip3'
-source ~/.pythonvenv/py37saas/bin/activate
+source ~/.pythonvenv/py38saas/bin/activate
 
 xrandr --auto
 # disable integrated screen for homework
@@ -183,10 +184,14 @@ alias sd=' tmux split-window -h -p 70; tmux select-pane -t 0; tmux split-window 
 alias blender='~/tools/blender-2.83.4-linux64/blender'
 alias bimize='~/workspace/bimize/build/gui/Bimize'
 
-source /opt/intel/openvino/bin/setupvars.sh
+#source /opt/intel/openvino/bin/setupvars.sh
 export PATH=~/.npm-global/bin:$PATH
 
-export PYTHONPATH=/home/nicolas/.local/lib/python3.7/site-packages/:$PYTHONPATH
+#export PYTHONPATH=/home/nvalognes/.local/lib/python3.7/site-packages/:$PYTHONPATH
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
