@@ -43,8 +43,14 @@ format-padding = 1
 [module/time]
 type = internal/date
 interval = 1.0
-time = " %H:%M "
-time-alt = " %A, %B %dth "
+;time = " %A, %B %dth  -  %H:%M "
+;time-alt = " %A, %B %dth  -  %H:%M "
+
+;date = %Y-%m-%d%
+time =%d/%m/%Y %H:%M:%S
+;date-alt = %A, %d %B %Y
+;time-alt = %H:%M:%S
+
 label = %time%
 format-background = ${colors.background}
 format-foreground = ${colors.foreground}
@@ -70,34 +76,104 @@ index-sort = true
 
 [module/battery]
 type = internal/battery
-full-at = 90
+
+full-at = 99
+
+; Use the following command to list batteries and adapters:
+; $ ls -1 /sys/class/power_supply/
 battery = BAT0
 adapter = AC
+
+; If an inotify event haven't been reported in this many
+; seconds, manually poll for new values.
+;
+; Needed as a fallback for systems that don't report events
+; on sysfs/procfs.
+;
+; Disable polling by setting the interval to 0.
+;
+; Default: 5
 poll-interval = 5
 
-format-full =
-format-full-background = #4c566a
-format-full-padding = 1
+; see "man date" for details on how to format the time string
+; NOTE: if you want to use syntax tags here you need to use %%{...}
+; Default: %H:%M:%S
+time-format = %H:%M
 
-format-charging-padding = 1
-format-charging = <animation-charging>
-format-charging-background = #4c566a
+; Available tags:
+;   <label-charging> (default)
+;   <bar-capacity>
+;   <ramp-capacity>
+;   <animation-charging>
+format-charging = <animation-charging> <label-charging>
 
-label-discharging = %percentage%%
-format-discharging = <ramp-capacity>
-format-discharging-padding = 1
-format-discharging-background = #4c566a
-animation-charging-framerate = 750
-ramp-capacity-0 = "%{F#bf616a}"
+; Available tags:
+;   <label-discharging> (default)
+;   <bar-capacity>
+;   <ramp-capacity>
+;   <animation-discharging>
+format-discharging = <ramp-capacity> <label-discharging>
+
+; Available tags:
+;   <label-full> (default)
+;   <bar-capacity>
+;   <ramp-capacity>
+format-full = <ramp-capacity> <label-full>
+
+; Available tokens:
+;   %percentage% (default) - is set to 100 if full-at is reached
+;   %percentage_raw% (unreleased)
+;   %time%
+;   %consumption% (shows current charge rate in watts)
+label-charging = %percentage:2%%
+
+label-charging-foreground = #A3BE8C
+
+; Available tokens:
+;   %percentage% (default) - is set to 100 if full-at is reached
+;   %percentage_raw% (unreleased)
+;   %time%
+;   %consumption% (shows current discharge rate in watts)
+label-discharging = %percentage:2%%
+
+label-discharging-foreground = #EDB54B
+
+; Available tokens:
+;   %percentage% (default) - is set to 100 if full-at is reached
+;   %percentage_raw% (unreleased)
+label-full = %percentage:2%%
+label-full-foreground = #A3BE8C
+
+; Only applies if <ramp-capacity> is used
+ramp-capacity-0 = 
 ramp-capacity-1 = 
 ramp-capacity-2 = 
 ramp-capacity-3 = 
 ramp-capacity-4 = 
+ramp-capacity-foreground = #EDB54B
+
+; Only applies if <bar-capacity> is used
+bar-capacity-width = 10
+
+; Only applies if <animation-charging> is used
 animation-charging-0 = 
 animation-charging-1 = 
 animation-charging-2 = 
 animation-charging-3 = 
 animation-charging-4 = 
+animation-charging-foreground = #A3BE8C
+; Framerate in milliseconds
+animation-charging-framerate = 750
+
+; Only applies if <animation-discharging> is used
+animation-discharging-0 = 
+animation-discharging-1 = 
+animation-discharging-2 = 
+animation-discharging-3 = 
+animation-discharging-4 = 
+animation-discharging-foreground = #DCA060
+; Framerate in milliseconds
+animation-discharging-framerate = 500
 
 
 ;[bar/second]
@@ -142,6 +218,7 @@ type = internal/pulseaudio
 format-volume = <label-volume> <bar-volume>
 label-volume = VOL %percentage%%
 label-volume-foreground = ${colors.foreground}
+label-volume-background = ${colors.background}
 
 label-muted = 🔇 muted
 label-muted-foreground = #666
@@ -191,24 +268,36 @@ bar-volume-empty = ─
 bar-volume-empty-font = 2
 bar-volume-empty-foreground = ${colors.foreground}
 
+[module/decor-glyph]
+type = custom/text
+;content-foreground = #4C566A
+;content-foreground = #00FF00
+content-foreground = ${colors.foreground}
+content-background = ${colors.background}
+margin = 0
+
+[module/sep]
+inherit = module/decor-glyph
+content = "/"
+
 [bar/nord]
 monitor-strict = true
 bottom = false
 modules-left = bspwm i3
-modules-center = mpd time
-modules-right = pulseaudio battery powermenu
-;modules-right = alsa pulseaudio time wired wireless vpn battery powermenu
+; modules-center = mpd time
+modules-right = pulseaudio sep powermenu sep time sep battery sep
 
 monitor = ${env:MONITOR:eDP-1}
 background = ${colors.background}
 foreground = ${colors.foreground}
-font-0 = DejaVu Sans Mono:size=10;3
+font-0 = Roboto Mono For Powerline:size=8;3
 font-1 = Material Icons:size=10;3
-font-2 = Font Awesome 5 Free:size=10;3
-font-3 = FontAwesome:size=10;3
-height = 24
+font-2 = Roboto Mono For Powerline:size=10;3
+font-3 = Roboto Mono For Powerline:size=10;3
+
+height = 20
 tray-position = right
-tray-padding = 4
+tray-padding = 10
 wm-restack = i3
 
 cursor-click = pointer

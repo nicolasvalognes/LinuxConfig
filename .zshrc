@@ -139,10 +139,11 @@ alias pylint='pylint --output-format=colorized'
 ## tmux
 alias tmux='tmux -2'
 #alias vi='nvim'
-#alias vimdiff='nvim -d'
+alias nvim='~/tools/neovim/nvim.appimage'
 alias vi='~/tools/neovim/nvim.appimage'
 #alias nvim='~/tools/neovim/nvim.appimage'
-alias vimdiff='~/tools/neovim/nvim.appimage -d'
+#alias vimdiff='~/tools/neovim/nvim.appimage -d'
+alias vimdiff='nvim -d'
 
 alias plantuml='java -jar ~/00_Tools/plantuml.jar'
 
@@ -183,6 +184,8 @@ alias sd=' tmux split-window -h -p 70; tmux select-pane -t 0; tmux split-window 
 
 alias blender='~/tools/blender-2.83.4-linux64/blender'
 alias bimize='~/workspace/bimize/build/gui/Bimize'
+
+alias gotop='~/tools/gotop/gotop'
 
 #source /opt/intel/openvino/bin/setupvars.sh
 export PATH=~/.npm-global/bin:$PATH

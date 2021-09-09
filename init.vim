@@ -221,10 +221,11 @@ let g:cpp_concepts_highlight = 1
 
 " Ale
     "\'typescript':['prettier', 'eslint', 'tsserver', 'tslint'],
+    "\'typescript':['prettier', 'eslint', 'tsserver'],
+    "\'typescript':['prettier', 'eslint'],
 let g:ale_linters = {
     \'python':['flake8', 'mypy'],
     \'markdown':['markdownlint',],
-    \'typescript':['prettier', 'eslint', 'tsserver'],
     \'cpp':['clang++', 'clang',],
     \'html':['prettier',],
     \'css':['prettier',],

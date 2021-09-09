@@ -6,3 +6,6 @@
 npm-debug.log
 tags
 .nvimlog
+.vim
+.idea
+.idea*
