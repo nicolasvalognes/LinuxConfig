@@ -1,7 +1,7 @@
 [colors]
-background = ${xrdb:background:#22282f}
-background2 = ${xrdb:lighterbg:#37414d}
-selection = ${xrdb:selection:#81a1c1}
+background = ${xrdb:background:#2E3440}
+background2 = ${xrdb:lighterbg:#3B4252}
+selection = ${xrdb:selection:#D8DEE9}
 foreground = ${xrdb:foreground:#839496}
 separator = ${xrdb:separator:#ff0000}
 lightfg = ${xrdb:color7:#ff0000}

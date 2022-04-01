@@ -132,10 +132,13 @@ Plug 'kshenoy/vim-signature'
 Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'Numkil/ag.nvim'
-Plug 'majutsushi/tagbar'
+"Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-Plug 'junegunn/goyo.vim'
+"Plug 'junegunn/goyo.vim'
+"Plug 'frazrepo/vim-rainbow'
+"Plug 'HerringtonDarkholme/yats.vim'
+"Plug 'tpope/vim-surround'
 
 " perso
 Plug 'nicolasvalognes/nv-vim-wisebim'
@@ -143,6 +146,7 @@ Plug 'nicolasvalognes/nv-vim-comment-improved'
 Plug 'nicolasvalognes/nv-vim-json-format'
 Plug 'nicolasvalognes/nv-vim-nord'
 Plug 'nicolasvalognes/nv-nerdcommenter'
+"Plug 'nicolasvalognes/nv-vim-jellyscheme'
 
 " Plugs for C/C++
 "Plug 'vim-scripts/a.vim'
@@ -175,9 +179,7 @@ Plug 'rstacruz/sparkup'
 
 " Color scheme
 Plug 'vim-airline/vim-airline-themes'
-Plug 'nicolasvalognes/nv-vim-jellyscheme'
 "Plug 'arcticicestudio/nord-vim'
-Plug 'nicolasvalognes/nv-vim-nord'
 
 call plug#end()
 
@@ -194,6 +196,7 @@ map <S-Tab> :BufExplorerHorizontalSplit<CR>
 "let g:auto_save_in_insert_mode = 0  " do not save while in insert mode
 "let g:auto_save_silent = 1  " do not display the auto-save notification
 
+"let g:rainbow_active = 1
 
 "map <leader>tags :CtrlPTag<CR>
 map <leader>tags :Tags<CR>
@@ -224,7 +227,7 @@ let g:cpp_concepts_highlight = 1
     "\'typescript':['prettier', 'eslint', 'tsserver'],
     "\'typescript':['prettier', 'eslint'],
 let g:ale_linters = {
-    \'python':['flake8', 'mypy'],
+    \'python':['flake8', 'mypy', 'pylint'],
     \'markdown':['markdownlint',],
     \'cpp':['clang++', 'clang',],
     \'html':['prettier',],
@@ -232,16 +235,16 @@ let g:ale_linters = {
     \'json':['prettier',],
     \}
 
+    "\'python':['black', 'isort'],
 let g:ale_fixers = {
     \'typescript':['prettier'],
     \'cpp':['clang-format',],
+    \'html':['prettier',],
     \'css':['prettier',],
     \'php':['php_cs_fixer',],
-    \'html':['prettier',],
     \'json':['prettier',],
     \}
 
-    "\'python':['black', 'isort'],
 
 
 let g:ale_completion_enabled=1
@@ -337,12 +340,12 @@ let g:coc_global_extensions= [
       \'coc-cmake',
       \'coc-css',
       \'coc-html',
-      \'coc-json',
       \'coc-python',
+      \'coc-json',
       \'coc-texlab',
+      \'coc-eslint',
       \'coc-tsserver'
       \]
-      "\'coc-eslint',
 
 nnoremap :bc :Bclose
 
@@ -358,9 +361,10 @@ au BufNewFile,BufRead *.md set ft=markdown
 au BufNewFile,BufRead CMakeLists.txt set filetype=cmake
 "au BufRead *.txt set ft=
 "au BufRead *.txt set conceallevel=0
-au BufRead *.json set conceallevel=0
+au BufRead,BufNewFile *.json set conceallevel=0
+let g:vim_json_conceal=0
 
-au VimEnter * IndentLinesToggle
+"au VimEnter * IndentLinesToggle
 
 
 """"""""""""""""""""

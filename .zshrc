@@ -67,8 +67,10 @@ plugins=(
   colored-man-pages
   zsh-syntax-highlighting
   zsh-autosuggestions
-  django
   colorize
+  ag
+  ng
+  pip
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -116,6 +118,7 @@ alias ls='ls --color=auto'
 alias lr='ls -lr'
 alias la='ls -la'
 #alias lt='ls -alt'
+#alias lsd='ls -lr'
 
 alias grep='grep --color=always'
 alias ngrep='grep -Hn --color=always'
@@ -124,26 +127,22 @@ alias ag='ag --color'
 #alias hl='ag --passthrough'
 alias hl="grep -e '^' -e"
 
-#alias git='git-lfs'
 alias gitlg='git log --graph --abbrev-commit --decorate --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n""          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)" --all'
 alias git_del_branch='git branch | grep -v -E "master|develop|release" | xargs -n 1 git branch -d'
 alias git_del_branch_force='git branch | grep -v -E "master|develop|release" | xargs -n 1 git branch -D'
 
-#alias robo3t='~/00_Tools/robo3t/bin/robo3t &'
-#alias chrome='/usr/bin/google-chrome-stable %U &'
-#alias firedev='/home/nvalognes/.local/firefox-70-developer-edition/firefox'
 alias firedev='/usr/local/firefox_dev/firefox'
 
 alias pylint='pylint --output-format=colorized'
 
 ## tmux
 alias tmux='tmux -2'
-#alias vi='nvim'
+
 alias nvim='~/tools/neovim/nvim.appimage'
-alias vi='~/tools/neovim/nvim.appimage'
+alias vi='nvim'
 #alias nvim='~/tools/neovim/nvim.appimage'
 #alias vimdiff='~/tools/neovim/nvim.appimage -d'
-alias vimdiff='nvim -d'
+#alias vimdiff='nvim -d'
 
 alias plantuml='java -jar ~/00_Tools/plantuml.jar'
 
@@ -151,7 +150,7 @@ alias curl_get='curl -i -H "Accept: application/json" -H "Content-Type: applicat
 
 alias mysql-workbench="/usr/bin/mysql-workbench"
 
-alias pip='pip3'
+#alias pip='pip3'
 source ~/.pythonvenv/py38saas/bin/activate
 
 xrandr --auto
@@ -180,12 +179,15 @@ alias g2b='npm install; export P2B_ENV_PATH=~/.env/grid2bim.env;ng serve --port 
 alias init_g2b_core_api_database='rm -rf g2b_core_api/*/migrations/00*; export P2B_ENV_PATH=~/.env/grid2bim.env; python manage.py makemigrations --settings=g2b_core_api.settings.settings_local; export P2B_ENV_PATH=~/.env/grid2bim.env; python manage.py migrate --settings=g2b_core_api.settings.settings_local; export P2B_ENV_PATH=~/.env/grid2bim.env; export DJANGO_SETTINGS_MODULE="g2b_core_api.settings.settings_local"; ./start_core_local.sh'
 alias init_g2b_middleware_database='rm -rf p2b_middleware/*/migrations/00*; export P2B_ENV_PATH=~/.env/grid2bim.env; python manage.py makemigrations --settings=p2b_middleware.settings.settings_local; export P2B_ENV_PATH=~/.env/grid2bim.env; python manage.py migrate --settings=p2b_middleware.settings.settings_local; export P2B_ENV_PATH=~/.env/grid2bim.env; ./devTools/start_control_center '
 
-alias sd=' tmux split-window -h -p 70; tmux select-pane -t 0; tmux split-window -v; '
+#alias sd=' tmux split-window -h -p 70; tmux select-pane -t 0; tmux split-window -v; '
+alias x2b='~/tools/dev_x2bim.sh'
 
-alias blender='~/tools/blender-2.83.4-linux64/blender'
+#alias blender='~/tools/blender-2.83.4-linux64/blender'
 alias bimize='~/workspace/bimize/build/gui/Bimize'
 
 alias gotop='~/tools/gotop/gotop'
+alias fm='~/tools/vimfm/vifm-v0.12-x86_64.AppImage .'
+alias bat='batcat'
 
 #source /opt/intel/openvino/bin/setupvars.sh
 export PATH=~/.npm-global/bin:$PATH
