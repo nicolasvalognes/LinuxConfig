@@ -131,7 +131,11 @@ Plug 'rbgrouleff/bclose.vim'
 Plug 'kshenoy/vim-signature'
 Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
+Plug 'nvim-lua/plenary.nvim'
+"Plug 'nvim-telescope/telescope.nvim'
+"Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Numkil/ag.nvim'
+"Plug 'mileszs/ack.vim'
 "Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -150,12 +154,12 @@ Plug 'nicolasvalognes/nv-nerdcommenter'
 
 " Plugs for C/C++
 "Plug 'vim-scripts/a.vim'
-Plug 'vim-scripts/c.vim'
-Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'justinmk/vim-syntax-extra'
+"Plug 'vim-scripts/c.vim'
+"Plug 'octol/vim-cpp-enhanced-highlight'
+"Plug 'justinmk/vim-syntax-extra'
 
 " Plugs for Qt
-Plug 'kosl90/qt-highlight-vim'
+"Plug 'kosl90/qt-highlight-vim'
 
 "Plug for Python
 Plug 'vim-python/python-syntax'
@@ -169,7 +173,7 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 
 "latex
-Plug 'lervag/vimtex'
+"Plug 'lervag/vimtex'
 
 "Plug for HTML
 Plug 'rstacruz/sparkup'
@@ -201,6 +205,7 @@ map <S-Tab> :BufExplorerHorizontalSplit<CR>
 "map <leader>tags :CtrlPTag<CR>
 map <leader>tags :Tags<CR>
 map <C-p> :Files<CR>
+"map <C-p> :Telescope find_files<CR>
 
 " python-syntax
 let python_highlight_all=1
@@ -223,9 +228,6 @@ let g:cpp_experimental_template_highlight = 1
 let g:cpp_concepts_highlight = 1
 
 " Ale
-    "\'typescript':['prettier', 'eslint', 'tsserver', 'tslint'],
-    "\'typescript':['prettier', 'eslint', 'tsserver'],
-    "\'typescript':['prettier', 'eslint'],
 let g:ale_linters = {
     \'python':['flake8', 'mypy', 'pylint'],
     \'markdown':['markdownlint',],
@@ -244,8 +246,6 @@ let g:ale_fixers = {
     \'php':['php_cs_fixer',],
     \'json':['prettier',],
     \}
-
-
 
 let g:ale_completion_enabled=1
 let g:ale_set_balloons=1
@@ -320,20 +320,7 @@ let g:tagbar_type_typescript = {
   \ ],
   \ 'sort' : 0
 \ }
-"let g:tagbar_type_typescript = {
-  "\ 'ctagstype': 'typescript',
-  "\ 'kinds': [
-    "\ 'c:classes',
-    "\ 'n:modules',
-    "\ 'f:functions',
-    "\ 'v:variables',
-    "\ 'v:varlambdas',
-    "\ 'm:members',
-    "\ 'i:interfaces',
-    "\ 'e:enums',
-  "\ ]
-"\ }
-"
+
 let g:coc_global_extensions= [
       \'coc-angular',
       \'coc-clangd',
@@ -346,6 +333,9 @@ let g:coc_global_extensions= [
       \'coc-eslint',
       \'coc-tsserver'
       \]
+
+"let g:ackprg = 'ag --nogroup --nocolor --column'
+"let g:ackprg = 'ag --vimgrep'
 
 nnoremap :bc :Bclose
 
