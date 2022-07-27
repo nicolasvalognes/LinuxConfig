@@ -58,7 +58,8 @@ type = internal/cpu
 ; Default: 1
 interval = 0.5
 
-label =  %percentage:2%%
+:label = %percentage:2%%
+label = CPU : %percentage:2%%
 
 label-foreground = #81A1C1
 
@@ -88,7 +89,8 @@ format = <label>
 ;   %gb_swap_free%
 ;   %gb_swap_used%
 
-label =  %gb_used%
+;label = %percentage_used%% (%gb_used%/%gb_total%)
+label = RAM : %percentage_used%% (%gb_used%/%gb_total%)
 
 label-foreground = #B48EAD
 
@@ -181,7 +183,7 @@ format-full = <ramp-capacity> <label-full>
 ;   %percentage_raw% (unreleased)
 ;   %time%
 ;   %consumption% (shows current charge rate in watts)
-label-charging = %percentage:2%%
+label-charging = BAT : %percentage:2%%
 
 label-charging-foreground = #A3BE8C
 
@@ -190,14 +192,14 @@ label-charging-foreground = #A3BE8C
 ;   %percentage_raw% (unreleased)
 ;   %time%
 ;   %consumption% (shows current discharge rate in watts)
-label-discharging = %percentage:2%%
+label-discharging = BAT : %percentage:2%%
 
 label-discharging-foreground = #EDB54B
 
 ; Available tokens:
 ;   %percentage% (default) - is set to 100 if full-at is reached
 ;   %percentage_raw% (unreleased)
-label-full = %percentage:2%%
+label-full = BAT : %percentage:2%%
 label-full-foreground = #A3BE8C
 
 ; Only applies if <ramp-capacity> is used
@@ -375,9 +377,9 @@ font-2 = unifont:size=10;3
 ;   modules-center = xwindow xbacklight
 ;   modules-right = ipc clock
 modules-left = i3
-modules-center =
+modules-center = date
 ;modules-right = wireless-network sep memory sep cpu sep battery sep date
-modules-right =  pulseaudio sep battery sep date
+modules-right =  cpu sep memory sep pulseaudio sep battery
 
 ; The separator will be inserted between the output of each module
 separator =

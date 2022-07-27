@@ -10,3 +10,4 @@ tags
 .idea
 .idea*
 *package-lock.json*
+.angular*
